@@ -20,12 +20,17 @@ html {
     flex-direction: column;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
 
 main .welcoming-section{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 40vh;
+    height: 20vh;
     display: flex;
     flex-direction: column;
     background-size: 100% 100%;
@@ -52,5 +57,14 @@ main .welcoming-section .business-slogan {
     font-size: 1em;
 }
 
+.search-home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 
-
+.search-half {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}

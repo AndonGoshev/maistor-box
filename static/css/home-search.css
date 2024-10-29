@@ -1,7 +1,7 @@
 .select {
     position: relative;
     min-width: 200px;
-    width: 1em;
+    width: 5em;
 }
 
 #slct {
@@ -32,7 +32,7 @@
     box-shadow: 0 1px 3px -2px #9098A9;
     cursor: pointer;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 1em;
     transition: all 150ms ease;
 }
 
@@ -50,12 +50,11 @@
 
 .select select:focus {
     outline: none;
-    border-color: #0077FF;
-    box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
+    box-shadow: 0 0 0 2px rgba(2, 1, 0, 0.2);
 }
 
 .select select:hover + svg {
-    stroke: #0077FF;
+    stroke: #DD5746;
 }
 
 .sprites {

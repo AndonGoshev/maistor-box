@@ -19,28 +19,79 @@
 
     <section class="search-home">
 
-        <label class="select" for="slct">
-            <select id="slct" required>
-                <option value="" disabled selected>Select option</option>
-                <option value="#">One</option>
-                <option value="#">Two</option>
-                <option value="#">Three</option>
-                <option value="#">Four</option>
-                <option value="#">Five</option>
-                <option value="#">Six</option>
-                <option value="#">Seven</option>
-            </select>
-            <svg>
-                <use xlink:href="#select-arrow-down"></use>
-            </svg>
-        </label>
+        <div class="search-half">
+    
+            <h3>Потърсете специалисти!</h3>
+            
+            <div class="specialization">
 
-        <!-- SVG Sprites -->
-        <svg class="sprites">
-            <symbol id="select-arrow-down" viewBox="0 0 10 6">
-                <polyline points="1 1 5 5 9 1"></polyline>
-            </symbol>
-        </svg>
+                <label class="select" for="slct">
+                    <select id="slct" required>
+                        <option value="" disabled selected>Избери категория...</option>
+                        <option value="#">One</option>
+                        <option value="#">Two</option>
+                        <option value="#">Three</option>
+                        <option value="#">Four</option>
+                        <option value="#">Five</option>
+                        <option value="#">Six</option>
+                        <option value="#">Seven</option>
+                    </select>
+                    <svg>
+                        <use xlink:href="#select-arrow-down"></use>
+                    </svg>
+                </label>
+
+                <!-- SVG Sprites -->
+                <svg class="sprites">
+                    <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                        <polyline points="1 1 5 5 9 1"></polyline>
+                    </symbol>
+                </svg>
+
+
+            </div>
+
+            <div class="country">
+
+                <label class="select" for="slct">
+                    <select id="slct" required>
+                        <option value="" disabled selected>Избери област...</option>
+                        <option value="#">One</option>
+                        <option value="#">Two</option>
+                        <option value="#">Three</option>
+                        <option value="#">Four</option>
+                        <option value="#">Five</option>
+                        <option value="#">Six</option>
+                        <option value="#">Seven</option>
+                    </select>
+                    <svg>
+                        <use xlink:href="#select-arrow-down"></use>
+                    </svg>
+                </label>
+
+                <!-- SVG Sprites -->
+                <svg class="sprites">
+                    <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                        <polyline points="1 1 5 5 9 1"></polyline>
+                    </symbol>
+                </svg>
+
+            </div>
+
+            <button class="fancy">
+                <span class="top-key"></span>
+                <a href="#" target="_blank" class="">Търси майстор!</a>
+                <span class="bottom-key-1"></span>
+                <span class="bottom-key-2"></span>
+            </button>
+
+        </div>
+    
+        <div class="categories-half">
+            
+            <h1>this is categories section</h1>
+            
+        </div>
 
     </section>
 
