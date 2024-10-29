@@ -1,0 +1,48 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+    <section class="welcoming-section">
+
+        <div class="business-title">
+
+            <h1 class="maistor">Maistor</h1>
+            <h1 class="box">Box</h1>
+
+        </div>
+
+        <p class="business-slogan">Намерете най-добрият майстор за вашия ремот.</p>
+
+    </section>
+
+    <section class="search-home">
+
+        <label class="select" for="slct">
+            <select id="slct" required>
+                <option value="" disabled selected>Select option</option>
+                <option value="#">One</option>
+                <option value="#">Two</option>
+                <option value="#">Three</option>
+                <option value="#">Four</option>
+                <option value="#">Five</option>
+                <option value="#">Six</option>
+                <option value="#">Seven</option>
+            </select>
+            <svg>
+                <use xlink:href="#select-arrow-down"></use>
+            </svg>
+        </label>
+
+        <!-- SVG Sprites -->
+        <svg class="sprites">
+            <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                <polyline points="1 1 5 5 9 1"></polyline>
+            </symbol>
+        </svg>
+
+    </section>
+
+
+{% endblock %}

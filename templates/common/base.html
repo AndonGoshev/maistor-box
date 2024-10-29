@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    {% block title %}
+        <title>Maistor Box</title>
+    {% endblock %}
+
+</head>
+<body>
+
+<div class="site">
+
+        <header>
+
+            {% include 'common/header.html' %}
+
+        </header>
+
+        <main>
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+
+        <footer>
+
+            {% include 'common/footer.html' %}
+
+        </footer>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font: 18px/1.5 'Roboto', sans-serif;
+}
+
+.site {
+    margin: 0 auto;
+    width: 1400px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+main .welcoming-section{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    background-size: 100% 100%;
+    /*background-color: antiquewhite;*/
+}
+
+main .welcoming-section .business-title {
+    font-size: 4em;
+    display: flex;
+    gap: 0.5em;
+    line-height: 1.7em;
+}
+
+
+main .welcoming-section .business-title .maistor {
+    color: #DD5746;
+}
+
+main .welcoming-section .business-title .box {
+    color: #FFC470;
+}
+
+main .welcoming-section .business-slogan {
+    font-size: 1em;
+}
+
+
+

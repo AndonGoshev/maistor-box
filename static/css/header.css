@@ -1,0 +1,20 @@
+header {
+    width: 100%;
+}
+
+header .nav-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 2em;
+}
+
+header .nav-line nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1em;
+    flex-direction: row;
+}
+
+header .nav-line nav ul li {
+    font-size: 0.7em;
+}
