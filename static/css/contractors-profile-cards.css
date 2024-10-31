@@ -5,14 +5,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 0.5em;
     height: 300px;
     width: 250px;
     padding: 10px;
-    border-radius: 5px;
-    background: #ffffff; /* $background */
+    border-radius: 2px;
+    background-color: #ffffff;
     position: relative;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .contractor-card .profile-img {
@@ -20,43 +19,75 @@
     justify-content: center;
     height: 75px;
     width: 75px;
+    min-height: 75px;
+    min-width: 75px;
     border-radius: 25%;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);*/
     overflow: hidden;
+}
+
+.profile-img, .contractor-card {
+        border: 2px solid #b8b8b8;
 }
 
 .contractor-card .profile-img img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .contractor-card h1 {
-    font-family: 'Sriracha', arial, sans-serif;
+    font-size: 1em;
     text-align: center;
     margin-bottom: 20px;
     color: #3a3a3a; /* $otherAccent */
 }
 
 .contractor-card .description {
-    color: #5a5a5a;
+    margin-top: -15px;
+    color: #9a9a9a;
     font-size: 0.8em;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
 }
 
-.contractor-card footer {
+.contractor-card .card-footer {
     position: absolute;
     left: 50%;
+    bottom: 0;
     transform: translate(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fdfdfd; /* $darkBackground */
     color: white;
     width: 100%;
-    bottom: 0;
     height: 40px;
-    padding: 0 20px;
-    padding-bottom: 10px;
+    padding: 0 20px 10px;
 }
 
 
+.contractor-card .description .specializations {
+    padding-right: 10px;
+}
+
+.specializations, .city {
+    border-radius: 2px;
+    padding: 2px 7px;
+    /*border: 1px solid black;*/
+}
+
+.contractor-card .description h2 {
+    text-align: center;
+    font-size: 0.9em;
+    color: #5A667F;
+}
+
+.contractor-card .description ul {
+    text-align: center;
+    color: #5A667F;
+    list-style: none;
+    font-size: 0.8em;
+}

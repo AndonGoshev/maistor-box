@@ -29,11 +29,11 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 3em;
+    gap: 5em;
 }
 
 main .welcoming-section {
-    /*padding: 0 3em;*/
+    padding-top: 4em;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -175,15 +175,44 @@ main .welcoming-section .business-slogan {
 .recently-registered-contractors {
     display: flex;
     flex-direction: column;
-    gap: 2em;
-}
-
-.recently-registered-contractors h3 {
-    text-align: center;
+    align-items: center;
+    gap: 1em;
 }
 
 .contractors-cards {
+    align-items: center;
     display: flex;
-    justify-content: center;
-    padding-bottom: 5em;
+    gap: 3em;
+    /*padding: 2em;*/
+}
+
+.are-you-contractor {
+    padding: 1em 5em;
+    background-color: #edeeef;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5em;
+}
+
+.are-you-contractor .are-you-contractor-text-section .question-and-icon img {
+    align-items: center;
+    vertical-align: middle;
+    height: 7em;
+    width: auto;
+    margin: 0 2em;
+}
+
+.fancy.special-class {
+    margin-bottom: 2em;
+    height: 3em;
+    background: #f8913a;
+    color: #ffffff;
+}
+
+.fancy.special-class:hover {
+    height: 3em;
+    background: #bd937b;
+    color: white;
 }
