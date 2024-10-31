@@ -1,24 +1,8 @@
 header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    background-color: white;
-}
-
-header .nav-line {
+    align-self: center;
     display: flex;
     justify-content: space-between;
-    padding: 0.5em 2em;
-}
-
-header .nav-line nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1em;
-    flex-direction: row;
-}
-
-header .nav-line nav ul li {
-    font-size: 0.7em;
+    width: 100%;
+    background-color: #8c8b8b;
+    margin: 1em;
 }

@@ -1,0 +1,18 @@
+{% load static %}
+
+<nav class="menu-wrapper">
+    <input type="checkbox" id="menu-toggle">
+
+    <label for="menu-toggle" class="menu-icon" tabindex="0">
+        <img src="{% static 'images/nav-icon.png' %}" alt="Menu Icon"> <!-- Replace with your image path -->
+    </label>
+
+    <ul class="dropdown-menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+ <!-- Link to your external JavaScript file -->
