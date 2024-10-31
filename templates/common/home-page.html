@@ -6,10 +6,13 @@
 
     <section class="welcoming-section">
 
-        <div class="business-title">
+        <div class="business-logo">
 
-            <h1 class="maistor">Maistor</h1>
-            <h1 class="box">Box</h1>
+            <a href="#">
+
+                <img src="{% static 'images/logo.png' %}">
+
+            </a>
 
         </div>
 
@@ -17,83 +20,166 @@
 
     </section>
 
-    <section class="search-home">
+    <section class="search-and-about">
 
-        <div class="search-half">
-    
-            <h3>Потърсете специалисти!</h3>
-            
-            <div class="specialization">
+        <div class="search-options">
 
-                <label class="select" for="slct">
-                    <select id="slct" required>
-                        <option value="" disabled selected>Избери категория...</option>
-                        <option value="#">One</option>
-                        <option value="#">Two</option>
-                        <option value="#">Three</option>
-                        <option value="#">Four</option>
-                        <option value="#">Five</option>
-                        <option value="#">Six</option>
-                        <option value="#">Seven</option>
-                    </select>
-                    <svg>
-                        <use xlink:href="#select-arrow-down"></use>
+            <div class="select-section">
+
+                <h3>Потърсете специалисти!</h3>
+
+                <div class="specialization">
+
+                    <label class="select" for="slct">
+                        <select id="slct" required>
+                            <option value="" disabled selected>Избери категория...</option>
+                            <option value="#">One</option>
+                        </select>
+                        <svg>
+                            <use xlink:href="#select-arrow-down"></use>
+                        </svg>
+                    </label>
+
+                    <!-- SVG Sprites -->
+                    <svg class="sprites">
+                        <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                            <polyline points="1 1 5 5 9 1"></polyline>
+                        </symbol>
                     </svg>
-                </label>
 
-                <!-- SVG Sprites -->
-                <svg class="sprites">
-                    <symbol id="select-arrow-down" viewBox="0 0 10 6">
-                        <polyline points="1 1 5 5 9 1"></polyline>
-                    </symbol>
-                </svg>
 
+                </div>
+
+                <div class="country">
+
+                    <label class="select" for="slct">
+                        <select id="slct" required>
+                            <option value="" disabled selected>Избери област...</option>
+                            <option value="#">One</option>
+                        </select>
+                        <svg>
+                            <use xlink:href="#select-arrow-down"></use>
+                        </svg>
+                    </label>
+
+                    <!-- SVG Sprites -->
+                    <svg class="sprites">
+                        <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                            <polyline points="1 1 5 5 9 1"></polyline>
+                        </symbol>
+                    </svg>
+
+                </div>
+
+                <button class="fancy">
+                    <span class="top-key"></span>
+                    <a href="#" target="_blank" class="">Търси майстор!</a>
+                    <span class="bottom-key-1"></span>
+                    <span class="bottom-key-2"></span>
+                </button>
 
             </div>
 
-            <div class="country">
+            <div class="categories">
 
-                <label class="select" for="slct">
-                    <select id="slct" required>
-                        <option value="" disabled selected>Избери област...</option>
-                        <option value="#">One</option>
-                        <option value="#">Two</option>
-                        <option value="#">Three</option>
-                        <option value="#">Four</option>
-                        <option value="#">Five</option>
-                        <option value="#">Six</option>
-                        <option value="#">Seven</option>
-                    </select>
-                    <svg>
-                        <use xlink:href="#select-arrow-down"></use>
-                    </svg>
-                </label>
+                <h3>Най-търсените категории:</h3>
 
-                <!-- SVG Sprites -->
-                <svg class="sprites">
-                    <symbol id="select-arrow-down" viewBox="0 0 10 6">
-                        <polyline points="1 1 5 5 9 1"></polyline>
-                    </symbol>
-                </svg>
+                <div class="categories-content">
+
+
+                    <div class="category-content">
+                        <a class="category-icon">
+
+                            <img class="icon-itself" src="{% static 'images/ceramic-tiles.png' %}">
+
+                        </a>
+                        <p>Фаянс</p>
+
+                    </div>
+
+                    <div class="category-content">
+                        <a class="category-icon">
+
+                            <img class="icon-itself" src="{% static 'images/small-services.png' %}">
+
+                        </a>
+                        <p>Дов. работи</p>
+
+                    </div>
+
+                    <div class="category-content">
+                        <a class="category-icon">
+
+                            <img class="icon-itself" src="{% static 'images/plumbing.png' %}">
+
+                        </a>
+                        <p>ВиК</p>
+                    </div>
+
+                    <div class="category-content">
+                        <a class="category-icon">
+
+                            <img class="icon-itself" src="{% static 'images/painting.png' %}">
+
+                        </a>
+                        <p>Боядисване</p>
+                    </div>
+
+                </div>
 
             </div>
-
-            <button class="fancy">
-                <span class="top-key"></span>
-                <a href="#" target="_blank" class="">Търси майстор!</a>
-                <span class="bottom-key-1"></span>
-                <span class="bottom-key-2"></span>
-            </button>
 
         </div>
-    
-        <div class="categories-half">
-            
-            <h1>this is categories section</h1>
-            
+
+
+        <div class="about">
+
+            <article class="who-are-we">
+                <p><span><img src="{% static 'images/logo.png' %}"></span> е платформата която помага както на всички
+                    нас да направим правилния избор за майстор ,така и на всички майстори да предлагат услугите си по
+                    подреден и координиран начин!</p>
+
+            </article>
+
+            <div class="contractors-graphic">
+
+                <img src="{% static 'images/contractors.jpg' %}">
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="recently-registered-contractors">
+
+        <h3>Последно регистрирани майстори:</h3>
+
+        <div class="contractors-cards">
+
+            <div class="contractor-card">
+                <div class="profile-img">
+                    <img src="{% static 'images/default-profile-picture.jpeg' %}">
+                </div>
+                <h1>
+                    Йордан Събев
+                </h1>
+                <div class="description">
+                    Maddie is a front end web developer in New York. She has worked in the field for 10 years now
+                </div>
+
+                <footer>
+                    <button class="fancy">Виж профил</button>
+                </footer>
+            </div>
+
         </div>
 
     </section>
+
+
 
 
 {% endblock %}

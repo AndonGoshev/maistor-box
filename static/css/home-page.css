@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
-
-
 * {
     padding: 0;
     margin: 0;
@@ -13,58 +11,179 @@ html {
     font: 18px/1.5 'Roboto', sans-serif;
 }
 
+h3 {
+    font-weight: bolder;
+    color: #5a5a5a;
+}
+
 .site {
     margin: 0 auto;
-    width: 1400px;
+    width: 100vw;
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
+    padding: 0 20px;
 }
 
 main {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     gap: 3em;
 }
 
-main .welcoming-section{
+main .welcoming-section {
+    /*padding: 0 3em;*/
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20vh;
+    /*height: 20vh;*/
     display: flex;
     flex-direction: column;
     background-size: 100% 100%;
     /*background-color: antiquewhite;*/
 }
 
-main .welcoming-section .business-title {
-    font-size: 4em;
-    display: flex;
-    gap: 0.5em;
-    line-height: 1.7em;
+main .welcoming-section .business-logo {
+    width: 40%;
 }
 
-
-main .welcoming-section .business-title .maistor {
-    color: #DD5746;
-}
-
-main .welcoming-section .business-title .box {
-    color: #FFC470;
+.business-logo a img {
+    width: 100%;
 }
 
 main .welcoming-section .business-slogan {
     font-size: 1em;
+    line-height: 0.0em;
 }
 
-.search-home {
+.search-and-about {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
-.search-half {
+
+
+.search-options {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 3em;
+}
+
+.select-section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+
+.select-section .specialization {
+    padding-top: 0.7em;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.categories h3 {
+    text-align: center;
+}
+
+.categories-content {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+}
+
+.categories-content .category-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.3em;
+}
+
+.categories-content .category-content p {
+    font-size: 0.7em;
+    color: white;
+    background-color: #183a59;
+    border-radius: 5px;
+}
+
+.categories .categories-content .category-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3E6D9C;
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+}
+
+.category-icon .icon-itself {
+    filter: invert();
+    width: 70%;
+    height: 70%;
+}
+
+
+.categories .categories-content .category-icon:hover {
+    background-color: #183a59;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+
+.about {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.who-are-we {
+    text-align: center;
+    font-size: 0.8em;
+    max-width: 500px;
+    font-weight: 300;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+}
+
+.who-are-we p img {
+    align-items: center;
+    vertical-align: middle;
+    height: 1em;
+    width: auto;
+    margin: 0 0.2em;
+}
+
+.contractors-graphic {
+    /*flex-shrink: 1;*/
+    align-items: center;
+    max-width: 400px;
+}
+
+.contractors-graphic img {
+    width: 100%;
+}
+
+.recently-registered-contractors {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.recently-registered-contractors h3 {
+    text-align: center;
+}
+
+.contractors-cards {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5em;
 }

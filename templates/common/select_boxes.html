@@ -1,0 +1,11 @@
+<label class="select" for="{{ select_id }}">
+    <select id="{{ select_id }}" required>
+        <option value="" disabled selected>{{ placeholder }}</option>
+        {% for option in options %}
+            <option value="#">{{ option }}</option>
+        {% endfor %}
+    </select>
+    <svg>
+        <use xlink:href="#select-arrow-down"></use>
+    </svg>
+</label>
