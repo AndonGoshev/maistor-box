@@ -1,8 +1,38 @@
 header {
+    align-items: center;
     align-self: center;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: #8c8b8b;
-    margin: 1em;
+    padding: 0.5em 1em 0.4em 0.5em;
+
+}
+
+header .navigation-and-logo {
+    align-items: center;
+    display: flex;
+    gap: 1em;
+}
+
+header .navigation-and-logo .header-logo {
+    padding-top: 5px;
+    align-self: center;
+    width: 120px;
+}
+
+header .navigation-and-logo .header-logo img {
+    width: 100%;
+    /*padding-bottom: 5%;*/
+}
+
+header .user-section {
+    align-self: center;
+    font-size: 0.8em;
+    display: flex;
+    gap: 1em;
+    color: #001253;
+}
+
+header .user-section p {
+    align-self: center;
 }
