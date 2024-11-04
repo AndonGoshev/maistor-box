@@ -17,7 +17,12 @@
         	<p>Здравейте  {{ request.user }}!</p>
             {% include 'common/profile-dropdown-menu.html' %}
         {% else %}
-            <p>nqma user</p>
+            <nav>
+            
+                <a href="{% url 'regular-user-registration' %}">Регистрация</a>
+                <a href="{% url 'contractor-registration' %}">Регистрация като майстор</a>
+            
+            </nav>
         {% endif %} 
         
     </div>

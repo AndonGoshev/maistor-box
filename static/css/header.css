@@ -36,3 +36,22 @@ header .user-section {
 header .user-section p {
     align-self: center;
 }
+
+body > div.site > header > header > div.user-section > nav {
+    display: flex;
+    gap: 0.7em;
+}
+
+body > div.site > header > header > div.user-section > nav > a {
+    color: #FD841F;
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 0.1em 0.3em;
+    border-radius: 5px;
+    border: 1px solid #E14D2A;
+}
+
+body > div.site > header > header > div.user-section > nav > a:hover {
+    color: #ffffff;
+    background-color: #FD841F;
+}
