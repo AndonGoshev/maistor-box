@@ -1,0 +1,15 @@
+{% load static %}
+
+<nav class="profile-menu-wrapper">
+    <input type="checkbox" id="profile-menu-toggle">
+
+    <label for="profile-menu-toggle" class="profile-menu-icon" tabindex="0">
+        <img src="{% static 'images/profile-icon.png' %}" alt="Profile Menu Icon"> <!-- Replace with your image path -->
+    </label>
+
+    <ul class="profile-dropdown-menu">
+        <li><a href="#">Профил</a></li>
+        <li><a href="#">Любими майстори</a></li>
+        <li><a href="#">Изход</a></li>
+    </ul>
+</nav>

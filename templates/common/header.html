@@ -1,8 +1,30 @@
 {% load static %}
 <header>
 
-    {% include 'common/nav-dropdown.html' %}
+    <div class="navigation-and-logo">
+        
+        {% include 'common/nav-dropdown.html' %}    
+        <div class="header-logo">
+            <a href="#"><img alt="maistor box" src="{% static 'images/logo.png' %}"></a>
+        </div>
+        
+    </div>
     
-    <p>something</p>
+    
+    <div class="user-section">
+        
+        {% if request.user.is_authenticated %}
+        	<p>Здравейте  {{ request.user }}!</p>
+            {% include 'common/profile-dropdown-menu.html' %}
+        {% else %}
+            <nav>
+            
+                <a href="{% url 'regular-user-registration' %}">Регистрация</a>
+                <a href="{% url 'contractor-registration' %}">Регистрация като майстор</a>
+            
+            </nav>
+        {% endif %} 
+        
+    </div>
 
 </header>

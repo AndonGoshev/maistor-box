@@ -18,7 +18,7 @@ h3 {
 
 .site {
     margin: 0 auto;
-    width: 100vw;
+    /*width: 100vw;*/
     max-width: 1400px;
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@ main {
 }
 
 main .welcoming-section {
-    padding-top: 4em;
+    /*padding-top: 1em;*/
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -215,4 +215,7 @@ main .welcoming-section .business-slogan {
     height: 3em;
     background: #bd937b;
     color: white;
+}
+
+footer, header {
 }
