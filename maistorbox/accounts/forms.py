@@ -7,9 +7,13 @@ from maistorbox.accounts.models import ContractorUser, Specializations, Regions,
 
 
 class ContractorUserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)  # Masked password input
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = ContractorUser
-        fields = ['username', 'password', 'email', 'first_name', 'last_name','profile_picture', 'specializations', 'regions']
+        fields = ['first_name', 'last_name', 'email', 'username', 'password', 'confirm_password', 'profile_picture', 'specializations', 'regions']
+
 
     specializations = forms.ModelMultipleChoiceField(
         queryset=Specializations.objects.all(),
@@ -20,6 +24,13 @@ class ContractorUserRegistrationForm(forms.ModelForm):
         queryset=Regions.objects.all(),
         widget=CheckboxSelectMultiple,
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+        if password and confirm_password and password != confirm_password:
+            raise forms.ValidationError("Passwords do not match.")
 
     def save(self, commit=False):
         User = get_user_model()
@@ -47,6 +58,16 @@ class ContractorUserRegistrationForm(forms.ModelForm):
 
 
         return user
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            if field == "username":
+                self.fields[field].help_text = 'Полето може да съдържа само букви цифри и (@ . + - _)'
+            self.fields[field].label = ''
+            self.fields[field].widget.attrs['placeholder'] = field
+
+
 
 
 class RegularUserRegistrationForm(forms.ModelForm):

@@ -5,14 +5,20 @@ from maistorbox.accounts.choices import UserTypeChoice
 
 
 class Specializations(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(
+        max_length=50,
+        blank=True,
+    )
 
     def __str__(self):
         return self.name
 
 
 class Regions(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(
+        max_length=50,
+        blank=True,
+    )
 
     def __str__(self):
         return self.name
@@ -31,8 +37,14 @@ class RegularUserModel(BaseUserModel):
 
 
 class ContractorUser(BaseUserModel):
-    regions = models.ManyToManyField(Regions)
-    specializations = models.ManyToManyField(Specializations)
+    regions = models.ManyToManyField(
+        Regions,
+        blank=True,
+    )
+    specializations = models.ManyToManyField(
+        Specializations,
+        blank=True,
+    )
     profile_picture = models.ImageField(
         upload_to='media/media'
     )
