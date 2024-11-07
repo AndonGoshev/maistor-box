@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from maistorbox.accounts.choices import UserTypeChoice
+from maistorbox.accounts.choices import UserTypeChoice, ContractorRegions, ContractorSpecializations
 
 
 class Specializations(models.Model):
@@ -63,5 +63,16 @@ class ProjectImage(models.Model):
         upload_to='media/user_images',
         blank=True,
         null=True,
+    )
+
+    regions = models.CharField(
+        max_length=50,
+        choices=ContractorRegions.choices,  # Use choices directly here
+        blank=True,
+    )
+    specializations = models.CharField(
+        max_length=50,
+        choices=ContractorSpecializations.choices,  # Use choices directly here
+        blank=True,
     )
 

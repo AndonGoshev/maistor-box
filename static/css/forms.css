@@ -80,3 +80,20 @@ form p p:focus {
     user-select: none;
 }
 
+body > div.site > main > form > p:nth-child(4) {
+    display: flex;
+    flex-direction: column;
+}
+
+#id_username {
+    flex-grow: 0;
+}
+
+#id_username_helptext {
+    font-size: 0.4em;
+    width: 100%;
+}
+
+#id_specializations {
+
+}

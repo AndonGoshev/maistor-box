@@ -14,14 +14,19 @@
     <div class="user-section">
         
         {% if request.user.is_authenticated %}
-        	<p>Здравейте  {{ request.user }}!</p>
+        	{% if user.user_type == "regular_user" %}
+            <p>Здравейте  {{ request.user }}!</p>
+            {% else %}
+                <p>Здравейте майстор {{ request.user.last_name }}!</p>
+            {% endif %}
             {% include 'common/profile-dropdown-menu.html' %}
         {% else %}
             <nav>
             
+                <a href="{% url 'login' %}">Влез</a>
                 <a href="{% url 'regular-user-registration' %}">Регистрация</a>
                 <a href="{% url 'contractor-registration' %}">Регистрация като майстор</a>
-            
+
             </nav>
         {% endif %} 
         

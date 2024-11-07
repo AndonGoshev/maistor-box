@@ -2,27 +2,28 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import CheckboxSelectMultiple
 
-from maistorbox.accounts.choices import UserTypeChoice
+from maistorbox.accounts.choices import UserTypeChoice, ContractorRegions, ContractorSpecializations
 from maistorbox.accounts.models import ContractorUser, Specializations, Regions, BaseUserModel, ProjectImage
+from maistorbox.mixins import FormsStylingMixin
 
 
-class ContractorUserRegistrationForm(forms.ModelForm):
+class ContractorUserRegistrationForm(forms.ModelForm, FormsStylingMixin):
     password = forms.CharField(widget=forms.PasswordInput)  # Masked password input
     confirm_password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = ContractorUser
-        fields = ['first_name', 'last_name', 'email', 'username', 'password', 'confirm_password', 'profile_picture', 'specializations', 'regions']
-
-
-    specializations = forms.ModelMultipleChoiceField(
-        queryset=Specializations.objects.all(),
-        widget=CheckboxSelectMultiple,
-    )
+        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'profile_picture', 'specializations', 'regions']
 
     regions = forms.ModelMultipleChoiceField(
         queryset=Regions.objects.all(),
-        widget=CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+    specializations = forms.ModelMultipleChoiceField(
+        queryset=Specializations.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
     )
 
     def clean(self):
@@ -32,45 +33,26 @@ class ContractorUserRegistrationForm(forms.ModelForm):
         if password and confirm_password and password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
 
-    def save(self, commit=False):
-        User = get_user_model()
-        user = User(username=self.cleaned_data['username'], email=self.cleaned_data['email'])
-        user.set_password(self.cleaned_data['password'])
-        user.user_type = UserTypeChoice.CONTRACTOR_USER
+    def save(self, commit=True):
+        # Create the ContractorUser instance without saving it immediately
+        contractor = super().save(commit=False)
+        contractor.set_password(self.cleaned_data['password'])  # Set hashed password
 
         if commit:
-            user.save()
-            contractor = ContractorUser.objects.create_user(
-                user=user,
-                profile_picture=self.cleaned_data['profile_picture']
-            )
+            contractor.save()  # Save the user to get a primary key
 
+            # Set many-to-many fields with the related choices
             contractor.specializations.set(self.cleaned_data['specializations'])
             contractor.regions.set(self.cleaned_data['regions'])
-            contractor.save()
 
-            project_images = self.cleaned_data['project_images']
-            if project_images:
-                for image in project_images:
-                    ProjectImage.objects.create(contractor=contractor, image=image)
-
-            return contractor
-
-
-        return user
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            if field == "username":
-                self.fields[field].help_text = 'Полето може да съдържа само букви цифри и (@ . + - _)'
-            self.fields[field].label = ''
-            self.fields[field].widget.attrs['placeholder'] = field
+        return contractor
 
 
 
 
-class RegularUserRegistrationForm(forms.ModelForm):
+class RegularUserRegistrationForm(forms.ModelForm, FormsStylingMixin):
+
+
     class Meta:
         model = get_user_model()
         fields = ['username', 'email', 'password']
@@ -79,7 +61,7 @@ class RegularUserRegistrationForm(forms.ModelForm):
         User = get_user_model()
         user = User(username=self.cleaned_data['username'], email=self.cleaned_data['emails'])
         user.set_password(self.cleaned_data['password'])
-        user_type = UserTypeChoice.REGULAR_USER
+        user.user_type = UserTypeChoice.REGULAR_USER
 
         if commit:
             user.save()
