@@ -4,6 +4,7 @@ from django import forms
 class FormsStylingMixin(forms.Form):
     PLACEHOLDER_TRANSLATION = {
         'username': "Потребителско име...",
+        'password': 'Парола...',
         'password1': 'Парола...',
         'password2': 'Потвърди парола...',
         'email': 'Имейл...',

@@ -1,13 +1,15 @@
 {% extends 'common/base.html' %}
 
 {% block title %}
-Излизане
+    Излизане
 {% endblock %}
 
 {% block content %}
-<form method="post">
-{% csrf_token %}
-    <p>Сигурни ли сте ,че искате да излезете от профила си?</p>
-    <button class="fancy special-class">Излизане</button>
-</form>
+    <div class="form-section">
+        <form method="post">
+            {% csrf_token %}
+            <p>Сигурни ли сте ,че искате да излезете от профила си?</p>
+            <button class="fancy special-class">Излизане</button>
+        </form>
+    </div>
 {% endblock %}

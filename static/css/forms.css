@@ -5,9 +5,12 @@
     width: 100%;
     justify-content: space-evenly;
     gap: 1em;
+    margin: 0 auto;
 }
 
 form {
+    align-items: center;
+    justify-content: center;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -65,15 +68,17 @@ body > div.site > main > div > form > p:nth-child(9) button{
     font-size: 1em;
 }
 
-body > div.site > main > div > form > p:nth-child(9), body > div.site > main > div > form > p:nth-child(10), body > div.site > main > div > form > p:nth-child(13) {
+body > div.site > main > div > form > p:nth-child(9), body > div.site > main > div > form > p:nth-child(10), body > div.site > main > div > form > p:nth-child(13), body > div.site > main > div > form > p:nth-child(9) {
     padding-top: 1em;
+    padding-bottom: 0.5em;
 }
 
 .form-section form div {
     padding-bottom: 1em;
     display: flex;
     justify-content: center;
-    gap: 1em;
+    gap: 0.5em;
+    line-height: 0;
 }
 
 .form-section form div div label{
@@ -81,10 +86,16 @@ body > div.site > main > div > form > p:nth-child(9), body > div.site > main > d
     color: black;
 }
 
-#id_regions {
-    align-self: center;
-    width: 75%;
+#id_regions , #id_specializations{
+    width: 100%;
+    max-width: 50em;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     flex-wrap: wrap;
+}
+
+body > div.site > main > div > form > p:nth-child(9) > label, body > div.site > main > div > form > p:nth-child(10) > label, body > div.site > main > div > form > p:nth-child(13) > label {
+    /*color: #FD841F;*/
 }
