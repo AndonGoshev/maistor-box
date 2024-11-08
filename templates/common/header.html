@@ -14,7 +14,7 @@
     <div class="user-section">
         
         {% if request.user.is_authenticated %}
-        	{% if request.user.user_type == "regular-user" %}
+        	{% if request.user.user_type == "regular_user" %}
             <p>Здравейте потребител {{ request.user }}!</p>
             {% else %}
                 <p>Здравейте майстор {{ request.user.last_name }}!</p>

@@ -1,13 +1,13 @@
 {% extends 'common/base.html' %}
 
 {% block title %}
-	Регистрация-потребител
+    Регистрация-потребител
 {% endblock %}
 
+
 {% block content %}
-	<form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="fancy special-class"></button>
-    </form>
+    <div class="form-section">
+        <h1>Регистрация</h1>
+        {% include "accounts/common/base-form.html" %}
+    </div>
 {% endblock %}
