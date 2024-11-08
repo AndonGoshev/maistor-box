@@ -65,14 +65,4 @@ class ProjectImage(models.Model):
         null=True,
     )
 
-    regions = models.CharField(
-        max_length=50,
-        choices=ContractorRegions.choices,  # Use choices directly here
-        blank=True,
-    )
-    specializations = models.CharField(
-        max_length=50,
-        choices=ContractorSpecializations.choices,  # Use choices directly here
-        blank=True,
-    )
 

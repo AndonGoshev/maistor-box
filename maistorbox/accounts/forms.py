@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.forms import CheckboxSelectMultiple
+from django.forms import CheckboxSelectMultiple, ClearableFileInput
 
 from maistorbox.accounts.choices import UserTypeChoice, ContractorRegions, ContractorSpecializations
 from maistorbox.accounts.models import ContractorUser, Specializations, Regions, BaseUserModel, ProjectImage
@@ -8,12 +8,14 @@ from maistorbox.mixins import FormsStylingMixin
 
 
 class ContractorUserRegistrationForm(forms.ModelForm, FormsStylingMixin):
-    password = forms.CharField(widget=forms.PasswordInput)  # Masked password input
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
-
     class Meta:
         model = ContractorUser
-        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'profile_picture', 'specializations', 'regions']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'profile_picture']
+
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+
+    projects_of_contractor_in_images = forms.ImageField(widget=ClearableFileInput(attrs={'multiple': True}))
 
     regions = forms.ModelMultipleChoiceField(
         queryset=Regions.objects.all(),
@@ -37,6 +39,7 @@ class ContractorUserRegistrationForm(forms.ModelForm, FormsStylingMixin):
         # Create the ContractorUser instance without saving it immediately
         contractor = super().save(commit=False)
         contractor.set_password(self.cleaned_data['password'])  # Set hashed password
+        contractor.user_type = UserTypeChoice.CONTRACTOR_USER
 
         if commit:
             contractor.save()  # Save the user to get a primary key
@@ -51,15 +54,16 @@ class ContractorUserRegistrationForm(forms.ModelForm, FormsStylingMixin):
 
 
 class RegularUserRegistrationForm(forms.ModelForm, FormsStylingMixin):
-
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'email', 'password', 'confirm_password']
 
     def save(self, commit=True):
         User = get_user_model()
-        user = User(username=self.cleaned_data['username'], email=self.cleaned_data['emails'])
+        user = User(username=self.cleaned_data['username'], email=self.cleaned_data['email'])
         user.set_password(self.cleaned_data['password'])
         user.user_type = UserTypeChoice.REGULAR_USER
 
