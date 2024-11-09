@@ -65,3 +65,23 @@ button.fancy {
         }
     }
 }
+
+
+
+
+.fancy.special-class {
+    margin-bottom: 2em;
+    height: 3em;
+    background: #f8913a;
+    color: #ffffff;
+}
+
+.fancy.special-class:hover {
+    height: 3em;
+    background: #bd937b;
+    color: white;
+}
+
+.fancy.special-class.credentials {
+    width: 14em;
+}

@@ -204,18 +204,5 @@ main .welcoming-section .business-slogan {
     margin: 0 2em;
 }
 
-.fancy.special-class {
-    margin-bottom: 2em;
-    height: 3em;
-    background: #f8913a;
-    color: #ffffff;
-}
-
-.fancy.special-class:hover {
-    height: 3em;
-    background: #bd937b;
-    color: white;
-}
-
 footer, header {
 }

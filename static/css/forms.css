@@ -99,3 +99,7 @@ body > div.site > main > div > form > p:nth-child(9), body > div.site > main > d
 body > div.site > main > div > form > p:nth-child(9) > label, body > div.site > main > div > form > p:nth-child(10) > label, body > div.site > main > div > form > p:nth-child(13) > label {
     /*color: #FD841F;*/
 }
+
+form .fancy .special-class {
+    background-color: #001253;
+}
