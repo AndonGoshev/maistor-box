@@ -141,3 +141,22 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = reverse_lazy('home_page')
 LOGOUT_REDIRECT_URL = reverse_lazy('home_page')
 
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# We are going to use this for developing purposes
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+# We are going to use this protocol and port because it's encrypted
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'andon.go6ev1@gmail.com'
+EMAIL_HOST_PASSWORD = '9604024360a'
+DEFAULT_FROM_EMAIL = 'andon.go6ev1@gmail.com'
+
+
+

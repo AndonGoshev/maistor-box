@@ -1,18 +1,20 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm, \
+    SetPasswordForm
 
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations
-from maistorbox.mixins import FormsStylingMixin
+from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTransateMixin
 
 
-class BaseUserRegistrationForm(UserCreationForm, FormsStylingMixin):
+class BaseUserRegistrationForm(ErrorMessagesTransateMixin, UserCreationForm, FormsStylingMixin):
     class Meta:
         model = BaseUserModel
         fields = ('username', 'email', 'password1', 'password2')
 
 
-class ContractorUserRegistrationForm(UserCreationForm, FormsStylingMixin):
+
+class ContractorUserRegistrationForm(ErrorMessagesTransateMixin, UserCreationForm, FormsStylingMixin):
     # Base user fields
     email = forms.EmailField(required=True)
     first_name = forms.CharField(
@@ -23,7 +25,6 @@ class ContractorUserRegistrationForm(UserCreationForm, FormsStylingMixin):
         required=True,
         max_length=50,
     )
-
 
     # Contractor user fields
     phone_number = forms.CharField(
@@ -47,7 +48,6 @@ class ContractorUserRegistrationForm(UserCreationForm, FormsStylingMixin):
     class Meta:
         model = BaseUserModel
         fields = ['username', 'password1', 'password2', 'email',]
-
 
     def save(self, commit=True):
 
@@ -77,4 +77,16 @@ class ContractorUserRegistrationForm(UserCreationForm, FormsStylingMixin):
 
 
 class CustomLoginForm(AuthenticationForm, FormsStylingMixin):
+    pass
+
+
+class CustomPasswordChangeForm(PasswordChangeForm, FormsStylingMixin):
+    pass
+
+
+
+class CustomPasswordResetForm(PasswordResetForm, FormsStylingMixin):
+    pass
+
+class CustomPasswordSetForm(SetPasswordForm, FormsStylingMixin):
     pass

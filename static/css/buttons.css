@@ -83,5 +83,6 @@ button.fancy {
 }
 
 .fancy.special-class.credentials {
+    margin-top: 1em;
     width: 14em;
 }

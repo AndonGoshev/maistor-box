@@ -6,10 +6,13 @@
 
 {% block content %}
     <div class="form-section">
+
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button class="fancy special-class credentials">Влизане</button>
         </form>
+
+    <a class="forgotten-password" href="{% url 'password-reset' %}">Забравена парола?</a>
     </div>
 {% endblock %}

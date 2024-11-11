@@ -8,6 +8,7 @@
 {% block content %}
     <div class="form-section">
         <h1>Регистрация</h1>
-        {% include "accounts/common/base-form.html" %}
+        {% include "accounts/common/base-registration-form.html" %}
+        {% include 'accounts/common/error-messages.html' %}
     </div>
 {% endblock %}

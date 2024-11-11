@@ -1,11 +1,15 @@
 .form-section {
+    height: auto;
     align-items: center;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    justify-content: space-evenly;
     gap: 1em;
-    margin: 0 auto;
+    width: 100%;
+    margin: 4em auto;
+}
+
+.form-section .forgotten-password {
+    font-size: 0.6em;
 }
 
 form {
@@ -59,7 +63,7 @@ body > div.site > main > div > form > p:nth-child(9) button{
     background-color: #001253;
 }
 
-.form-section h1{
+.form-section h1, .form-section h2{
     color: #FD841F;
 }
 
@@ -103,3 +107,4 @@ body > div.site > main > div > form > p:nth-child(9) > label, body > div.site > 
 form .fancy .special-class {
     background-color: #001253;
 }
+
