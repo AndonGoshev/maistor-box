@@ -43,10 +43,10 @@ class CustomLogoutView(LogoutView):
 class RegularUserProfileView(TemplateView):
     template_name = 'accounts/regular-users/regular-user-profile-details.html'
 
-class RegularUserProfileDeleteView(DeleteView):
+class UserProfileDeleteView(DeleteView):
     model = BaseUserModel
     success_url = reverse_lazy('home_page')
-    template_name = 'accounts/regular-users/regular-user-profile-delete.html'
+    template_name = 'accounts/common/profile-delete.html'
     pk_url_kwarg = 'id'
 
 

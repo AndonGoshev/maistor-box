@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-	Профил
+    Профил
 {% endblock %}
 
 {% block content %}
@@ -10,27 +10,73 @@
 
         <div class="profile-info">
 
-                <div class="profile-info-image">
+            <div class="contractor-profile-info-image">
 
-                    <img src="{{ user.contractor_user.profile_image }}" alt="profile-icon">
+                <img src="{{ user.contractor_user.profile_image.url }}" alt="profile-icon">
 
-                </div>
-                <div class="profile-info-text">
+            </div>
 
-                    <p>Потребител: <span class="profile-details">{{ user.username }}</span></p>
-                    <p>Име: <span class="profile-details">{{ user.first_name }}</span></p>
-                    <p>Имейл: <span class="profile-details">{{ user.email }}</span></p>
+            <div class="profile-info-text">
 
-                </div>
+                <p>Потребител: <span class="profile-details">{{ user.username }}</span></p>
+                <p>Име: <span class="profile-details">{{ user.first_name }}</span></p>
+                <p>Фамилия: <span class="profile-details">{{ user.last_name }}</span></p>
+                <p>Телефонен номер: <span class="profile-details">{{ user.contractor_user.phone_number }}</span></p>
+                <p>Имейл: <span class="profile-details">{{ user.email }}</span></p>
+
+                <p>За мен:<span class="profile-details">
+
+                        {% if user.contractor_user.about_me %}
+                            {{ user.contractor_user.about_me }}
+                        {% else %}
+                            Все още не сте добавили информация за вас - можете да го направите от (Настройки на профила
+                            >
+                            Редактиране на профила)
+                        {% endif %}
+
+                </span></p>
+
+            </div>
+
+        </div>
+
+        <div class="regions-of-work">
+
+            <h3>Градове в които работя:</h3>
+
+            <ul>
+                {% for city in user.contractor_user.regions.all %}
+                    <li>{{ city.name }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        <div class="specializations-of-work">
+
+            <h3>Моите специалности:</h3>
+
+            <ul>
+                {% for specialization in user.contractor_user.specializations.all %}
+                    <li>{{ specialization.name }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        <div class="projects-done">
+
+            <h3>Моите проекти:</h3>
 
         </div>
 
         <div class="profile-edit">
-            <h2>Настройки на профила</h2>
+            <h3>Настройки на профила</h3>
             <a href="{% url 'password-change' %}"><p>Смяна на парола</p></a>
-            <a href="{% url 'regular-user-profile-delete' user.id %}"><p>Изтриване на профил</p></a>
+            <a href="{% url 'user-profile-delete' user.id %}"><p>Изтриване на профил</p></a>
 
         </div>
+
 
     </div>
 {% endblock %}

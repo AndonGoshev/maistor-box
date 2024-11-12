@@ -35,19 +35,26 @@ class ContractorUserModel(models.Model):
         related_name='contractor_user',
     )
 
+    about_me = models.TextField(
+        blank=True,
+        null=True,
+    )
+
     phone_number = models.CharField()
 
     profile_image = models.ImageField(
-        upload_to='media/users_profile_pictures',
+        upload_to='contractor-users-profile-pictures',
     )
 
     regions = models.ManyToManyField(
         Regions,
-        related_name='users',
-
+        related_name='regions',
     )
 
     specializations = models.ManyToManyField(
         Specializations,
-        related_name='users',
+        related_name='specializations',
     )
+
+
+class

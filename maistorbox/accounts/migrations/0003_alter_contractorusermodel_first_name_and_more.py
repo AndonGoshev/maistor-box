@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='contractorusermodel',
             name='profile_image',
-            field=models.ImageField(upload_to='media/users_profile_pictures'),
+            field=models.ImageField(upload_to='media/contractor-users-profile-pictures'),
         ),
         migrations.AlterField(
             model_name='contractorusermodel',
