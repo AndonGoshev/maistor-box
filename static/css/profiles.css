@@ -1,0 +1,53 @@
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5em;
+    margin: 10% auto;
+}
+
+.profile-info {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+}
+
+.profile-info-image {
+    width: 4em;
+}
+
+.profile-info-image img {
+    width: 100%;
+}
+
+.profile-info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.profile-details {
+    font-weight: bold;
+    padding-left: 0.2em;
+    color: #001253;
+}
+
+.profile-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2em;
+}
+
+.profile-section h2 {
+    color: #FD841F;
+}
+.profile-edit a {
+    text-decoration: none;
+    color: #3E6D9C;
+}
+
+.profile-edit a:hover {
+    color: #0025b5;
+}

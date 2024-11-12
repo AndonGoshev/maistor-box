@@ -1,0 +1,36 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+	Профил
+{% endblock %}
+
+{% block content %}
+    <div class="profile-section">
+
+        <div class="profile-info">
+
+                <div class="profile-info-image">
+
+                    <img src="{{ user.contractor_user.profile_image }}" alt="profile-icon">
+
+                </div>
+                <div class="profile-info-text">
+
+                    <p>Потребител: <span class="profile-details">{{ user.username }}</span></p>
+                    <p>Име: <span class="profile-details">{{ user.first_name }}</span></p>
+                    <p>Имейл: <span class="profile-details">{{ user.email }}</span></p>
+
+                </div>
+
+        </div>
+
+        <div class="profile-edit">
+            <h2>Настройки на профила</h2>
+            <a href="{% url 'password-change' %}"><p>Смяна на парола</p></a>
+            <a href="{% url 'regular-user-profile-delete' user.id %}"><p>Изтриване на профил</p></a>
+
+        </div>
+
+    </div>
+{% endblock %}

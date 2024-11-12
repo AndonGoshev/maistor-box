@@ -4,17 +4,17 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations
-from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTransateMixin
+from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin
 
 
-class BaseUserRegistrationForm(ErrorMessagesTransateMixin, UserCreationForm, FormsStylingMixin):
+class BaseUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
     class Meta:
         model = BaseUserModel
         fields = ('username', 'email', 'password1', 'password2')
 
 
 
-class ContractorUserRegistrationForm(ErrorMessagesTransateMixin, UserCreationForm, FormsStylingMixin):
+class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
     # Base user fields
     email = forms.EmailField(required=True)
     first_name = forms.CharField(

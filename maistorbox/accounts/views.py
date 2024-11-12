@@ -1,5 +1,3 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, \
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
@@ -10,7 +8,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView, DeleteView
 from django.contrib import messages
 
 from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRegistrationForm, CustomLoginForm, \
@@ -40,6 +38,25 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     template_name = "accounts/common/logout.html"
     http_method_names = ['get', 'post', 'options']
+
+
+class RegularUserProfileView(TemplateView):
+    template_name = 'accounts/regular-users/regular-user-profile-details.html'
+
+class RegularUserProfileDeleteView(DeleteView):
+    model = BaseUserModel
+    success_url = reverse_lazy('home_page')
+    template_name = 'accounts/regular-users/regular-user-profile-delete.html'
+    pk_url_kwarg = 'id'
+
+
+class ContractorUserProfileDetailsView(TemplateView):
+    template_name = 'accounts/contractors/contractor-profile-details.html'
+
+
+class ContractorUserProfileDeleteView(DeleteView):
+    pass
+
 
 class CustomPasswordChangeView(PasswordChangeView):
     template_name = 'accounts/common/password-change.html'

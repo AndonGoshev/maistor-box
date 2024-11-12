@@ -16,8 +16,6 @@ class FormsStylingMixin(forms.Form):
         'last_name': 'Фамилия...',
         'phone_number': 'Телефонен номер...',
         'profile_image': 'Качи профилна снимка...',
-        # 'specializations': 'neshto si',
-        # 'regions': 'neshto drugo si regioni',
         'old_password': 'Стара парола...',
         'new_password1': 'Нова парола...',
         'new_password2': 'Потвърдете новата парола...',
@@ -41,25 +39,15 @@ class FormsStylingMixin(forms.Form):
             self.fields[field].help_text = ''
 
         if 'profile_image' in self.fields:
-            self.fields['profile_image'].label = 'Качете профилна снимка:'
+            self.fields['profile_image'].label = 'Моля качете профилна снимка:'
 
 
 # I'm using this approach for the translation because the other one requires installing things that are not really intuative for windows
-class ErrorMessagesTransateMixin:
-    def custom_error_messages(self):
+class ErrorMessagesTranslateMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        translated_messages = {
-            'required': 'Това поле е задължително.',
-            'invalid': 'Невалидна стойност.',
-            'max_length': 'Тази стойност е твърде дълга.',
-            'min_length': 'Тази стойност е твърде кратка.',
-            'unique': 'Това поле трябва да бъде уникално.',
-            'invalid_email': 'Моля, въведете валиден имейл адрес.',
-            'password_mismatch': 'Паролите не съвпадат.',
-            'max_value': 'Тази стойност е твърде голяма.',
-            'min_value': 'Тази стойност е твърде малка.',
-        }
-
+        # Field-specific custom error messages (applied first)
         field_messages = {
             'username': {
                 'unique': "Потребител с това потребителско име вече съществува.",
@@ -87,17 +75,28 @@ class ErrorMessagesTransateMixin:
             },
         }
 
-        for field, messages in field_messages.items():
-            if field in self.fields:
-                for error_code, message in messages.items():
-                    self.fields[field].error_messages[error_code] = message
+        # Common error messages for all fields
+        translated_messages = {
+            'required': 'Това поле е задължително.',
+            'invalid': 'Невалидна стойност.',
+            'max_length': 'Тази стойност е твърде дълга.',
+            'min_length': 'Тази стойност е твърде кратка.',
+            'unique': 'Това поле трябва да бъде уникално.',
+            'invalid_email': 'Моля, въведете валиден имейл адрес.',
+            'password_mismatch': 'Паролите не съвпадат.',
+            'max_value': 'Тази стойност е твърде голяма.',
+            'min_value': 'Тази стойност е твърде малка.',
+        }
 
+        # Apply field-specific error messages first
+        for field_name, messages in field_messages.items():
+            if field_name in self.fields:
+                self.fields[field_name].error_messages.update(messages)
+
+        # Apply common messages last so that specific messages are not overwritten
         for field in self.fields.values():
-            field.error_messages.update(translated_messages)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.custom_error_messages()
+            for error_code, message in translated_messages.items():
+                field.error_messages.setdefault(error_code, message)
 
 
 

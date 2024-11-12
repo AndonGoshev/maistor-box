@@ -25,11 +25,14 @@ class BaseUserModel(AbstractUser):
         max_length=50,
     )
 
+    email = models.EmailField(unique=True)
+
 
 class ContractorUserModel(models.Model):
     user = models.OneToOneField(
         BaseUserModel,
         on_delete=models.CASCADE,
+        related_name='contractor_user',
     )
 
     phone_number = models.CharField()

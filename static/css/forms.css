@@ -34,6 +34,7 @@ form p input::placeholder {
 }
 
 form ul {
+    color: #E14D2A;
     display: flex;
     flex-direction: column;
     justify-content: center;

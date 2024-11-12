@@ -6,17 +6,22 @@ from django.urls import path, include
 
 from maistorbox.accounts.views import BaseUserRegistrationView, ContractorUserRegistrationView, CustomLoginView, \
     CustomLogoutView, CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetView, \
-    CustomPasswordResetDoneView, CustomPasswordResetConfirmView
+    CustomPasswordResetDoneView, CustomPasswordResetConfirmView, RegularUserProfileView, RegularUserProfileDeleteView, \
+    ContractorUserProfileDetailsView
 
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('regular-user/', include([
         path('registration/', BaseUserRegistrationView.as_view(), name='regular-user-registration'),
+        path('profile-details/<int:id>/', RegularUserProfileView.as_view(), name='regular-user-profile-details'),
+        path('profile/delete/<int:id>/', RegularUserProfileDeleteView.as_view(), name='regular-user-profile-delete'),
     ])),
     path('contractors/', include([
-        path('registration/', ContractorUserRegistrationView.as_view(), name='contractor-registration')
+        path('registration/', ContractorUserRegistrationView.as_view(), name='contractor-registration'),
+        path('profile-details/<int:id>/', ContractorUserProfileDetailsView.as_view(), name='contractor-user-profile-details')
     ])),
+
     path('password-change/', CustomPasswordChangeView.as_view(), name='password-change'),
     path('password-change-done/', CustomPasswordChangeDoneView.as_view(), name='password-change-done'),
 
