@@ -56,3 +56,55 @@ class ContractorUserModel(models.Model):
         related_name='specializations',
     )
 
+
+class ContractorProject(models.Model):
+    name = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+
+    description = models.TextField(
+        max_length=1000,
+    )
+
+    min_price_for_similar_project = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+    )
+
+    max_price_for_similar_project = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+    )
+
+    contractor_user = models.ForeignKey(
+        to=ContractorUserModel,
+        on_delete=models.CASCADE,
+        related_name='contractor_project',
+    )
+
+    def save(self, *args, **kwargs):
+        if self.min_price_for_similar_project > self.max_price_for_similar_project:
+            raise ValueError('Минималната цена не може да бъде по-висока от максималната!')
+        super().save(*args, **kwargs)
+
+
+class ImageModel(models.Model):
+    image = models.ImageField()
+
+    caption = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+
+    contractor_project = models.ForeignKey(
+        to=ContractorProject,
+        on_delete=models.CASCADE,
+    )
+

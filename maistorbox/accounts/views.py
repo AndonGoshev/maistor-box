@@ -5,16 +5,15 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_encode
 from django.views.generic import CreateView, TemplateView, DeleteView
 from django.contrib import messages
 
 from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRegistrationForm, CustomLoginForm, \
-    CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm
-from maistorbox.accounts.models import BaseUserModel
-
+    CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectForm
+from maistorbox.accounts.models import BaseUserModel, ContractorProject
 
 
 class BaseUserRegistrationView(CreateView):
@@ -30,6 +29,13 @@ class ContractorUserRegistrationView(CreateView):
     template_name = 'accounts/contractors/contractor-registration.html'
     success_url = reverse_lazy('home_page')
     redirect_url = reverse_lazy('contractor-registration')
+
+
+# class ContractorProjectCreateView(CreateView):
+#     model = ContractorProject
+#     form_class = ContractorProjectForm
+#     template_name = ''
+#     success_url = reverse_lazy('contractor-user-profile-details')
 
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm

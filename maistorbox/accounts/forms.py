@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
     SetPasswordForm
 
 from maistorbox.accounts.choices import UserTypeChoice
-from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations
+from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations, ContractorProject, \
+    ImageModel
 from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin
 
 
@@ -76,6 +77,26 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
         return base_user
 
 
+class ContractorProjectForm(forms.ModelForm):
+    class Meta:
+        model = ContractorProject
+        fields = "__all__"
+
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = ImageModel
+        fields = "__all__"
+
+
+ImageFormSet = forms.modelformset_factory(
+    ImageModel,
+    form=ImageForm,
+    extra=8,
+)
+
+
+
 class CustomLoginForm(AuthenticationForm, FormsStylingMixin):
     pass
 
@@ -90,3 +111,4 @@ class CustomPasswordResetForm(PasswordResetForm, FormsStylingMixin):
 
 class CustomPasswordSetForm(SetPasswordForm, FormsStylingMixin):
     pass
+
