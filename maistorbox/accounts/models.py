@@ -56,5 +56,3 @@ class ContractorUserModel(models.Model):
         related_name='specializations',
     )
 
-
-class
