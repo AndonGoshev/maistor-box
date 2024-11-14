@@ -37,12 +37,10 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
     )
     regions = forms.ModelMultipleChoiceField(
         queryset=Regions.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
         required=True
     )
     specializations = forms.ModelMultipleChoiceField(
         queryset=Specializations.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
         required=True
     )
 
@@ -77,16 +75,16 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
         return base_user
 
 
-class ContractorProjectForm(forms.ModelForm):
+class ContractorProjectForm(forms.ModelForm, FormsStylingMixin):
     class Meta:
         model = ContractorProject
-        fields = "__all__"
+        exclude = ['contractor_user',]
 
 
-class ImageForm(forms.ModelForm):
+class ImageForm(forms.ModelForm, FormsStylingMixin):
     class Meta:
         model = ImageModel
-        fields = "__all__"
+        exclude = ['contractor_project',]
 
 
 ImageFormSet = forms.modelformset_factory(

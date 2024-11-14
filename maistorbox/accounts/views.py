@@ -5,21 +5,21 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.views.generic import CreateView, TemplateView, DeleteView
 from django.contrib import messages
 
 from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRegistrationForm, CustomLoginForm, \
-    CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectForm
-from maistorbox.accounts.models import BaseUserModel, ContractorProject
+    CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectForm, ImageFormSet
+from maistorbox.accounts.models import BaseUserModel, ContractorProject, ImageModel
 
 
 class BaseUserRegistrationView(CreateView):
     form_class = BaseUserRegistrationForm
     template_name = 'accounts/regular-users/regular-user-registration.html'
-    success_url = reverse_lazy('home_page')
+    success_url = reverse_lazy('login')
     redirect_url = reverse_lazy('regular-user-registration')
 
 
@@ -27,15 +27,58 @@ class BaseUserRegistrationView(CreateView):
 class ContractorUserRegistrationView(CreateView):
     form_class = ContractorUserRegistrationForm
     template_name = 'accounts/contractors/contractor-registration.html'
-    success_url = reverse_lazy('home_page')
+    success_url = reverse_lazy('login')
     redirect_url = reverse_lazy('contractor-registration')
 
 
-# class ContractorProjectCreateView(CreateView):
-#     model = ContractorProject
-#     form_class = ContractorProjectForm
-#     template_name = ''
-#     success_url = reverse_lazy('contractor-user-profile-details')
+class ContractorProjectCreateView(CreateView):
+    model = ContractorProject
+    form_class = ContractorProjectForm
+    template_name = 'accounts/contractors/contractor-user-upload-project.html'
+    success_url = reverse_lazy('contractor-user-profile-details')
+
+    def get_success_url(self):
+        contractor_id = self.request.user.contractor_user.id
+        return reverse('contractor-user-profile-details', kwargs={'id': contractor_id})
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        #Initializing the image form_set
+        if self.request.POST:
+            data['image_formset'] = ImageFormSet(self.request.POST, self.request.FILES, queryset=ImageModel.objects.none())
+        else:
+            data['image_formset'] = ImageFormSet(queryset=ImageModel.objects.none())
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        image_formset = context['image_formset']
+
+        #TODO check if it works with only .user or i should make it .contractor_user
+        #Assigning project
+        form.instance.contractor_user = self.request.user.contractor_user
+
+        if form.is_valid() and image_formset.is_valid():
+            self.object = form.save()
+
+            for image_form in image_formset:
+                if image_form.cleaned_data:
+                    image = image_form.cleaned_data['image']
+                    image_caption = image_form.cleaned_data.get('caption', '')
+                    ImageModel.objects.create(contractor_project=self.object, image=image, image_caption=image_caption)
+
+            return redirect(self.get_success_url())
+
+        return self.form_invalid(form)
+
+
+
+
+
+
+
+
 
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm

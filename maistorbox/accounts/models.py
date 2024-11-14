@@ -58,13 +58,13 @@ class ContractorUserModel(models.Model):
 
 
 class ContractorProject(models.Model):
-    name = models.CharField(
+    project_name = models.CharField(
         max_length=100,
         blank=True,
         null=True,
     )
 
-    description = models.TextField(
+    project_description = models.TextField(
         max_length=1000,
     )
 
@@ -73,6 +73,7 @@ class ContractorProject(models.Model):
         decimal_places=2,
         blank=True,
         null=True,
+        default=0,
     )
 
     max_price_for_similar_project = models.DecimalField(
@@ -80,12 +81,13 @@ class ContractorProject(models.Model):
         decimal_places=2,
         blank=True,
         null=True,
+        default=0,
     )
 
     contractor_user = models.ForeignKey(
         to=ContractorUserModel,
         on_delete=models.CASCADE,
-        related_name='contractor_project',
+        related_name='projects',
     )
 
     def save(self, *args, **kwargs):
@@ -97,7 +99,7 @@ class ContractorProject(models.Model):
 class ImageModel(models.Model):
     image = models.ImageField()
 
-    caption = models.CharField(
+    image_caption = models.CharField(
         max_length=100,
         blank=True,
         null=True,
@@ -107,4 +109,3 @@ class ImageModel(models.Model):
         to=ContractorProject,
         on_delete=models.CASCADE,
     )
-

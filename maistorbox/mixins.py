@@ -7,7 +7,7 @@ from maistorbox.accounts.models import BaseUserModel
 
 class FormsStylingMixin(forms.Form):
     PLACEHOLDER_TRANSLATION = {
-        'username': "Потребителско име...",
+        'username': 'Потребителско име...',
         'password': 'Парола...',
         'password1': 'Парола...',
         'password2': 'Потвърди парола...',
@@ -19,20 +19,32 @@ class FormsStylingMixin(forms.Form):
         'old_password': 'Стара парола...',
         'new_password1': 'Нова парола...',
         'new_password2': 'Потвърдете новата парола...',
+        'project_name': 'Име на проекта',
+        'project_description': 'Описание...',
+        'image_caption': 'Описание за снимката...',
+        'min_price_for_similar_project': 'Минимална цена за подобен проект...',
+        'max_price_for_similar_project': 'Максимална цена за подобен проект...',
+        'image': 'Снимка',
+        'regions': 'Изберете в кои области или градове работите:',
+        'specializations': 'Изберете специалисти:',
     }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         for field in self.fields:
-
-            if field == 'regions':
-                self.fields[field].label = 'Изберете в кои области или градове работите:'
+            if field == "max_price_for_similar_project" or field == "min_price_for_similar_project":
+                self.fields[field].help_text = self.PLACEHOLDER_TRANSLATION[field]
+                self.fields[field].label = ''
                 continue
 
-            if field == 'specializations':
-                self.fields[field].label = 'Изберете в кои специалности сте специалисти:'
-                continue
+            # if field == 'regions':
+            #     self.fields[field].label = 'Изберете в кои области или градове работите:'
+            #     continue
+            #
+            # if field == 'specializations':
+            #     self.fields[field].label = 'Изберете в кои специалности сте специалисти:'
+            #     continue
 
             self.fields[field].label = ''
             self.fields[field].widget.attrs['placeholder'] = self.PLACEHOLDER_TRANSLATION[field]
@@ -97,6 +109,3 @@ class ErrorMessagesTranslateMixin:
         for field in self.fields.values():
             for error_code, message in translated_messages.items():
                 field.error_messages.setdefault(error_code, message)
-
-
-
