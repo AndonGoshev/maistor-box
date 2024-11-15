@@ -108,4 +108,5 @@ class ImageModel(models.Model):
     contractor_project = models.ForeignKey(
         to=ContractorProject,
         on_delete=models.CASCADE,
+        related_name='project_images',
     )

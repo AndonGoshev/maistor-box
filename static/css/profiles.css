@@ -4,6 +4,7 @@
     align-items: center;
     gap: 4em;
     margin: 4em auto;
+    width: 95%;
 }
 
 .profile-info {
@@ -14,7 +15,7 @@
     align-items: center;
     justify-content: center;
     background-color: #dadcdf;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 .profile-info-text {
@@ -69,14 +70,13 @@
     object-fit: cover;
 }
 
-.profile-details {
+.details-p-span {
     font-weight: bold;
     padding-left: 0.2em;
     color: #001253;
 }
 
 .profile-edit {
-    padding-top: 3em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,7 +97,7 @@
     color: #0025b5;
 }
 
-.profile-section .regions-of-work, .profile-section .specializations-of-work {
+.profile-section .regions-of-work, .profile-section .specializations-of-work, .projects-done {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,8 +117,4 @@
     color: #001253;
     list-style: none;
     font-weight: bolder;
-}
-
-.profile-section .projects-done h3 {
-    color: #FD841F;
 }

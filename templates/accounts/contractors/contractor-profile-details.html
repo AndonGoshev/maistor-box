@@ -18,13 +18,13 @@
 
             <div class="profile-info-text">
 
-                <p>Потребител: <span class="profile-details">{{ user.username }}</span></p>
-                <p>Име: <span class="profile-details">{{ user.first_name }}</span></p>
-                <p>Фамилия: <span class="profile-details">{{ user.last_name }}</span></p>
-                <p>Телефонен номер: <span class="profile-details">{{ user.contractor_user.phone_number }}</span></p>
-                <p>Имейл: <span class="profile-details">{{ user.email }}</span></p>
+                <p>Потребител: <span class="details-p-span">{{ user.username }}</span></p>
+                <p>Име: <span class="details-p-span">{{ user.first_name }}</span></p>
+                <p>Фамилия: <span class="details-p-span">{{ user.last_name }}</span></p>
+                <p>Телефонен номер: <span class="details-p-span">{{ user.contractor_user.phone_number }}</span></p>
+                <p>Имейл: <span class="details-p-span">{{ user.email }}</span></p>
 
-                <p>За мен:<span class="profile-details">
+                <p>За мен:<span class="details-p-span">
 
                         {% if user.contractor_user.about_me %}
                             {{ user.contractor_user.about_me }}
@@ -68,6 +68,44 @@
 
             <h3>Моите проекти:</h3>
 
+            <div class="projects-cards">
+
+                {% for project in user.contractor_user.projects.all %}
+
+                    <div class="project-card">
+
+                        <div class="project-card-info">
+                            {% if project.name %}
+                                <p>Заглавие на проекта: <span class="project-details-p-span">{{ project.project_name }}</span>
+                                </p>
+                            {% endif %}
+                            <p>Описание: <span class="project-details-p-span">{{ project.project_description }}</span></p>
+                            {% if project.min_price_for_similar_project and project.max_price_for_similar_project %}
+                                <p>Минимална цена за подобен проект:
+                                    <span class="project-details-p-span">{{ project.min_price_for_similar_project }}</span></p>
+                                <p>Максимална цена за подобен проект:
+                                    <span class="project-details-p-span">{{ project.max_price_for_similar_project }}</span></p>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="project-card-images">
+
+                            {% for image in project.project_images.all %}
+                                <div class="project-card-image">
+
+
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
         </div>
 
         <div class="profile-edit">
@@ -76,7 +114,6 @@
             <a href="{% url 'user-profile-delete' user.id %}"><p>Изтриване на профил</p></a>
 
         </div>
-
 
     </div>
 {% endblock %}
