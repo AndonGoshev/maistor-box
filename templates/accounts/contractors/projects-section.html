@@ -1,0 +1,129 @@
+<div class="projects">
+
+    <h3>Моите проекти:</h3>
+
+    <div class="projects-cards">
+
+        {% for project in user.contractor_user.projects.all %}
+
+            <div class="project-card">
+
+                <div class="project-card-info">
+                    {% if project.project_name %}
+                        <p>Име на проекта: <span class="project-details-p-span">{{ project.project_name }}</span>
+                        </p>
+                    {% endif %}
+                    <p>Описание: <span class="project-details-p-span">{{ project.project_description }}</span></p>
+                    {% if project.min_price_for_similar_project and project.max_price_for_similar_project %}
+                        <p>Минимална цена за подобен проект:
+                            <span class="project-details-p-span">{{ project.min_price_for_similar_project }}лв.</span>
+                        </p>
+                        <p>Максимална цена за подобен проект:
+                            <span class="project-details-p-span">{{ project.max_price_for_similar_project }}лв.</span>
+                        </p>
+                    {% endif %}
+
+                </div>
+
+                <div class="project-card-images">
+
+                    {% for image_object in project.project_images.all %}
+                        <div class="project-card-image">
+
+                            <img src="{{ image_object.image.url }}">
+                            {% if image_object.image_caption %}
+                            <span class="image-caption">това е текст към снимката</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    // Create the lightbox elements
+    const $lightbox = $("<div class='lightbox'></div>");
+    const $lightboxContent = $("<div class='lightbox-content'></div>");
+    const $lightboxImg = $("<img class='lightbox-image'>");
+    const $prevButton = $("<button class='lightbox-arrow lightbox-arrow-left'>&lt;</button>");
+    const $nextButton = $("<button class='lightbox-arrow lightbox-arrow-right'>&gt;</button>");
+
+    // Append elements to the lightbox
+    $lightboxContent.append($prevButton, $lightboxImg, $nextButton);
+    $lightbox.append($lightboxContent);
+    $("body").append($lightbox);
+
+    let images = []; // Array to store images of the current project
+    let currentIndex = 0;
+
+    // Initially hide the lightbox (important to prevent showing an empty lightbox)
+    $lightbox.hide();
+
+    // Open lightbox and initialize navigation
+    $(".project-card-images img").click(function (e) {
+      e.preventDefault();
+
+      // Get the images of the current project
+      const $currentProject = $(this).closest(".project-card-images");
+      images = $currentProject.find("img").map(function () {
+        return $(this).attr("src");
+      }).get();
+
+      // Set the current image index
+      currentIndex = $currentProject.find("img").index(this);
+
+      // Show the selected image
+      showImage(currentIndex);
+
+      // Display the lightbox
+      $lightbox.fadeIn();
+    });
+
+    // Show image by index
+    function showImage(index) {
+      $lightboxImg.attr("src", images[index]);
+    }
+
+    // Navigate to the previous image
+    $prevButton.click(function () {
+      currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;  // Loop to the last image if at the first
+      showImage(currentIndex);
+    });
+
+    // Navigate to the next image
+    $nextButton.click(function () {
+      currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;  // Loop to the first image if at the last
+      showImage(currentIndex);
+    });
+
+    // Keyboard navigation
+    $(document).keydown(function (e) {
+      if ($lightbox.is(":visible")) {
+        if (e.key === "ArrowLeft") {
+          currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;  // Loop to the last image if at the first
+          showImage(currentIndex);
+        } else if (e.key === "ArrowRight") {
+          currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;  // Loop to the first image if at the last
+          showImage(currentIndex);
+        } else if (e.key === "Escape") {
+          $lightbox.fadeOut();
+        }
+      }
+    });
+
+    // Close lightbox when clicking outside the content
+    $lightbox.click(function (e) {
+      if ($(e.target).is($lightbox)) {
+        $lightbox.fadeOut();
+      }
+    });
+  });
+</script>

@@ -64,49 +64,7 @@
 
         </div>
 
-        <div class="projects-done">
-
-            <h3>Моите проекти:</h3>
-
-            <div class="projects-cards">
-
-                {% for project in user.contractor_user.projects.all %}
-
-                    <div class="project-card">
-
-                        <div class="project-card-info">
-                            {% if project.name %}
-                                <p>Заглавие на проекта: <span class="project-details-p-span">{{ project.project_name }}</span>
-                                </p>
-                            {% endif %}
-                            <p>Описание: <span class="project-details-p-span">{{ project.project_description }}</span></p>
-                            {% if project.min_price_for_similar_project and project.max_price_for_similar_project %}
-                                <p>Минимална цена за подобен проект:
-                                    <span class="project-details-p-span">{{ project.min_price_for_similar_project }}</span></p>
-                                <p>Максимална цена за подобен проект:
-                                    <span class="project-details-p-span">{{ project.max_price_for_similar_project }}</span></p>
-                            {% endif %}
-
-                        </div>
-
-                        <div class="project-card-images">
-
-                            {% for image in project.project_images.all %}
-                                <div class="project-card-image">
-
-
-                                </div>
-                            {% endfor %}
-
-                        </div>
-
-                    </div>
-
-                {% endfor %}
-
-            </div>
-
-        </div>
+        {% include 'accounts/contractors/projects-section.html' %}
 
         <div class="profile-edit">
             <h3>Настройки на профила</h3>
@@ -116,4 +74,5 @@
         </div>
 
     </div>
+
 {% endblock %}

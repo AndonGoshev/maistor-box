@@ -1,10 +1,10 @@
-.projects-done {
+.projects {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.profile-section .projects-done h3 {
+.profile-section .projects h3 {
     color: #FD841F;
 }
 
@@ -16,23 +16,165 @@
 }
 
 .project-card {
-    padding: 1em 2em;
+    align-items: center;
+    text-align: center;
+    padding: 2em 2em;
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 2em;
     width: 40%;
-    /*background-color: white;*/
+    min-width: 20em;
+    background-color: #f4f4f4;
     border-radius: 5px;
-    background-image: url("static/images/project-card-background.jpg");
-    background-size: cover;
-    background-position: center;
-    border: 1px solid red;
+    border: 1px solid #676767;
+    box-shadow: 1px 1px 1px 1px gray;
 }
 
 .project-card p {
-    color: #b68e58;
-    font-size: 0.9em;
+    color: #d16f1d;
+    font-size: 0.7em;
     font-weight: bolder;
 }
 
-.project-details-p-span {
-    color: #B68E58FF;
+.project-card-info span {
+    color: #4a4a4a;
+}
+
+.project-card-info {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+
+.project-card-images {
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    gap: 1em 0.5em;
+    flex-wrap: wrap;
+}
+
+.project-card-image {
+    flex-shrink: 0;
+    width: 4em;
+    height: 4em;
+    border-radius: 5px;
+    border: 1px solid #676767;
+    box-shadow: 1px 1px 1px 1px gray;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.project-card-image:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 4px 2px rgb(62, 109, 156, 0.5);
+    width: 3.9em;
+    height: 3.9em;
+    transition: 0.3s;
+}
+
+.project-card-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Hide the caption in the thumbnails */
+.project-card-image span {
+    display: none; /* Hide the caption text */
+}
+
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Lightbox content */
+
+.lightbox-content {
+    position: relative;
+    max-width: 60vw;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: visible;
+}
+
+/* Image in the lightbox */
+.lightbox-image {
+    max-width: 100%; /* Make sure the image doesn't exceed the content area */
+    max-height: 100%; /* Make sure the image doesn't exceed the content area */
+    object-fit: fill;
+    display: block;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin: auto;
+}
+
+.image-caption {
+    background-color: rgb(253, 132, 31);
+    padding: 0 0.5em;
+    position: absolute;
+    bottom: 8px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+/* Close button */
+.lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    border: 1px solid black;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.6em;
+    z-index: 1001;
+    border-radius: 5px;
+}
+
+.lightbox-arrow {
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 50px 10px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10004;
+}
+
+.lightbox-arrow-left {
+    left: 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.lightbox-arrow-right {
+    right: 4px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
