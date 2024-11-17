@@ -4,7 +4,7 @@
     gap: 1em;
 }
 
-.profile-section .projects h3 {
+.projects h3 {
     color: #FD841F;
 }
 
@@ -13,9 +13,11 @@
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    row-gap: 5em;
 }
 
 .project-card {
+    position: relative;
     align-items: center;
     text-align: center;
     padding: 2em 2em;
@@ -25,6 +27,7 @@
     gap: 2em;
     width: 40%;
     min-width: 20em;
+    min-height: 20em;
     background-color: #f4f4f4;
     border-radius: 5px;
     border: 1px solid #676767;
@@ -70,8 +73,6 @@
 .project-card-image:hover {
     cursor: pointer;
     box-shadow: 1px 1px 4px 2px rgb(62, 109, 156, 0.5);
-    width: 3.9em;
-    height: 3.9em;
     transition: 0.3s;
 }
 
@@ -82,9 +83,34 @@
     display: block;
 }
 
-/* Hide the caption in the thumbnails */
-.project-card-image span {
-    display: none; /* Hide the caption text */
+.project-actions-section {
+    padding: 0.2em 0.5em 0 0.5em;
+    position: absolute;
+    right: 50%;
+    transform: translate(50%);
+    bottom: -20px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1em;
+    background-color: #ff963f;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.edit-button, .delete-object-button {
+    width: 15px;
+}
+
+.edit-button img, .delete-object-button img {
+    width: 100%;
+}
+
+.edit-button:hover, .delete-object-button:hover {
+    width: 16px;
+}
+
+.projects .upload-project {
+    padding-top: 2em;
 }
 
 
@@ -102,7 +128,6 @@
     overflow: hidden;
 }
 
-/* Lightbox content */
 
 .lightbox-content {
     position: relative;
@@ -116,10 +141,9 @@
     overflow: visible;
 }
 
-/* Image in the lightbox */
 .lightbox-image {
-    max-width: 100%; /* Make sure the image doesn't exceed the content area */
-    max-height: 100%; /* Make sure the image doesn't exceed the content area */
+    max-width: 100%;
+    max-height: 100%;
     object-fit: fill;
     display: block;
     border-radius: 5px;
@@ -131,27 +155,16 @@
     background-color: rgb(253, 132, 31);
     padding: 0 0.5em;
     position: absolute;
-    bottom: 8px;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%);
     color: #fff;
     font-size: 1rem;
     text-align: center;
     border-radius: 5px;
     border: 1px solid black;
-}
-
-/* Close button */
-.lightbox-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    color: #ffffff;
-    border: 1px solid black;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 0.6em;
-    z-index: 1001;
-    border-radius: 5px;
+    display: none;
+    z-index: 1101;
 }
 
 .lightbox-arrow {

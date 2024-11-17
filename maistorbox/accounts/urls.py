@@ -6,8 +6,7 @@ from django.conf import settings
 from maistorbox.accounts.views import BaseUserRegistrationView, ContractorUserRegistrationView, CustomLoginView, \
     CustomLogoutView, CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetView, \
     CustomPasswordResetDoneView, CustomPasswordResetConfirmView, RegularUserProfileView, UserProfileDeleteView, \
-    ContractorUserProfileDetailsView, ContractorProjectCreateView
-
+    ContractorUserProfileDetailsView, ContractorProjectCreateView, ContractorProjectDeleteView
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
@@ -18,7 +17,10 @@ urlpatterns = [
     path('contractors/', include([
         path('registration/', ContractorUserRegistrationView.as_view(), name='contractor-registration'),
         path('<int:id>/profile-details/', ContractorUserProfileDetailsView.as_view(), name='contractor-user-profile-details'),
-        path('<int:id>/upload-project/', ContractorProjectCreateView.as_view(), name='contractor-user-upload-project')
+        path('projects/', include([
+            path('<int:id>/project-create/', ContractorProjectCreateView.as_view(), name='contractor-user-project-create'),
+            path('<int:id>/project-delete/', ContractorProjectDeleteView.as_view(), name='contractor-user-project-delete'),
+        ])),
     ])),
 
     path('profile-delete/<int:id>/', UserProfileDeleteView.as_view(), name='user-profile-delete'),
@@ -32,3 +34,4 @@ urlpatterns = [
     path('reset/<str:uidb64>/<str:token>', CustomPasswordResetConfirmView.as_view(), name='password-reset-confirm'),
     path('reset/done/', PasswordResetCompleteView.as_view(), name='password-reset-complete'),
 ]
+

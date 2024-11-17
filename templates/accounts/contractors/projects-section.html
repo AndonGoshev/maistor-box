@@ -1,3 +1,4 @@
+{% load static %}
 <div class="projects">
 
     <h3>Моите проекти:</h3>
@@ -7,6 +8,13 @@
         {% for project in user.contractor_user.projects.all %}
 
             <div class="project-card">
+
+                <div class="project-actions-section">
+
+                    <div class="edit-button"><a href="#"><img src="{% static 'images/edit.png' %}"></a></div>
+                    <div class="delete-object-button"><a href="{% url 'contractor-user-project-delete' project.id %}"><img src="{% static 'images/delete-object.png' %}"></a></div>
+
+                </div>
 
                 <div class="project-card-info">
                     {% if project.project_name %}
@@ -32,7 +40,7 @@
 
                             <img src="{{ image_object.image.url }}">
                             {% if image_object.image_caption %}
-                            <span class="image-caption">това е текст към снимката</span>
+                            <span class="image-caption">{{ image_object.image_caption }}</span>
                             {% endif %}
                         </div>
                     {% endfor %}
@@ -45,85 +53,105 @@
 
     </div>
 
+    <div class="upload-project">
+
+        <a href="{% url 'contractor-user-project-create' user.id %}"><button class="fancy special-class credentials">Създай нов</button></a>
+
+    </div>
+
 </div>
 
 <script>
-  $(document).ready(function () {
-    // Create the lightbox elements
+ $(document).ready(function () {
     const $lightbox = $("<div class='lightbox'></div>");
     const $lightboxContent = $("<div class='lightbox-content'></div>");
     const $lightboxImg = $("<img class='lightbox-image'>");
+    const $lightboxCaption = $("<div class='image-caption'></div>");
     const $prevButton = $("<button class='lightbox-arrow lightbox-arrow-left'>&lt;</button>");
     const $nextButton = $("<button class='lightbox-arrow lightbox-arrow-right'>&gt;</button>");
 
-    // Append elements to the lightbox
-    $lightboxContent.append($prevButton, $lightboxImg, $nextButton);
+    $lightboxContent.append($prevButton, $lightboxImg, $lightboxCaption, $nextButton);
     $lightbox.append($lightboxContent);
     $("body").append($lightbox);
 
-    let images = []; // Array to store images of the current project
+    let images = [];
+    let captions = [];
     let currentIndex = 0;
+    let currentProject = null;
 
-    // Initially hide the lightbox (important to prevent showing an empty lightbox)
     $lightbox.hide();
 
-    // Open lightbox and initialize navigation
+    // On image click inside the project
     $(".project-card-images img").click(function (e) {
-      e.preventDefault();
+        e.preventDefault();
 
-      // Get the images of the current project
-      const $currentProject = $(this).closest(".project-card-images");
-      images = $currentProject.find("img").map(function () {
-        return $(this).attr("src");
-      }).get();
+        const $currentImage = $(this);
+        currentProject = $currentImage.closest(".project-card"); // Store the current project
 
-      // Set the current image index
-      currentIndex = $currentProject.find("img").index(this);
+        // Collect image URLs and captions only for the current project
+        images = currentProject.find(".project-card-images img").map(function () {
+            return $(this).attr("src");
+        }).get();
 
-      // Show the selected image
-      showImage(currentIndex);
+        captions = currentProject.find(".project-card-images .image-caption").map(function () {
+            return $(this).text();
+        }).get();
 
-      // Display the lightbox
-      $lightbox.fadeIn();
+        currentIndex = images.indexOf($currentImage.attr("src")); // Find index of clicked image
+
+        // Show image and caption
+        showImage(currentIndex);
+
+        $lightbox.fadeIn(); // Show the lightbox
     });
 
-    // Show image by index
+    // Show the image and caption based on the current index
     function showImage(index) {
-      $lightboxImg.attr("src", images[index]);
+        const $currentImage = currentProject.find(".project-card-images img").eq(index); // Find the image within the current project
+        const captionText = $currentImage.siblings(".image-caption").text() || ''; // Get the caption
+
+        $lightboxImg.attr("src", images[index]); // Set the image
+        $lightboxCaption.text(captionText); // Set the caption
+
+        if (captionText) {
+            $lightboxCaption.show(); // Show caption if available
+        } else {
+            $lightboxCaption.hide(); // Hide caption if not available
+        }
     }
 
     // Navigate to the previous image
     $prevButton.click(function () {
-      currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;  // Loop to the last image if at the first
-      showImage(currentIndex);
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        showImage(currentIndex);
     });
 
     // Navigate to the next image
     $nextButton.click(function () {
-      currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;  // Loop to the first image if at the last
-      showImage(currentIndex);
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        showImage(currentIndex);
     });
 
-    // Keyboard navigation
+    // Handle keyboard navigation
     $(document).keydown(function (e) {
-      if ($lightbox.is(":visible")) {
-        if (e.key === "ArrowLeft") {
-          currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;  // Loop to the last image if at the first
-          showImage(currentIndex);
-        } else if (e.key === "ArrowRight") {
-          currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;  // Loop to the first image if at the last
-          showImage(currentIndex);
-        } else if (e.key === "Escape") {
-          $lightbox.fadeOut();
+        if ($lightbox.is(":visible")) {
+            if (e.key === "ArrowLeft") {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+                showImage(currentIndex);
+            } else if (e.key === "ArrowRight") {
+                currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+                showImage(currentIndex);
+            } else if (e.key === "Escape") {
+                $lightbox.fadeOut();
+            }
         }
-      }
     });
 
-    // Close lightbox when clicking outside the content
+    // Close the lightbox when clicking outside of the content area
     $lightbox.click(function (e) {
-      if ($(e.target).is($lightbox)) {
-        $lightbox.fadeOut();
-      }
+        if ($(e.target).is($lightbox)) {
+            $lightbox.fadeOut();
+        }
     });
-  });
+});
 </script>

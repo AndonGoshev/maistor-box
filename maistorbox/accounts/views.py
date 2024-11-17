@@ -4,9 +4,11 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.shortcuts import redirect
+from django.template.base import kwarg_re
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes
+from django.utils.functional import keep_lazy
 from django.utils.http import urlsafe_base64_encode
 from django.views.generic import CreateView, TemplateView, DeleteView
 from django.contrib import messages
@@ -35,7 +37,7 @@ class ContractorProjectCreateView(CreateView):
     model = ContractorProject
     form_class = ContractorProjectForm
     template_name = 'accounts/contractors/contractor-user-upload-project.html'
-    success_url = reverse_lazy('contractor-user-profile-details')
+    success_url = reverse_lazy('contractor-user-project-create')
 
     def get_success_url(self):
         contractor_id = self.request.user.contractor_user.id
@@ -65,12 +67,22 @@ class ContractorProjectCreateView(CreateView):
             for image_form in image_formset:
                 if image_form.cleaned_data:
                     image = image_form.cleaned_data['image']
-                    image_caption = image_form.cleaned_data.get('caption', '')
+                    image_caption = image_form.cleaned_data.get('image_caption', '')
                     ImageModel.objects.create(contractor_project=self.object, image=image, image_caption=image_caption)
 
             return redirect(self.get_success_url())
 
         return self.form_invalid(form)
+
+
+class ContractorProjectDeleteView(DeleteView):
+    model = ContractorProject
+    template_name = 'accounts/contractors/project-delete.html'
+    pk_url_kwarg = 'id'
+
+    def get_success_url(self):
+        contractor_id = self.object.contractor_user.id
+        return reverse_lazy('contractor-user-profile-details', kwargs={'id': contractor_id})
 
 
 
@@ -177,4 +189,5 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'accounts/common/password-reset-confirm.html'
     form_class = CustomPasswordSetForm
     success_url = reverse_lazy('login')
+
 
