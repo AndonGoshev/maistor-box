@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 
 from maistorbox.accounts.models import BaseUserModel
@@ -38,14 +39,6 @@ class FormsStylingMixin(forms.Form):
                 self.fields[field].label = ''
                 continue
 
-            # if field == 'regions':
-            #     self.fields[field].label = 'Изберете в кои области или градове работите:'
-            #     continue
-            #
-            # if field == 'specializations':
-            #     self.fields[field].label = 'Изберете в кои специалности сте специалисти:'
-            #     continue
-
             self.fields[field].label = ''
             self.fields[field].widget.attrs['placeholder'] = self.PLACEHOLDER_TRANSLATION[field]
             self.fields[field].help_text = ''
@@ -54,7 +47,7 @@ class FormsStylingMixin(forms.Form):
             self.fields['profile_image'].label = 'Моля качете профилна снимка:'
 
 
-# I'm using this approach for the translation because the other one requires installing things that are not really intuative for windows
+# I'm using this approach for the translation because the other one requires installing things that are not really intuitive for Windows OS
 class ErrorMessagesTranslateMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -109,3 +102,21 @@ class ErrorMessagesTranslateMixin:
         for field in self.fields.values():
             for error_code, message in translated_messages.items():
                 field.error_messages.setdefault(error_code, message)
+
+
+class MinPriceMaxPriceValidationMixin:
+    def clean(self):
+        cleaned_data = super().clean()
+
+        min_price = cleaned_data.get('min_price_for_similar_project')
+        max_price = cleaned_data.get('max_price_for_similar_project')
+
+        if min_price and max_price:
+            if min_price > max_price:
+
+                raise ValidationError({
+                    'min_price_for_similar_project': 'Минималната цена не може да бъде по-висока от максималната.',
+                    'max_price_for_similar_project': 'Максималната цена не може да бъде по-ниска от минималната.'
+                })
+
+        return cleaned_data

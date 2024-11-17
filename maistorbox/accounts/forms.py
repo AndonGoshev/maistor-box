@@ -1,18 +1,18 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm, \
     SetPasswordForm
+from django.forms import BaseModelForm, BaseModelFormSet
 
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations, ContractorProject, \
     ImageModel
-from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin
+from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin, MinPriceMaxPriceValidationMixin
 
 
 class BaseUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
     class Meta:
         model = BaseUserModel
         fields = ('username', 'email', 'password1', 'password2')
-
 
 
 class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
@@ -46,7 +46,7 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
 
     class Meta:
         model = BaseUserModel
-        fields = ['username', 'password1', 'password2', 'email',]
+        fields = ['username', 'password1', 'password2', 'email', ]
 
     def save(self, commit=True):
 
@@ -75,24 +75,47 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
         return base_user
 
 
-class ContractorProjectForm(forms.ModelForm, FormsStylingMixin):
+class ContractorProjectCreateForm(forms.ModelForm, MinPriceMaxPriceValidationMixin, FormsStylingMixin,):
     class Meta:
         model = ContractorProject
-        exclude = ['contractor_user',]
+        exclude = ['contractor_user', ]
+
+
+class ContractorProjectEditForm(forms.ModelForm, MinPriceMaxPriceValidationMixin, FormsStylingMixin,):
+    class Meta:
+        model = ContractorProject
+        exclude = ['contractor_user', ]
 
 
 class ImageForm(forms.ModelForm, FormsStylingMixin):
     class Meta:
         model = ImageModel
-        exclude = ['contractor_project',]
+        exclude = ['contractor_project', ]
 
 
-ImageFormSet = forms.modelformset_factory(
+class CustomImageFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        queryset = kwargs.get('queryset', None)
+        extra_images_needed = 8
+        if queryset:
+            extra_images_needed = 8 - queryset.count()
+
+        kwargs['extra'] = max(0, extra_images_needed)
+
+        super().__init__(*args, **kwargs)
+
+CreateImageFormSet = forms.modelformset_factory(
     ImageModel,
     form=ImageForm,
     extra=8,
 )
 
+
+EditImageFormSet = forms.modelformset_factory(
+    ImageModel,
+    form=ImageForm,
+    formset=CustomImageFormSet,
+)
 
 
 class CustomLoginForm(AuthenticationForm, FormsStylingMixin):
@@ -103,10 +126,9 @@ class CustomPasswordChangeForm(PasswordChangeForm, FormsStylingMixin):
     pass
 
 
-
 class CustomPasswordResetForm(PasswordResetForm, FormsStylingMixin):
     pass
 
+
 class CustomPasswordSetForm(SetPasswordForm, FormsStylingMixin):
     pass
-

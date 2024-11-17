@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from maistorbox.accounts.choices import UserTypeChoice
@@ -90,10 +91,13 @@ class ContractorProject(models.Model):
         related_name='projects',
     )
 
-    def save(self, *args, **kwargs):
-        if self.min_price_for_similar_project > self.max_price_for_similar_project:
-            raise ValueError('Минималната цена не може да бъде по-висока от максималната!')
-        super().save(*args, **kwargs)
+    def clean(self):
+        if self.min_price_for_similar_project and self.max_price_for_similar_project:
+            if self.min_price_for_similar_project > self.max_price_for_similar_project:
+                raise ValidationError({
+                    'min_price_for_similar_project': 'Минималната цена не може да бъде по-висока от максималната.',
+                    'max_price_for_similar_project': 'Максималната цена не може да бъде по-ниска от минималната.'
+                })
 
 
 class ImageModel(models.Model):

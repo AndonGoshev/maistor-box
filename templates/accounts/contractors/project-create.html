@@ -1,7 +1,7 @@
 {% extends 'common/base.html' %}
 
 {% block title %}
-	Качване на проект
+    Качване на проект
 {% endblock %}
 
 {% block content %}
@@ -20,12 +20,20 @@
             {{ image_formset.management_form }}
 
             {% for form in image_formset %}
-            <div class="image-form">
+                <div class="image-form">
 
-                {{ form.as_p }}
+                    {{ form.as_p }}
 
-            </div>
+                </div>
             {% endfor %}
+
+            {% if form.min_price_for_similar_project.errors %}
+                <ul class="error-list">
+                    {% for error in form.min_price_for_similar_project.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
             <button class="fancy special-class">Качи проект</button>
         </form>

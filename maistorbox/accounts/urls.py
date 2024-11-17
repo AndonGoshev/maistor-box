@@ -6,7 +6,9 @@ from django.conf import settings
 from maistorbox.accounts.views import BaseUserRegistrationView, ContractorUserRegistrationView, CustomLoginView, \
     CustomLogoutView, CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetView, \
     CustomPasswordResetDoneView, CustomPasswordResetConfirmView, RegularUserProfileView, UserProfileDeleteView, \
-    ContractorUserProfileDetailsView, ContractorProjectCreateView, ContractorProjectDeleteView
+    ContractorUserProfileDetailsView, ContractorProjectCreateView, ContractorProjectDeleteView, \
+    ContractorProjectEditView
+
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
@@ -19,6 +21,7 @@ urlpatterns = [
         path('<int:id>/profile-details/', ContractorUserProfileDetailsView.as_view(), name='contractor-user-profile-details'),
         path('projects/', include([
             path('<int:id>/project-create/', ContractorProjectCreateView.as_view(), name='contractor-user-project-create'),
+            path('<int:id>/project-edit/', ContractorProjectEditView.as_view(), name='contractor-user-project-edit'),
             path('<int:id>/project-delete/', ContractorProjectDeleteView.as_view(), name='contractor-user-project-delete'),
         ])),
     ])),

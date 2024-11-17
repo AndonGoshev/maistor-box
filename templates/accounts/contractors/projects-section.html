@@ -11,7 +11,7 @@
 
                 <div class="project-actions-section">
 
-                    <div class="edit-button"><a href="#"><img src="{% static 'images/edit.png' %}"></a></div>
+                    <div class="edit-button"><a href="{% url 'contractor-user-project-edit' project.id %}"><img src="{% static 'images/edit.png' %}"></a></div>
                     <div class="delete-object-button"><a href="{% url 'contractor-user-project-delete' project.id %}"><img src="{% static 'images/delete-object.png' %}"></a></div>
 
                 </div>
