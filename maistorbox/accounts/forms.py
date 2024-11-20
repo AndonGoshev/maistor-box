@@ -87,10 +87,30 @@ class ContractorProjectEditForm(forms.ModelForm, MinPriceMaxPriceValidationMixin
         exclude = ['contractor_user', ]
 
 
+class CustomClearableFileInput(forms.ClearableFileInput):
+    initial_text = ''  # Clear any default "Currently" label
+    input_text = ''    # Clear any default "Change" label
+
+
+
 class ImageForm(forms.ModelForm, FormsStylingMixin):
     class Meta:
         model = ImageModel
         exclude = ['contractor_project', ]
+        widgets = {
+            'image': CustomClearableFileInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Dynamically set the button label based on whether the image exists
+        if self.instance.image:
+            self.fields['image'].widget.attrs['class'] = 'change-image'  # Add your own class
+            self.fields['image'].label = "Смени снимката"
+        else:
+            self.fields['image'].widget.attrs['class'] = 'upload-image'  # Add your own class
+            self.fields['image'].label = "Качи снимка"
 
 
 class CustomImageFormSet(BaseModelFormSet):

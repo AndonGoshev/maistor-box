@@ -74,7 +74,6 @@ class ContractorProject(models.Model):
         decimal_places=2,
         blank=True,
         null=True,
-        default=0,
     )
 
     max_price_for_similar_project = models.DecimalField(
@@ -82,7 +81,6 @@ class ContractorProject(models.Model):
         decimal_places=2,
         blank=True,
         null=True,
-        default=0,
     )
 
     contractor_user = models.ForeignKey(

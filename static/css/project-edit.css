@@ -1,0 +1,47 @@
+.project-images-edit {
+    border: none;
+}
+
+.project-images-edit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding-bottom: 0;
+}
+
+.image-object-edit {
+    background-color: #dfdfdf;
+    padding: 1em 2em;
+}
+
+.image-object-edit div a {
+    display: none;
+}
+
+.image-object-edit {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.image-object-edit .image-container {
+    width: 4em;
+    height: 4em;
+    margin-right: 3em;
+    padding-bottom: 0;
+}
+
+.image-object-edit .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-object-edit:nth-child(n) {
+    align-items: center;
+    padding-bottom: 0;
+}
+
+.image-object-edit:nth-child(n) label {
+    align-self: center;
+}

@@ -27,13 +27,7 @@
                 </div>
             {% endfor %}
 
-            {% if form.min_price_for_similar_project.errors %}
-                <ul class="error-list">
-                    {% for error in form.min_price_for_similar_project.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            {% include 'accounts/common/error-messages.html' %}
 
             <button class="fancy special-class">Качи проект</button>
         </form>

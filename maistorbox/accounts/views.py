@@ -1,5 +1,3 @@
-from lib2to3.fixes.fix_input import context
-
 from django import forms
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, \
@@ -162,6 +160,7 @@ class ContractorProjectEditView(UpdateView):
             return redirect(self.get_success_url())
 
         return self.form_invalid(form)
+
 
 
 class ContractorProjectDeleteView(DeleteView):

@@ -62,6 +62,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'maistorbox.wsgi.application'
 
 # Database
@@ -154,3 +155,4 @@ DEFAULT_FROM_EMAIL = 'andon.go6ev1@gmail.com'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media/'
+

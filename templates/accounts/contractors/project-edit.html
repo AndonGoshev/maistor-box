@@ -16,29 +16,41 @@
 
             <fieldset class="project-images-edit">
 
-                {% for image_form in image_formset %}
+                <div class="project-images-edit-container">
 
-                    <div class="image-object-edit">
 
-                        {{ image_form }}
+                    {% for image_form in image_formset %}
 
-                    </div>
+                        <div class="image-object-edit">
 
-                {% endfor %}
+                            {% if image_form.instance.image %}
+
+                                <div class="image-container">
+
+                                    <img src="{{ image_form.instance.image.url }}">
+
+                                </div>
+
+
+                            {% endif %}
+
+                            {{ image_form }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
 
             </fieldset>
-
-            {% if form.min_price_for_similar_project.errors %}
-                <ul class="error-list">
-                    {% for error in form.min_price_for_similar_project.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
 
             <button class="fancy special-class">Готово</button>
         </form>
 
     </div>
 
+    <script>console.log(document.querySelector('.image-object-edit:nth-child(all)'));
+console.log(document.querySelector('body > div.site > main > div > form > fieldset > div > div:nth-child(1) > div:nth-child(2)'));</script>
+
 {% endblock %}
+
