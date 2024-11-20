@@ -107,7 +107,7 @@ class ImageForm(forms.ModelForm, FormsStylingMixin):
         # Dynamically set the button label based on whether the image exists
         if self.instance.image:
             self.fields['image'].widget.attrs['class'] = 'change-image'  # Add your own class
-            self.fields['image'].label = "Смени снимката"
+            self.fields['image'].label = "Смени"
         else:
             self.fields['image'].widget.attrs['class'] = 'upload-image'  # Add your own class
             self.fields['image'].label = "Качи снимка"

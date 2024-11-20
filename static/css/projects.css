@@ -13,7 +13,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    row-gap: 5em;
+    gap: 5em;
 }
 
 .project-card {
@@ -30,8 +30,8 @@
     min-height: 20em;
     background-color: #f4f4f4;
     border-radius: 5px;
-    border: 1px solid #676767;
-    box-shadow: 1px 1px 1px 1px gray;
+    border: 1px solid gray;
+    /*box-shadow: 1px 1px 1px 1px gray;*/
 }
 
 .project-card p {
@@ -65,15 +65,13 @@
     height: 4em;
     border-radius: 5px;
     border: 1px solid #676767;
-    box-shadow: 1px 1px 1px 1px gray;
     overflow: hidden;
-    transition: 0.3s;
 }
 
 .project-card-image:hover {
     cursor: pointer;
-    box-shadow: 1px 1px 4px 2px rgb(62, 109, 156, 0.5);
-    transition: 0.3s;
+    border: 3px solid rgb(225, 77, 42);
+    transition: 0.1s;
 }
 
 .project-card-image img {

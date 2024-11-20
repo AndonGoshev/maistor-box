@@ -105,6 +105,8 @@ class ContractorProjectEditView(UpdateView):
         # Modify the formset to remove delete checkbox if no image exists
         for form in data['image_formset']:
             # If the image instance doesn't exist, hide the delete checkbox
+
+            form.fields['DELETE'].label = 'Изтрий'
             if not form.instance.pk:
                 form.fields['DELETE'].widget = forms.HiddenInput()
 

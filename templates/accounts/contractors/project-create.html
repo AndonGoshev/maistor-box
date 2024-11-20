@@ -19,15 +19,28 @@
 
             {{ image_formset.management_form }}
 
-            {% for form in image_formset %}
-                <div class="image-form">
+            <fieldset class="project-images-create-edit">
 
-                    {{ form.as_p }}
+                <div class="project-images-create-edit-container">
+
+                    {% for image_form in image_formset %}
+
+                        <div class="image-object-line">
+
+                        <div class="image-upload-container">
+
+                            {{ image_form }}
+
+                        </div>
+
+
+                        </div>
+                    {% endfor %}
 
                 </div>
-            {% endfor %}
 
-            {% include 'accounts/common/error-messages.html' %}
+            </fieldset>
+
 
             <button class="fancy special-class">Качи проект</button>
         </form>

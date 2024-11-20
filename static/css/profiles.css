@@ -66,8 +66,9 @@
 .contractor-profile-info-image img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 5px;
     object-fit: cover;
+    border: 1px solid #676767;
 }
 
 .details-p-span {
