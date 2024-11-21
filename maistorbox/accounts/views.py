@@ -5,7 +5,8 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.forms import modelformset_factory
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
+from django.template.base import kwarg_re
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes
@@ -13,11 +14,11 @@ from django.utils.http import urlsafe_base64_encode
 from django.views.generic import CreateView, TemplateView, DeleteView, UpdateView
 from django.contrib import messages
 
-
 from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRegistrationForm, CustomLoginForm, \
-    CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectCreateForm, EditImageFormSet, \
-    ImageForm, CreateImageFormSet
-from maistorbox.accounts.models import BaseUserModel, ContractorProject, ImageModel
+    CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectCreateForm, \
+    EditImageFormSet, \
+    ImageForm, CreateImageFormSet, ContractorUserProfileEditForm
+from maistorbox.accounts.models import BaseUserModel, ContractorProject, ImageModel, ContractorUserModel
 
 
 class BaseUserRegistrationView(CreateView):
@@ -27,12 +28,81 @@ class BaseUserRegistrationView(CreateView):
     redirect_url = reverse_lazy('regular-user-registration')
 
 
-
 class ContractorUserRegistrationView(CreateView):
     form_class = ContractorUserRegistrationForm
     template_name = 'accounts/contractors/contractor-registration.html'
     success_url = reverse_lazy('login')
     redirect_url = reverse_lazy('contractor-registration')
+
+# class ContractorUserProfileEditView(UpdateView):
+#     model = BaseUserModel
+#     form_class = ContractorUserRegistrationForm  # Use the same form as registration for editing
+#     template_name = 'accounts/contractors/contractor-profile-edit.html'
+#
+#     fields = ['phone_number', 'profile_image', 'regions', 'specializations', 'about_me']
+#
+#     def get_object(self, queryset=None):
+#         # Ensure we're fetching the correct user (this assumes the logged-in user is editing their profile)
+#         return get_object_or_404(BaseUserModel, id=self.kwargs['id'])
+#
+#     def get_initial(self):
+#         # Pre-populate the form with the existing contractor data (if any)
+#         initial = super().get_initial()
+#         user = self.get_object()
+#
+#         # Access the contractor's related data (ContractorUserModel)
+#         contractor_user = user.contractor_user  # This fetches the related ContractorUserModel
+#
+#         # Pre-populate contractor-specific fields
+#         initial['first_name'] = user.first_name
+#         initial['last_name'] = user.last_name
+#         initial['phone_number'] = contractor_user.phone_number
+#         initial['profile_image'] = contractor_user.profile_image
+#         initial['about_me'] = contractor_user.about_me
+#         initial['regions'] = contractor_user.regions.all()
+#         initial['specializations'] = contractor_user.specializations.all()
+#
+#         return initial
+#
+#     def form_valid(self, form):
+#         # Save the base user data first
+#         user = form.save(commit=False)
+#         user.save()
+#
+#         # Update the contractor-specific data
+#         contractor_user = user.contractor_user  # Access the related ContractorUserModel
+#
+#         contractor_user.phone_number = form.cleaned_data['phone_number']
+#         contractor_user.profile_image = form.cleaned_data.get('profile_image')
+#         contractor_user.about_me = form.cleaned_data['about_me']
+#
+#         if 'regions' in form.cleaned_data:
+#             contractor_user.regions.set(form.cleaned_data['regions'])
+#
+#         if 'specializations' in form.cleaned_data:
+#             contractor_user.specializations.set(form.cleaned_data['specializations'])
+#
+#         contractor_user.save()
+#
+#         return super().form_valid(form)
+#
+#     def get_success_url(self):
+#         return reverse_lazy('contractor-user-profile-details', kwargs={'pk': self.object.pk})
+
+class ContractorUserProfileEditView(UpdateView):
+    model = ContractorUserModel
+    form_class = ContractorUserProfileEditForm  # Use the custom form for editing
+    template_name = 'accounts/contractors/contractor-profile-edit.html'
+    success_url = reverse_lazy('contractor-user-profile-details')  # Change to the desired success URL
+
+    def get_success_url(self):
+        contractor_id = self.request.user.contractor_user.id
+        return reverse('contractor-user-profile-details', kwargs={'id': contractor_id})
+
+    # This method ensures that we get the current contractor user based on the logged-in user
+    def get_object(self, queryset=None):
+        return self.request.user.contractor_user
+
 
 
 class ContractorProjectCreateView(CreateView):
@@ -49,7 +119,8 @@ class ContractorProjectCreateView(CreateView):
         data = super().get_context_data(**kwargs)
 
         if self.request.POST:
-            data['image_formset'] = CreateImageFormSet(self.request.POST, self.request.FILES, queryset=ImageModel.objects.none())
+            data['image_formset'] = CreateImageFormSet(self.request.POST, self.request.FILES,
+                                                       queryset=ImageModel.objects.none())
         else:
             data['image_formset'] = CreateImageFormSet(queryset=ImageModel.objects.none())
         return data
@@ -164,7 +235,6 @@ class ContractorProjectEditView(UpdateView):
         return self.form_invalid(form)
 
 
-
 class ContractorProjectDeleteView(DeleteView):
     model = ContractorProject
     template_name = 'accounts/contractors/project-delete.html'
@@ -175,10 +245,10 @@ class ContractorProjectDeleteView(DeleteView):
         return reverse_lazy('contractor-user-profile-details', kwargs={'id': contractor_id})
 
 
-
 class CustomLoginView(LoginView):
     form_class = CustomLoginForm
     template_name = "accounts/common/login.html"
+
 
 class CustomLogoutView(LogoutView):
     template_name = "accounts/common/logout.html"
@@ -187,6 +257,7 @@ class CustomLogoutView(LogoutView):
 
 class RegularUserProfileView(TemplateView):
     template_name = 'accounts/regular-users/regular-user-profile-details.html'
+
 
 class UserProfileDeleteView(DeleteView):
     model = BaseUserModel
@@ -213,14 +284,11 @@ class CustomPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'accounts/common/password-change-done.html'
 
 
-
-
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'accounts/common/password-reset.html'
     email_template_name = 'accounts/common/email-password-reset.html'
     success_url = reverse_lazy('password-reset-email-sent')
     form_class = CustomPasswordResetForm
-
 
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
@@ -231,8 +299,6 @@ class CustomPasswordResetView(PasswordResetView):
         domain = get_current_site(self.request).domain
         protocol = 'http' if not self.request.is_secure() else 'https'
         user = BaseUserModel.objects.get(email=email)
-
-
 
         print(f"doamin - {domain}")
         print(f"protocol - {protocol}")
@@ -273,5 +339,3 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'accounts/common/password-reset-confirm.html'
     form_class = CustomPasswordSetForm
     success_url = reverse_lazy('login')
-
-

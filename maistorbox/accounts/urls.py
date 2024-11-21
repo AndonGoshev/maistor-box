@@ -3,11 +3,12 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
 from django.urls import path, include
 
 from django.conf import settings
+
 from maistorbox.accounts.views import BaseUserRegistrationView, ContractorUserRegistrationView, CustomLoginView, \
     CustomLogoutView, CustomPasswordChangeView, CustomPasswordChangeDoneView, CustomPasswordResetView, \
     CustomPasswordResetDoneView, CustomPasswordResetConfirmView, RegularUserProfileView, UserProfileDeleteView, \
     ContractorUserProfileDetailsView, ContractorProjectCreateView, ContractorProjectDeleteView, \
-    ContractorProjectEditView
+    ContractorProjectEditView, ContractorUserProfileEditView
 
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
@@ -18,7 +19,10 @@ urlpatterns = [
     ])),
     path('contractors/', include([
         path('registration/', ContractorUserRegistrationView.as_view(), name='contractor-registration'),
-        path('<int:id>/profile-details/', ContractorUserProfileDetailsView.as_view(), name='contractor-user-profile-details'),
+        path('<int:id>/profile/', include([
+            path('details/', ContractorUserProfileDetailsView.as_view(), name='contractor-user-profile-details'),
+            path('edit/', ContractorUserProfileEditView.as_view(), name='contractor-user-profile-edit' )
+        ])),
         path('projects/', include([
             path('<int:id>/project-create/', ContractorProjectCreateView.as_view(), name='contractor-user-project-create'),
             path('<int:id>/project-edit/', ContractorProjectEditView.as_view(), name='contractor-user-project-edit'),

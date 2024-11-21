@@ -28,6 +28,7 @@ class FormsStylingMixin(forms.Form):
         'image': 'Снимка',
         'regions': 'Изберете в кои области или градове работите:',
         'specializations': 'Изберете специалисти:',
+        'about_me': 'За мен...'
     }
 
     def __init__(self, *args, **kwargs):
