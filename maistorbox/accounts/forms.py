@@ -1,13 +1,17 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm, \
     SetPasswordForm
-from django.forms import BaseModelForm, BaseModelFormSet
+from django.forms import BaseModelForm, BaseModelFormSet, ClearableFileInput
 
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations, ContractorProject, \
     ImageModel
 from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin, MinPriceMaxPriceValidationMixin
 
+
+class CustomClearableFileInput(forms.ClearableFileInput):
+    initial_text = ''  # Clear any default "Currently" label
+    input_text = ''  # Clear any default "Change" label
 
 class BaseUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
     class Meta:
@@ -75,74 +79,7 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
         return base_user
 
 
-# class ContractorUserProfileEditForm(forms.ModelForm, ErrorMessagesTranslateMixin, FormsStylingMixin):
-#     first_name = forms.CharField(
-#         required=True,
-#         max_length=50,
-#     )
-#     last_name = forms.CharField(
-#         required=True,
-#         max_length=50,
-#     )
-#
-#     # Contractor user fields
-#     phone_number = forms.CharField(
-#         required=True,
-#         max_length=20,
-#     )
-#     profile_image = forms.ImageField(
-#         required=False,  # Make it optional for editing
-#     )
-#     regions = forms.ModelMultipleChoiceField(
-#         queryset=Regions.objects.all(),
-#         required=True
-#     )
-#     specializations = forms.ModelMultipleChoiceField(
-#         queryset=Specializations.objects.all(),
-#         required=True
-#     )
-#     about_me = forms.CharField(
-#         widget=forms.Textarea(attrs={'rows': 4, 'cols': 40}),
-#         required=False
-#     )
-#
-#     class Meta:
-#         model = BaseUserModel
-#         fields = ['username', 'first_name', 'last_name']
-#
-#     def save(self, user=None, commit=True):
-#         # Save the base part of the contractor user
-#         base_user = super().save(commit=False)
-#         base_user.first_name = self.cleaned_data['first_name']
-#         base_user.last_name = self.cleaned_data['last_name']
-#
-#         if commit:
-#             base_user.save()
-#
-#         # If user is passed in (in edit mode), use the existing user and update their related contractor data
-#         if user:
-#             contractor_user = user.contractor_user
-#         else:
-#             contractor_user = ContractorUserModel(user=base_user)
-#
-#         # Update contractor user fields
-#         contractor_user.phone_number = self.cleaned_data['phone_number']
-#         contractor_user.profile_image = self.cleaned_data.get('profile_image', contractor_user.profile_image)
-#         contractor_user.about_me = self.cleaned_data.get('about_me', contractor_user.about_me)
-#
-#         if 'regions' in self.cleaned_data:
-#             contractor_user.regions.set(self.cleaned_data['regions'])
-#
-#         if 'specializations' in self.cleaned_data:
-#             contractor_user.specializations.set(self.cleaned_data['specializations'])
-#
-#         if commit:
-#             contractor_user.save()
-#
-#         return base_user
-
-
-class ContractorUserProfileEditForm(forms.ModelForm, FormsStylingMixin, ErrorMessagesTranslateMixin):
+class ContractorUserProfileEditForm(forms.ModelForm,  FormsStylingMixin, ErrorMessagesTranslateMixin):
     # Include fields from the related BaseUserModel (first_name, last_name)
     first_name = forms.CharField(
         max_length=50,
@@ -157,6 +94,9 @@ class ContractorUserProfileEditForm(forms.ModelForm, FormsStylingMixin, ErrorMes
     class Meta:
         model = ContractorUserModel
         fields = ['about_me', 'phone_number', 'profile_image', 'regions', 'specializations']
+        widgets = {
+            'profile_image': CustomClearableFileInput()
+        }
 
     # Add additional logic to ensure first_name, last_name are properly populated
     def __init__(self, *args, **kwargs):
@@ -189,11 +129,6 @@ class ContractorProjectEditForm(forms.ModelForm, MinPriceMaxPriceValidationMixin
     class Meta:
         model = ContractorProject
         exclude = ['contractor_user', ]
-
-
-class CustomClearableFileInput(forms.ClearableFileInput):
-    initial_text = ''  # Clear any default "Currently" label
-    input_text = ''  # Clear any default "Change" label
 
 
 class ImageForm(forms.ModelForm, FormsStylingMixin):

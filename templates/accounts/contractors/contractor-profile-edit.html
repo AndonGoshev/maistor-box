@@ -11,9 +11,11 @@
 
         <h1>Редактиране на профил</h1>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
 
             {% csrf_token %}
+
+            <h3>Профилна снимка</h3>
 
             <div class="image-object-line">
 
@@ -28,21 +30,21 @@
                 {% endif %}
 
                 <div class="image-upload-container">
-
+                    <label for="id_profile_image">Смени</label>
                     {{ form.profile_image }}
 
                 </div>
 
             </div>
 
-            {{ form.first_name }}
-            {{ form.last_name }}
+            <p>{{ form.first_name }}</p>
+            <p>{{ form.last_name }}</p>
 
             <!-- Render the rest of the form -->
-            {{ form.about_me }}
-            {{ form.phone_number }}
-            {{ form.regions }}
-            {{ form.specializations }}
+            <p>{{ form.phone_number }}</p>
+            <p class="about-me-input">{{ form.about_me }}</p>
+            <p class="regions-input">{{ form.regions }}</p>
+            <p class="specializations-input">{{ form.specializations }}</p>
 
 
             <button class="fancy special-class credentials">Запази</button>

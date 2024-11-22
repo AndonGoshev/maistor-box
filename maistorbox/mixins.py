@@ -40,12 +40,10 @@ class FormsStylingMixin(forms.Form):
                 self.fields[field].label = ''
                 continue
 
+
             self.fields[field].label = ''
             self.fields[field].widget.attrs['placeholder'] = self.PLACEHOLDER_TRANSLATION[field]
             self.fields[field].help_text = ''
-
-        if 'profile_image' in self.fields:
-            self.fields['profile_image'].label = 'Моля качете профилна снимка:'
 
 
 # I'm using this approach for the translation because the other one requires installing things that are not really intuitive for Windows OS

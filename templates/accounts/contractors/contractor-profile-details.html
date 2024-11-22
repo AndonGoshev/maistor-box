@@ -68,6 +68,7 @@
 
         <div class="profile-edit">
             <h3>Настройки на профила</h3>
+            <a href="{% url 'contractor-user-profile-edit' user.id %}">Редактиране на профил</a>
             <a href="{% url 'password-change' %}"><p>Смяна на парола</p></a>
             <a href="{% url 'user-profile-delete' user.id %}"><p>Изтриване на профил</p></a>
 

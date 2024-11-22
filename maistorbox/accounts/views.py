@@ -1,3 +1,5 @@
+from urllib import request
+
 from django import forms
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, \
@@ -34,60 +36,6 @@ class ContractorUserRegistrationView(CreateView):
     success_url = reverse_lazy('login')
     redirect_url = reverse_lazy('contractor-registration')
 
-# class ContractorUserProfileEditView(UpdateView):
-#     model = BaseUserModel
-#     form_class = ContractorUserRegistrationForm  # Use the same form as registration for editing
-#     template_name = 'accounts/contractors/contractor-profile-edit.html'
-#
-#     fields = ['phone_number', 'profile_image', 'regions', 'specializations', 'about_me']
-#
-#     def get_object(self, queryset=None):
-#         # Ensure we're fetching the correct user (this assumes the logged-in user is editing their profile)
-#         return get_object_or_404(BaseUserModel, id=self.kwargs['id'])
-#
-#     def get_initial(self):
-#         # Pre-populate the form with the existing contractor data (if any)
-#         initial = super().get_initial()
-#         user = self.get_object()
-#
-#         # Access the contractor's related data (ContractorUserModel)
-#         contractor_user = user.contractor_user  # This fetches the related ContractorUserModel
-#
-#         # Pre-populate contractor-specific fields
-#         initial['first_name'] = user.first_name
-#         initial['last_name'] = user.last_name
-#         initial['phone_number'] = contractor_user.phone_number
-#         initial['profile_image'] = contractor_user.profile_image
-#         initial['about_me'] = contractor_user.about_me
-#         initial['regions'] = contractor_user.regions.all()
-#         initial['specializations'] = contractor_user.specializations.all()
-#
-#         return initial
-#
-#     def form_valid(self, form):
-#         # Save the base user data first
-#         user = form.save(commit=False)
-#         user.save()
-#
-#         # Update the contractor-specific data
-#         contractor_user = user.contractor_user  # Access the related ContractorUserModel
-#
-#         contractor_user.phone_number = form.cleaned_data['phone_number']
-#         contractor_user.profile_image = form.cleaned_data.get('profile_image')
-#         contractor_user.about_me = form.cleaned_data['about_me']
-#
-#         if 'regions' in form.cleaned_data:
-#             contractor_user.regions.set(form.cleaned_data['regions'])
-#
-#         if 'specializations' in form.cleaned_data:
-#             contractor_user.specializations.set(form.cleaned_data['specializations'])
-#
-#         contractor_user.save()
-#
-#         return super().form_valid(form)
-#
-#     def get_success_url(self):
-#         return reverse_lazy('contractor-user-profile-details', kwargs={'pk': self.object.pk})
 
 class ContractorUserProfileEditView(UpdateView):
     model = ContractorUserModel
@@ -102,6 +50,7 @@ class ContractorUserProfileEditView(UpdateView):
     # This method ensures that we get the current contractor user based on the logged-in user
     def get_object(self, queryset=None):
         return self.request.user.contractor_user
+
 
 
 

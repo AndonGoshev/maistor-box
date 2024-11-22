@@ -7,7 +7,59 @@
 {% block content %}
     <div class="form-section">
         <h1>Регистрация като майстор</h1>
-        {% include "accounts/common/base-registration-form.html" %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="image-object-line contractor-registration">
+
+                <div class="image-upload-container contractor-registration">
+
+                    <div><label for="id_profile_image">Моля качете профилна снимка </label></div>
+                    <div class="no-file-chosen">{{ form.profile_image }}</div>
+
+                </div>
+
+            </div>
+
+
+            <p>{{ form.username }}</p>
+            <p>{{ form.password1 }}</p>
+            <p>{{ form.password2 }}</p>
+            <p>{{ form.email }}</p>
+            <p>{{ form.first_name }}</p>
+            <p>{{ form.last_name }}</p>
+            <p>{{ form.phone_number }}</p>
+            <p class="regions-input">{{ form.regions }}</p>
+            <p class="specializations-input">{{ form.specializations }}</p>
+
+
+{#            {% for field in form %}#}
+{##}
+{#                {% if field.name == "profile_image" %}#}
+{##}
+{#                    <div class="image-object-line contractor-registration">#}
+{##}
+{#                        <div class="image-upload-container contractor-registration">#}
+{##}
+{#                            <div><label for="id_profile_image">Моля качете профилна снимка </label></div>#}
+{#                            <div class="no-file-chosen">{{ field }}</div>#}
+{##}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{##}
+{#                {% else %}#}
+{##}
+{#                    <p> {{ field }} </p>#}
+{##}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+
+
+            <button class="fancy special-class credentials">Регистрация</button>
+        </form>
+
         {% include 'accounts/common/error-messages.html' %}
     </div>
 {% endblock %}

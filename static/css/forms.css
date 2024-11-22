@@ -64,7 +64,7 @@ body > div.site > main > div > form > p:nth-child(9) button{
     background-color: #001253;
 }
 
-.form-section h1, .form-section h2{
+.form-section h1, .form-section h2, .form-section h3{
     color: #FD841F;
 }
 
@@ -73,9 +73,13 @@ body > div.site > main > div > form > p:nth-child(9) button{
     font-size: 1em;
 }
 
-body > div.site > main > div > form > p:nth-child(9), body > div.site > main > div > form > p:nth-child(10), body > div.site > main > div > form > p:nth-child(13), body > div.site > main > div > form > p:nth-child(9) {
+.regions-input {
     padding-top: 1em;
     padding-bottom: 0.5em;
+}
+
+.specializations-input {
+    padding-bottom: 1em;
 }
 
 .form-section form div {
