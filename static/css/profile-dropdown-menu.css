@@ -55,3 +55,32 @@
 .user-section .profile-dropdown-menu li a:hover {
     color: white;
 }
+
+
+.profile-menu-wrapper label {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.profile-image-small {
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.profile-menu-small {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.profile-image-small > img, .profile-menu-small > img {
+    width: 100%!important;
+    height: 100%!important;
+    object-fit: cover;
+}
+
+.profile-image-small {
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}

@@ -3,21 +3,27 @@
 <nav class="profile-menu-wrapper">
     <input type="checkbox" id="profile-menu-toggle">
 
-    <label for="profile-menu-toggle" class="profile-menu-icon" tabindex="0">
-        <img src="{% static 'images/profile-icon.png' %}" alt="Profile Menu Icon"> <!-- Replace with your image path -->
-    </label>
-
     {% if user.user_type == 'regular_user' %}
-    <ul class="profile-dropdown-menu">
-        <li><a href="{% url 'regular-user-profile-details' user.id  %}">Профил</a></li>
-        <li><a href="#">Любими майстори</a></li>
-        <li><a href="{% url 'logout' %}">Изход</a></li>
-    </ul>
+        <label for="profile-menu-toggle" class="profile-menu-icon" tabindex="0">
+            <img src="{% static 'images/profile-icon.png' %}" alt="Profile Menu Icon"> </label>
+        <ul class="profile-dropdown-menu">
+            <li><a href="{% url 'regular-user-profile-details' user.id %}">Профил</a></li>
+            <li><a href="#">Любими майстори</a></li>
+            <li><a href="{% url 'logout' %}">Изход</a></li>
+        </ul>
     {% else %}
-    <ul class="profile-dropdown-menu">
-        <li><a href="{% url 'contractor-user-profile-details' user.id %}">Профил</a></li>
-        <li><a href="#">майстори</a></li>
-        <li><a href="{% url 'logout' %}">Изход</a></li>
-    </ul>
+        <label for="profile-menu-toggle" class="profile-menu-icon" tabindex="0">
+            <div class="profile-image-small">
+                <img src="{{ user.contractor_user.profile_image.url }}" alt="Profile Menu Icon">
+            </div>
+        <div class="profile-menu-small">
+            <img src="{% static 'images/profile-menu-small.png' %}">
+        </div>
+        </label>
+        <ul class="profile-dropdown-menu">
+            <li><a href="{% url 'contractor-user-profile-details' user.id %}">Профил</a></li>
+            <li><a href="#">майстори</a></li>
+            <li><a href="{% url 'logout' %}">Изход</a></li>
+        </ul>
     {% endif %}
 </nav>
