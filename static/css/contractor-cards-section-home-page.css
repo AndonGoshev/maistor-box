@@ -1,0 +1,16 @@
+.recently-registered-contractors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.contractors-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5em;
+    max-width: 80%;
+    padding-top: 5em;
+    align-items: center;
+}

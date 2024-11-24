@@ -1,0 +1,9 @@
+.contractor-results {
+    padding-bottom: 5em;
+    justify-content: center;
+    max-width: 80%;
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5em;
+}

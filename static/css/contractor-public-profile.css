@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Sriracha&display=swap');
+
+.contractor-profile-container {
+    padding-top: 6em;
+    padding-bottom: 4em;
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contractor-profile-container h3 {
+    padding: 0 1em;
+    margin-bottom: 0.5em;
+    color: #e68841;
+    text-align: center;
+    /*border: 1px solid #b8b8b8;*/
+    /*border-radius: 5px;*/
+    /*background-color: #f6f6f6;*/
+}
+
+.contractor-profile-wrapper, .regions-specializations-wrapper {
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 5px;
+    border: 2px solid #b8b8b8;
+    /*background-color: #f4f4f4;*/
+    position: relative;
+}
+
+/*.contractor-profile-wrapper h2 {*/
+/*    color: #FD841F;*/
+/*}*/
+
+.contractor-profile-wrapper .profile-image {
+    width: 8em;
+    height: 8em;
+    border: 2px solid #b8b8b8;
+    border-radius: 5px;
+    overflow: hidden;
+    position: absolute;
+    top: -4.3em;
+}
+
+.contractor-profile-wrapper .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.personal-information-wrapper {
+    width: 50em;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5em 4em 4em 4em;
+    text-align: center;
+    gap: 4em;
+    flex-wrap: wrap;
+}
+
+.regions-specializations-wrapper {
+    align-items: center;
+    width: 50em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2em 1em 2em 1em;
+    text-align: center;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+.regions-specializations-wrapper ul {
+    list-style: none;
+}
+
+.regions-specializations-wrapper ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.regions-wrapper, .specializations-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*.contractor-card {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    gap: 0.5em;*/
+/*    height: 300px;*/
+/*    width: 250px;*/
+/*    padding: 10px;*/
+/*    border-radius: 5px;*/
+/*    background-color: #ffffff;*/
+/*    position: relative;*/
+/*}*/
+
+/*.contractor-card .profile-img {*/
+/*    position: absolute;*/
+/*    top: -13%;*/
+/*    height: 75px;*/
+/*    width: 75px;*/
+/*    min-height: 75px;*/
+/*    min-width: 75px;*/
+/*    border-radius: 25%;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.profile-img, .contractor-card {*/
+/*        border: 2px solid #b8b8b8;*/
+/*}*/
+
+/*.contractor-card .profile-img img {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover;*/
+/*    object-position: center;*/
+/*}*/
+
+/*.contractor-card h1 {*/
+/*    padding-top: 20%;*/
+/*    font-size: 1em;*/
+/*    text-align: center;*/
+/*    margin-bottom: 20px;*/
+/*    color: #3a3a3a; !* $otherAccent *!*/
+/*}*/
+
+/*.contractor-card .description {*/
+/*    margin-top: -15px;*/
+/*    color: #9a9a9a;*/
+/*    font-size: 0.8em;*/
+/*    margin-bottom: 20px;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    gap: 0.5em;*/
+/*}*/
+
+/*.contractor-card .card-footer {*/
+/*    position: absolute;*/
+/*    left: 50%;*/
+/*    bottom: 0;*/
+/*    transform: translate(-50%);*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    color: white;*/
+/*    width: 100%;*/
+/*    height: 40px;*/
+/*    padding: 0 20px 10px;*/
+/*}*/
+
+
+/*.contractor-card .description .specializations {*/
+/*    padding-right: 10px;*/
+/*}*/
+
+/*.specializations, .city {*/
+/*    border-radius: 2px;*/
+/*    padding: 2px 7px;*/
+/*    !*border: 1px solid black;*!*/
+/*}*/
+
+/*.contractor-card .description h2 {*/
+/*    text-align: center;*/
+/*    font-size: 0.9em;*/
+/*    color: #5A667F;*/
+/*}*/
+
+/*.contractor-card .description ul {*/
+/*    text-align: center;*/
+/*    color: #5A667F;*/
+/*    list-style: none;*/
+/*    font-size: 0.8em;*/
+/*}*/
+
+

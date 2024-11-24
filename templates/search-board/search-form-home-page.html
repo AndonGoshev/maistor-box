@@ -1,0 +1,68 @@
+{% load static %}
+
+<div class="search-options">
+
+    <div class="form-section">
+
+
+        <h3>Потърсете специалисти!</h3>
+
+        <form method="get" action="{% url 'search_board' %}">
+
+            {{ contractor_search_form.as_p }}
+
+            <button class="fancy special-class" type="submit">Търси майстор!</button>
+        </form>
+
+    </div>
+
+    <div class="categories">
+
+        <h3>Най-търсените категории:</h3>
+
+        <div class="categories-content">
+
+
+            <div class="category-content">
+                <a href="#" class="category-icon">
+
+                    <img class="icon-itself" src="{% static 'images/ceramic-tiles.png' %}">
+
+                </a>
+                <p>Фаянс</p>
+
+            </div>
+
+            <div class="category-content">
+                <a href="#" class="category-icon">
+
+                    <img class="icon-itself" src="{% static 'images/small-services.png' %}">
+
+                </a>
+                <p>Дов. работи</p>
+
+            </div>
+
+            <div class="category-content">
+                <a href="#" class="category-icon">
+
+                    <img class="icon-itself" src="{% static 'images/plumbing.png' %}">
+
+                </a>
+                <p>ВиК</p>
+            </div>
+
+            <div class="category-content">
+                <a href="#" class="category-icon">
+
+                    <img class="icon-itself" src="{% static 'images/painting.png' %}">
+
+                </a>
+                <p>Боядисване</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

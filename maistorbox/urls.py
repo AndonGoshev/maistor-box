@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('maistorbox.common.urls')),
     path('accounts/', include('maistorbox.accounts.urls')),
+    path('search-board/', include('maistorbox.search_board.urls')),
 ]
 
 if settings.DEBUG:

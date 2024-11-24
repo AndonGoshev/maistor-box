@@ -172,20 +172,6 @@ main .welcoming-section .business-slogan {
     width: 100%;
 }
 
-.recently-registered-contractors {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-}
-
-.contractors-cards {
-    align-items: center;
-    display: flex;
-    gap: 3em;
-    /*padding: 2em;*/
-}
-
 .are-you-contractor {
     padding: 1em 5em;
     background-color: #edeeef;

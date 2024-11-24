@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="contractor-card">
+    <div class="profile-img">
+        <img src="{{ contractor.contractor.profile_image.url }}">
+    </div>
+    <h1>
+        {{ contractor.contractor.user.get_full_name }}
+    </h1>
+
+    <div class="description">
+
+        <div class="specializations">
+
+            <h2>Специалист по:</h2>
+
+            <ul>
+                {% for specialization in contractor.contractor.specializations.all %}
+
+                    <li>{{ specialization }}</li>
+
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        <div class="city">
+
+            <h2>Работи в област:</h2>
+
+            <ul>
+                {% for region in contractor.contractor.regions.all %}
+
+                    <li>{{ region }}</li>
+
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+
+    <a href="{% url 'contractor-public-profile' contractor.slug %}">
+        <div class="card-footer">
+            <button class="fancy special-class">Виж профил</button>
+        </div>
+    </a>
+</div>

@@ -36,15 +36,32 @@ class ContractorUserModel(models.Model):
         related_name='contractor_user',
     )
 
+    first_name = models.CharField(
+        max_length=50,
+    )
+    last_name = models.CharField(
+        max_length=50,
+    )
+
     about_me = models.TextField(
         blank=True,
         null=True,
     )
 
-    phone_number = models.CharField()
+    phone_number = models.CharField(
+        max_length=20,
+    )
 
     profile_image = models.ImageField(
         upload_to='contractor-users-profile-pictures',
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
     )
 
     regions = models.ManyToManyField(

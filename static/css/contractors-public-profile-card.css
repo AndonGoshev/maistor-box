@@ -9,20 +9,19 @@
     height: 300px;
     width: 250px;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #ffffff;
     position: relative;
 }
 
 .contractor-card .profile-img {
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: -13%;
     height: 75px;
     width: 75px;
     min-height: 75px;
     min-width: 75px;
     border-radius: 25%;
-    /*box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);*/
     overflow: hidden;
 }
 
@@ -38,6 +37,7 @@
 }
 
 .contractor-card h1 {
+    padding-top: 20%;
     font-size: 1em;
     text-align: center;
     margin-bottom: 20px;
@@ -91,3 +91,4 @@
     list-style: none;
     font-size: 0.8em;
 }
+

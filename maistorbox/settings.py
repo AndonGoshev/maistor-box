@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'maistorbox.accounts.apps.AccountsConfig',
     'cloudinary',
     'cloudinary_storage',
+    'maistorbox.search_board.apps.SearchBoardConfig'
 ]
 
 MIDDLEWARE = [

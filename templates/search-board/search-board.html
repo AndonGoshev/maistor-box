@@ -1,0 +1,29 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    Майстори
+{% endblock %}
+
+{% block content %}
+
+    {% include 'search-board/search-form-secondary.html' %}
+
+    <div class="contractor-results">
+
+        {% if contractors_list %}
+
+            {% for contractor in contractors_list %}
+
+                {% include 'common/contractor-card.html' %}
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>nqma rezultati</p>
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

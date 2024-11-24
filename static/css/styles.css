@@ -2,7 +2,7 @@
 @import "header.css";
 @import "home-search.css";
 @import "buttons.css";
-@import "contractors-profile-cards.css";
+@import "contractors-public-profile-card.css";
 @import "footer.css";
 @import "nav-dropdown.css";
 @import "profile-dropdown-menu.css";
@@ -12,3 +12,6 @@
 @import "project-create-edit.css";
 @import "contractor-profile-edit.css";
 @import "contractor-registration.css";
+@import "contractor-cards-section-home-page.css";
+@import "contractor-cards-section-search-board.css";
+@import "contractor-public-profile.css";

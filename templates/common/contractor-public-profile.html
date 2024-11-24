@@ -1,0 +1,127 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    Профил
+{% endblock %}
+
+{% block content %}
+
+    <div class="contractor-profile-container">
+
+        <div class="contractor-profile-wrapper">
+
+            <div class="profile-image">
+
+                <img src="{{ contractor.contractor.profile_image.url }}">
+
+            </div>
+
+            <div class="personal-information-wrapper">
+
+                <div class="left-side-wrapper">
+
+                    <h3>Персонална информация</h3>
+                    <p>Име: <span>{{ contractor.contractor.user.get_full_name }}</span></p>
+                    {% if contractor.contractor.about_me %}
+                        <p>За мен: <span>contractor.contractor.about_me</span></p>
+                    {% endif %}
+
+                </div>
+
+                <div class="right-side-wrapper">
+
+                    <h3>Контакти</h3>
+
+                    {% if contractor.contractor.phone_number %}
+                        <p>Телефонен номер: <span>{{ contractor.contractor.phone_number }}</span></p>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="regions-specializations-wrapper">
+
+            <div class="regions-wrapper">
+
+                <h3>Градове и области в които работя</h3>
+
+                <ul>
+
+                    {% for region in contractor.contractor.regions.all %}
+
+                        <li>{{ region }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <div class="regions-wrapper">
+
+                <h3>Моите специализации</h3>
+
+                <ul>
+
+                    {% for specialization in contractor.contractor.specializations.all %}
+
+                        <li>{{ specialization }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+    {#    <div class="">#}
+    {#        <h1>#}
+    {#            {{ contractor.contractor.user.get_full_name }}#}
+    {#        </h1>#}
+    {##}
+    {#        <div class="description">#}
+    {##}
+    {#            <div class="specializations">#}
+    {##}
+    {#                <h2>Специалист по:</h2>#}
+    {##}
+    {#                <ul>#}
+    {#                    {% for specialization in contractor.contractor.specializations.all %}#}
+    {##}
+    {#                        <li>{{ specialization }}</li>#}
+    {##}
+    {#                    {% endfor %}#}
+    {#                </ul>#}
+    {##}
+    {#            </div>#}
+    {##}
+    {#            <div class="city">#}
+    {##}
+    {#                <h2>Работи в област:</h2>#}
+    {##}
+    {#                <ul>#}
+    {#                    {% for region in contractor.contractor.regions.all %}#}
+    {##}
+    {#                        <li>{{ region }}</li>#}
+    {##}
+    {#                    {% endfor %}#}
+    {#                </ul>#}
+    {##}
+    {#            </div>#}
+    {##}
+    {#        </div>#}
+    {##}
+    {#    </div>#}
+
+{% endblock %}
