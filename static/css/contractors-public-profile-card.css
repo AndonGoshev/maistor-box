@@ -26,7 +26,7 @@
 }
 
 .profile-img, .contractor-card {
-        border: 2px solid #b8b8b8;
+    border: 2px solid #b8b8b8;
 }
 
 .contractor-card .profile-img img {
@@ -76,7 +76,6 @@
 .specializations, .city {
     border-radius: 2px;
     padding: 2px 7px;
-    /*border: 1px solid black;*/
 }
 
 .contractor-card .description h2 {

@@ -1,40 +1,95 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block title %}
     Профил
 {% endblock %}
 
+{% block scripts %}
+    <script src="{% static 'js/project-images-displaying.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
-    <div class="contractor-profile-container">
+    <div class="public-profile-wrapper">
 
-        <div class="contractor-profile-wrapper">
+        <div class="contractor-info-section">
 
-            <div class="profile-image">
+            <div class="info-left-side">
 
-                <img src="{{ contractor.contractor.profile_image.url }}">
+                <div class="profile-image-and-name">
 
-            </div>
+                    <div class="profile-image">
+                        <img src="{{ contractor.contractor.profile_image.url }}">
+                    </div>
 
-            <div class="personal-information-wrapper">
+                    <h2>{{ contractor.contractor.user.get_full_name }}</h2>
 
-                <div class="left-side-wrapper">
+                </div>
+
+                <div class="about-me-and-contacts">
 
                     <h3>Персонална информация</h3>
-                    <p>Име: <span>{{ contractor.contractor.user.get_full_name }}</span></p>
                     {% if contractor.contractor.about_me %}
-                        <p>За мен: <span>contractor.contractor.about_me</span></p>
+                        <p class="about-me">За мен: <span>{{ contractor.contractor.about_me }}</span></p>
+                    {% endif %}
+
+                    {% if contractor.contractor.phone_number %}
+                        <p class="phone-number">Телефонен номер: <span>{{ contractor.contractor.phone_number }}</span>
+                        </p>
+                    {% endif %}
+
+                    {% if contractor.contractor.social_networks %}
+
+                    {% else %}
+
+                        <ul class="social-networks">
+                            <p>Социални мрежи:</p>
+                            <li><img src="{% static 'images/facebook-icon.png' %}"></li>
+                            <li><img src="{% static 'images/instagram-logo.png' %}"></li>
+                            <li><img src="{% static 'images/linkedin-icon.png' %}"></li>
+
+                        </ul>
+
                     {% endif %}
 
                 </div>
 
-                <div class="right-side-wrapper">
+            </div>
 
-                    <h3>Контакти</h3>
+            <div class="info-right-side">
 
-                    {% if contractor.contractor.phone_number %}
-                        <p>Телефонен номер: <span>{{ contractor.contractor.phone_number }}</span></p>
-                    {% endif %}
+                <div class="specializations">
+
+                    <h3>Моите специалности <span class="specializations-small-icon"><img
+                            src="{% static 'images/tool-icon.png' %}"></span></h3>
+
+                    <ul>
+
+                        {% for specialization in contractor.contractor.specializations.all %}
+
+                            <li>{{ specialization }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+                <div class="regions">
+
+                    <h3>Градове и региони в ,които работя <span class="regions-small-icon"><img
+                            src="{% static 'images/loacation-small.png' %}"></span></h3>
+
+                    <ul>
+
+                        {% for region in contractor.contractor.regions.all %}
+
+                            <li>{{ region }}</li>
+
+                        {% endfor %}
+
+                    </ul>
 
                 </div>
 
@@ -42,86 +97,67 @@
 
         </div>
 
-        <div class="regions-specializations-wrapper">
+        <div class="projects">
 
-            <div class="regions-wrapper">
+            <h3>Моите проекти:</h3>
 
-                <h3>Градове и области в които работя</h3>
+            {% if contractor.contractor.projects.exists %}
 
-                <ul>
+                <div class="projects-cards">
 
-                    {% for region in contractor.contractor.regions.all %}
+                    {% for project in contractor.contractor.projects.all %}
 
-                        <li>{{ region }}</li>
+                        <div class="project-card">
+
+                            <div class="project-card-info">
+                                {% if project.project_name %}
+                                    <p>Име на проекта: <span
+                                            class="project-details-p-span">{{ project.project_name }}</span>
+                                    </p>
+                                {% endif %}
+                                <p>Описание: <span
+                                        class="project-details-p-span">{{ project.project_description }}</span>
+                                </p>
+                                {% if project.min_price_for_similar_project and project.max_price_for_similar_project %}
+                                    <p>Минимална цена за подобен проект:
+                                        <span class="project-details-p-span">{{ project.min_price_for_similar_project }}лв.</span>
+                                    </p>
+                                    <p>Максимална цена за подобен проект:
+                                        <span class="project-details-p-span">{{ project.max_price_for_similar_project }}лв.</span>
+                                    </p>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="project-card-images">
+
+                                {% for image_object in project.project_images.all %}
+                                    <div class="project-card-image">
+
+                                        <img src="{{ image_object.image.url }}">
+                                        {% if image_object.image_caption %}
+                                            <span class="image-caption">{{ image_object.image_caption }}</span>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
 
                     {% endfor %}
 
-                </ul>
+                </div>
 
-            </div>
+            {% else %}
 
-            <div class="regions-wrapper">
+                <p class="no-projects">Майсторът все още няма качени проекти.</p>
 
-                <h3>Моите специализации</h3>
-
-                <ul>
-
-                    {% for specialization in contractor.contractor.specializations.all %}
-
-                        <li>{{ specialization }}</li>
-
-                    {% endfor %}
-
-                </ul>
-
-            </div>
+            {% endif %}
 
         </div>
 
     </div>
 
-
-
-
-
-
-    {#    <div class="">#}
-    {#        <h1>#}
-    {#            {{ contractor.contractor.user.get_full_name }}#}
-    {#        </h1>#}
-    {##}
-    {#        <div class="description">#}
-    {##}
-    {#            <div class="specializations">#}
-    {##}
-    {#                <h2>Специалист по:</h2>#}
-    {##}
-    {#                <ul>#}
-    {#                    {% for specialization in contractor.contractor.specializations.all %}#}
-    {##}
-    {#                        <li>{{ specialization }}</li>#}
-    {##}
-    {#                    {% endfor %}#}
-    {#                </ul>#}
-    {##}
-    {#            </div>#}
-    {##}
-    {#            <div class="city">#}
-    {##}
-    {#                <h2>Работи в област:</h2>#}
-    {##}
-    {#                <ul>#}
-    {#                    {% for region in contractor.contractor.regions.all %}#}
-    {##}
-    {#                        <li>{{ region }}</li>#}
-    {##}
-    {#                    {% endfor %}#}
-    {#                </ul>#}
-    {##}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {##}
-    {#    </div>#}
 
 {% endblock %}

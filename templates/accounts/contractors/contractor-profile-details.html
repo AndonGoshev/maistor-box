@@ -5,64 +5,144 @@
     Профил
 {% endblock %}
 
+{% block scripts %}
+	<script src="{% static 'js/project-images-displaying.js' %}"></script>
+{% endblock %}
+
 {% block content %}
-    <div class="profile-section">
 
-        <div class="profile-info">
+    <div class="public-profile-wrapper">
 
-            <div class="contractor-profile-info-image">
+{#        <p>Това е вашият личен профил. Можете да редактирате или изтривате информация за вас. <br> Полетата "потребителско име" и "имейл" са поверителни и видими само тук - в личния ви профил. <br>Можете да достъпите публичния си профил от този линк <a href="{% url '{{ localhost/user.get_full_name|slugify }}' %}"></a></p>#}
 
-                <img src="{{ user.contractor_user.profile_image.url }}" alt="profile-icon">
+        <div class="contractor-info-section">
+
+            <div class="info-left-side">
+
+                <div class="profile-image-and-name">
+
+                    <div class="profile-image">
+                        <img src="{{ user.contractor_user.profile_image.url }}">
+                    </div>
+
+                    <h2>{{ user.get_full_name }}</h2>
+
+                </div>
+
+                <div class="about-me-and-contacts">
+
+                    <h3>Персонална информация</h3>
+
+                    <p class="username">Потребителско име: <span>{{ user.username }}</span></p>
+
+                    <p class="username">Имейл: <span>{{ user.email }}</span></p>
+
+                    {% if user.contractor_user.about_me %}
+                        <p class="about-me">За мен: <span>{{ user.contractor_user.about_me }}</span></p>
+                    {% else %}
+                        <p class="no-about-me">За мен: Все още не сте добавили информация за вас. Може да го направите от (Настройки на профила / Редактиране на профила)</p>
+                    {% endif %}
+
+                    {% if user.contractor_user.phone_number %}
+                        <p class="phone-number">Телефонен номер: <span>{{ user.contractor_user.phone_number }}</span>
+                        </p>
+                    {% endif %}
+
+                    {% if contractor.contractor.social_networks %}
+
+                    {% else %}
+
+                        <ul class="social-networks">
+                            <p>Социални мрежи:</p>
+                            <li><img src="{% static 'images/facebook-icon.png' %}"></li>
+                            <li><img src="{% static 'images/instagram-logo.png' %}"></li>
+                            <li><img src="{% static 'images/linkedin-icon.png' %}"></li>
+
+                        </ul>
+
+                    {% endif %}
+
+                </div>
 
             </div>
 
-            <div class="profile-info-text">
+            <div class="info-right-side">
 
-                <p>Потребител: <span class="details-p-span">{{ user.username }}</span></p>
-                <p>Име: <span class="details-p-span">{{ user.first_name }}</span></p>
-                <p>Фамилия: <span class="details-p-span">{{ user.last_name }}</span></p>
-                <p>Телефонен номер: <span class="details-p-span">{{ user.contractor_user.phone_number }}</span></p>
-                <p>Имейл: <span class="details-p-span">{{ user.email }}</span></p>
+                <div class="specializations">
 
-                <p>За мен:<span class="details-p-span">
+                    <h3>Моите специалности <span class="specializations-small-icon"><img
+                            src="{% static 'images/tool-icon.png' %}"></span></h3>
 
-                        {% if user.contractor_user.about_me %}
-                            {{ user.contractor_user.about_me }}
-                        {% else %}
-                            Все още не сте добавили информация за вас - можете да го направите от (Настройки на профила
-                            >
-                            Редактиране на профила)
-                        {% endif %}
+                    <ul>
 
-                </span></p>
+                        {% for specialization in user.contractor_user.specializations.all %}
+
+                            <li>{{ specialization }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+                <div class="regions">
+
+                    <h3>Градове и региони в ,които работя <span class="regions-small-icon"><img
+                            src="{% static 'images/loacation-small.png' %}"></span></h3>
+
+                    <ul>
+
+                        {% for region in user.contractor_user.regions.all %}
+
+                            <li>{{ region }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
 
             </div>
 
         </div>
 
-        <div class="regions-of-work">
 
-            <h3>Градове в които работя:</h3>
+        {##}
 
-            <ul>
-                {% for city in user.contractor_user.regions.all %}
-                    <li>{{ city.name }}</li>
-                {% endfor %}
-            </ul>
+        {##}
 
-        </div>
+        {##}
 
-        <div class="specializations-of-work">
-
-            <h3>Моите специалности:</h3>
-
-            <ul>
-                {% for specialization in user.contractor_user.specializations.all %}
-                    <li>{{ specialization.name }}</li>
-                {% endfor %}
-            </ul>
-
-        </div>
+        {##}
+        {#                </span></p>#}
+        {##}
+        {#            </div>#}
+        {##}
+        {#        </div>#}
+        {##}
+        {#        <div class="regions-of-work">#}
+        {##}
+        {#            <h3>Градове в които работя:</h3>#}
+        {##}
+        {#            <ul>#}
+        {#                {% for city in user.contractor_user.regions.all %}#}
+        {#                    <li>{{ city.name }}</li>#}
+        {#                {% endfor %}#}
+        {#            </ul>#}
+        {##}
+        {#        </div>#}
+        {##}
+        {#        <div class="specializations-of-work">#}
+        {##}
+        {#            <h3>Моите специалности:</h3>#}
+        {##}
+        {#            <ul>#}
+        {#                {% for specialization in user.contractor_user.specializations.all %}#}
+        {#                    <li>{{ specialization.name }}</li>#}
+        {#                {% endfor %}#}
+        {#            </ul>#}
+        {##}
+        {#        </div>#}
 
         {% include 'accounts/contractors/projects-section.html' %}
 

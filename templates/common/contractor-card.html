@@ -15,7 +15,7 @@
             <h2>Специалист по:</h2>
 
             <ul>
-                {% for specialization in contractor.contractor.specializations.all %}
+                {% for specialization in contractor.contractor.specializations.all|slice:3 %}
 
                     <li>{{ specialization }}</li>
 
@@ -29,7 +29,7 @@
             <h2>Работи в област:</h2>
 
             <ul>
-                {% for region in contractor.contractor.regions.all %}
+                {% for region in contractor.contractor.regions.all|slice:3 %}
 
                     <li>{{ region }}</li>
 

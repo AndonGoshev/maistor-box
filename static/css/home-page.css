@@ -63,13 +63,11 @@ main .welcoming-section .business-slogan {
     width: 100%;
 }
 
-
-
 .search-options {
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 3em;
+    /*gap: 1em;*/
 }
 
 .select-section {
