@@ -10,9 +10,9 @@
 
     <div class="description">
 
-        <div class="specializations">
+        <div class="contractor-card-specializations">
 
-            <h2>Специалист по:</h2>
+            <h2>Специалист   <br> по:</h2>
 
             <ul>
                 {% for specialization in contractor.contractor.specializations.all|slice:3 %}
@@ -24,9 +24,9 @@
 
         </div>
 
-        <div class="city">
+        <div class="contractor-card-regions">
 
-            <h2>Работи в област:</h2>
+            <h2>Работи в <br>области:</h2>
 
             <ul>
                 {% for region in contractor.contractor.regions.all|slice:3 %}

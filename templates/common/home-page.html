@@ -1,6 +1,12 @@
 {% extends "common/base.html" %}
 {% load static %}
 
+{% block scripts %}
+    <script src="{% static 'js/select-box-regions-specializations.js' %}"
+    data-select-mode="single">
+    </script>
+{% endblock %}
+
 {% block content %}
 
 
@@ -51,127 +57,19 @@
 
         <div class="contractors-cards">
 
-            <div class="contractor-card">
-                <div class="profile-img">
-                    <img src="{% static 'images/default-profile.webp' %}">
-                </div>
-                <h1>
-                    Йордан Събев
-                </h1>
+            {% if contractors_list %}
 
-                <div class="description">
+            {% for contractor in contractors_list %}
 
-                    <div class="specializations">
+                {% include 'common/contractor-card.html' %}
 
-                        <h2>Специалист по:</h2>
+            {% endfor %}
 
-                        <ul>
-                            <li>-Фаянс</li>
-                            <li>-Паркет</li>
-                            <li>-Боядисване</li>
-                        </ul>
+        {% else %}
 
-                    </div>
+            <p>nqma rezultati</p>
 
-                    <div class="city">
-
-                        <h2>Работи в област:</h2>
-
-                        <ul>
-                            <li>Пловдив</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-                <a href="#">
-                    <div class="card-footer">
-                        <button class="fancy">Виж профил</button>
-                    </div>
-                </a>
-            </div>
-
-            <div class="contractor-card">
-                <div class="profile-img">
-                    <img src="{% static 'images/default-profile-2.jpg' %}">
-                </div>
-                <h1>
-                    Георги Дражев
-                </h1>
-
-                <div class="description">
-
-                    <div class="specializations">
-
-                        <h2>Специалист по:</h2>
-
-                        <ul>
-                            <li>-Фаянс</li>
-                            <li>-Паркет</li>
-                            <li>-Боядисване</li>
-                        </ul>
-
-                    </div>
-
-                    <div class="city">
-
-                        <h2>Работи в област:</h2>
-
-                        <ul>
-                            <li>Пловдив</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-                <a href="#">
-                    <div class="card-footer">
-                        <button class="fancy">Виж профил</button>
-                    </div>
-                </a>
-            </div>
-
-            <div class="contractor-card">
-                <div class="profile-img">
-                    <img src="{% static 'images/default-profile-3.jpg' %}">
-                </div>
-                <h1>
-                    Санчо Панса
-                </h1>
-                <div class="description">
-
-                    <div class="specializations">
-
-                        <h2>Специалист по:</h2>
-
-                        <ul>
-                            <li>-Фаянс</li>
-                            <li>-Паркет</li>
-                            <li>-Боядисване</li>
-                        </ul>
-
-                    </div>
-
-                    <div class="city">
-
-                        <h2>Работи в област:</h2>
-
-                        <ul>
-                            <li>Пловдив</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-                <a href="#">
-                    <div class="card-footer">
-                        <button class="fancy">Виж профил</button>
-                    </div>
-                </a>
-            </div>
+        {% endif %}
 
         </div>
 

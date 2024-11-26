@@ -8,13 +8,13 @@ class ContractorSearchForm(forms.Form):
     regions = ModelChoiceField(
         queryset=Regions.objects.all(),
         required=False,
-        label='Градове и области',
+        label='',
         widget=forms.Select(attrs={'class': 'regions-search-field'}),
     )
 
     specializations = ModelChoiceField(
         queryset=Specializations.objects.all(),
         required=False,
-        label='Специализации',
+        label='',
         widget=forms.Select(attrs={'class': 'specializations-search-field'}),
     )

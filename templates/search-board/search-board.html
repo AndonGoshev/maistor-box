@@ -1,7 +1,14 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block title %}
     Майстори
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/select-box-regions-specializations.js' %}"
+    data-select-mode="single">
+    </script>
 {% endblock %}
 
 {% block content %}

@@ -29,11 +29,11 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 5em;
+    gap: 2em;
 }
 
 main .welcoming-section {
-    /*padding-top: 1em;*/
+    padding-top: 3em;
     justify-content: center;
     align-items: center;
     width: 100%;

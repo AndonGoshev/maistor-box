@@ -1,0 +1,17 @@
+.search-form-secondary {
+    padding-top: 2em;
+}
+
+.search-form-secondary form {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+    justify-content: center;
+}
+
+.search-form-secondary form button {
+    width: 15em!important;
+    height: 2.4em!important;
+    margin: 0!important;
+}

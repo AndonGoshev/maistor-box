@@ -69,11 +69,11 @@
 }
 
 
-.contractor-card .description .specializations {
+.contractor-card .description .my-specializations {
     padding-right: 10px;
 }
 
-.specializations, .city {
+.my-specializations, .contractor-card-regions {
     border-radius: 2px;
     padding: 2px 7px;
 }

@@ -49,7 +49,7 @@ form ul li {
     text-align: center;
 }
 
-form .helptext{
+form .helptext {
     align-self: center;
     display: inline-block;
     font-size: 0.5em;
@@ -60,11 +60,11 @@ form button {
     align-items: center;
 }
 
-body > div.site > main > div > form > p:nth-child(9) button{
+body > div.site > main > div > form > p:nth-child(9) button {
     background-color: #001253;
 }
 
-.form-section h1, .form-section h2, .form-section h3{
+.form-section h1, .form-section h2, .form-section h3 {
     color: #FD841F;
 }
 
@@ -90,12 +90,12 @@ body > div.site > main > div > form > p:nth-child(9) button{
     line-height: 0;
 }
 
-.form-section form div div label{
+.form-section form div div label {
     font-size: 0.8em;
     color: black;
 }
 
-#id_regions , #id_specializations{
+#id_regions, #id_specializations {
     width: 100%;
     max-width: 50em;
     display: flex;
