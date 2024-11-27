@@ -57,9 +57,9 @@
 
         <div class="contractors-cards">
 
-            {% if contractors_list %}
+            {% if contractor %}
 
-            {% for contractor in contractors_list %}
+            {% for contractor in contractor.all %}
 
                 {% include 'common/contractor-card.html' %}
 

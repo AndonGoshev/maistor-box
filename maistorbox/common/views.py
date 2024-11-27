@@ -12,6 +12,7 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['contractor_search_form'] = ContractorSearchForm
+        context['contractor'] = ContractorPublicModel.objects.all().order_by('-id')[:3]
         return context
 
 
