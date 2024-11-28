@@ -118,12 +118,9 @@
                                 <p>Описание: <span
                                         class="project-details-p-span">{{ project.project_description }}</span>
                                 </p>
-                                {% if project.min_price_for_similar_project and project.max_price_for_similar_project %}
-                                    <p>Минимална цена за подобен проект:
-                                        <span class="project-details-p-span">{{ project.min_price_for_similar_project }}лв.</span>
-                                    </p>
-                                    <p>Максимална цена за подобен проект:
-                                        <span class="project-details-p-span">{{ project.max_price_for_similar_project }}лв.</span>
+                                {% if project.average_price_for_similar_project %}
+                                    <p>Средна цена за подобен проект:
+                                        <span class="project-details-p-span">{{ project.average_price_for_similar_project }}лв.</span>
                                     </p>
                                 {% endif %}
 

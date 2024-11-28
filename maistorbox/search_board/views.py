@@ -10,6 +10,7 @@ class SearchBoardView(ListView):
     template_name = 'search-board/search-board.html'
     context_object_name = 'contractors_list'
     form_class = ContractorSearchForm
+    paginate_by = 12
 
     def get_queryset(self):
         queryset = super().get_queryset()

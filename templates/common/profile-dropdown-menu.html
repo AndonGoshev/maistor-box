@@ -8,7 +8,6 @@
             <img src="{% static 'images/profile-icon.png' %}" alt="Profile Menu Icon"> </label>
         <ul class="profile-dropdown-menu">
             <li><a href="{% url 'regular-user-profile-details' user.id %}">Профил</a></li>
-            <li><a href="#">Любими майстори</a></li>
             <li><a href="{% url 'logout' %}">Изход</a></li>
         </ul>
     {% else %}
@@ -22,7 +21,7 @@
         </label>
         <ul class="profile-dropdown-menu">
             <li><a href="{% url 'contractor-user-profile-details' user.id %}">Профил</a></li>
-            <li><a href="#">майстори</a></li>
+            <li><a href="{% url 'contractor-user-profile-edit' user.id %}">Редактиране-профил</a></li>
             <li><a href="{% url 'logout' %}">Изход</a></li>
         </ul>
     {% endif %}

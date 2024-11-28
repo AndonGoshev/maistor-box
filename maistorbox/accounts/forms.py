@@ -6,7 +6,7 @@ from django.forms import BaseModelForm, BaseModelFormSet, ClearableFileInput
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations, ContractorProject, \
     ImageModel
-from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin, MinPriceMaxPriceValidationMixin
+from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin
 
 
 class CustomClearableFileInput(forms.ClearableFileInput):
@@ -119,13 +119,13 @@ class ContractorUserProfileEditForm(forms.ModelForm,  FormsStylingMixin, ErrorMe
 
         return contractor_user
 
-class ContractorProjectCreateForm(forms.ModelForm, MinPriceMaxPriceValidationMixin, FormsStylingMixin, ):
+class ContractorProjectCreateForm(forms.ModelForm, FormsStylingMixin, ):
     class Meta:
         model = ContractorProject
         exclude = ['contractor_user', ]
 
 
-class ContractorProjectEditForm(forms.ModelForm, MinPriceMaxPriceValidationMixin, FormsStylingMixin, ):
+class ContractorProjectEditForm(forms.ModelForm, FormsStylingMixin, ):
     class Meta:
         model = ContractorProject
         exclude = ['contractor_user', ]

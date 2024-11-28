@@ -1,5 +1,6 @@
 .user-section .profile-menu-wrapper {
     position: relative;
+    z-index: 1000;
 }
 
 .user-section #profile-menu-toggle {

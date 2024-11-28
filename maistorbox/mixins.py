@@ -23,24 +23,17 @@ class FormsStylingMixin(forms.Form):
         'project_name': 'Име на проекта',
         'project_description': 'Описание...',
         'image_caption': 'Описание за снимката...',
-        'min_price_for_similar_project': 'Минимална цена за подобен проект в лева...',
-        'max_price_for_similar_project': 'Максимална цена за подобен проект в лева...',
         'image': 'Снимка',
         'regions': 'Изберете в кои области или градове работите:',
         'specializations': 'Изберете специалисти:',
-        'about_me': 'За мен...'
+        'about_me': 'За мен...',
+        'average_price_for_similar_project': 'Средна цена за подобен проект в лева:'
     }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         for field in self.fields:
-            if field == "max_price_for_similar_project" or field == "min_price_for_similar_project":
-                self.fields[field].help_text = self.PLACEHOLDER_TRANSLATION[field]
-                self.fields[field].label = ''
-                continue
-
-
             self.fields[field].label = ''
             self.fields[field].widget.attrs['placeholder'] = self.PLACEHOLDER_TRANSLATION[field]
             self.fields[field].help_text = ''
@@ -101,21 +94,3 @@ class ErrorMessagesTranslateMixin:
         for field in self.fields.values():
             for error_code, message in translated_messages.items():
                 field.error_messages.setdefault(error_code, message)
-
-
-class MinPriceMaxPriceValidationMixin:
-    def clean(self):
-        cleaned_data = super().clean()
-
-        min_price = cleaned_data.get('min_price_for_similar_project')
-        max_price = cleaned_data.get('max_price_for_similar_project')
-
-        if min_price and max_price:
-            if min_price > max_price:
-
-                raise ValidationError({
-                    'min_price_for_similar_project': 'Минималната цена не може да бъде по-висока от максималната.',
-                    'max_price_for_similar_project': 'Максималната цена не може да бъде по-ниска от минималната.'
-                })
-
-        return cleaned_data

@@ -36,13 +36,6 @@ class ContractorUserModel(models.Model):
         related_name='contractor_user',
     )
 
-    first_name = models.CharField(
-        max_length=50,
-    )
-    last_name = models.CharField(
-        max_length=50,
-    )
-
     about_me = models.TextField(
         blank=True,
         null=True,
@@ -86,14 +79,7 @@ class ContractorProject(models.Model):
         max_length=1000,
     )
 
-    min_price_for_similar_project = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        blank=True,
-        null=True,
-    )
-
-    max_price_for_similar_project = models.DecimalField(
+    average_price_for_similar_project = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         blank=True,
@@ -106,17 +92,11 @@ class ContractorProject(models.Model):
         related_name='projects',
     )
 
-    def clean(self):
-        if self.min_price_for_similar_project and self.max_price_for_similar_project:
-            if self.min_price_for_similar_project > self.max_price_for_similar_project:
-                raise ValidationError({
-                    'min_price_for_similar_project': 'Минималната цена не може да бъде по-висока от максималната.',
-                    'max_price_for_similar_project': 'Максималната цена не може да бъде по-ниска от минималната.'
-                })
-
 
 class ImageModel(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(
+        upload_to='contractor-project-images',
+    )
 
     image_caption = models.CharField(
         max_length=100,

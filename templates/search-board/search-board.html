@@ -7,7 +7,7 @@
 
 {% block scripts %}
     <script src="{% static 'js/select-box-regions-specializations.js' %}"
-    data-select-mode="single">
+            data-select-mode="single">
     </script>
 {% endblock %}
 
@@ -15,21 +15,47 @@
 
     {% include 'search-board/search-form-secondary.html' %}
 
-    <div class="contractor-results">
+    <div class="contractor-results-section">
 
         {% if contractors_list %}
 
-            {% for contractor in contractors_list %}
+            <div class="contractor-results">
 
-                {% include 'common/contractor-card.html' %}
+                {% for contractor in contractors_list %}
 
-            {% endfor %}
+                    {% include 'common/contractor-card.html' %}
+
+                {% endfor %}
+
+            </div>
 
         {% else %}
 
-            <p>nqma rezultati</p>
+            <div class="contractor-results">
+
+                <p>Не са намерени резултати от това търсене.</p>
+
+            </div>
 
         {% endif %}
+
+        <div class="pagination">
+            <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1"><img src="{% static 'images/first-page.png' %}"></a>
+                <a href="?page={{ page_obj.previous_page_number }}"><img src="{% static 'images/previous-page.png' %}"></a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"><img src="{% static 'images/next-page.png' %}"></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}"><img src="{% static 'images/last-page.png' %}"></a>
+            {% endif %}
+            </span>
+        </div>
 
     </div>
 

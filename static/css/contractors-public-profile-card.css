@@ -91,3 +91,7 @@
     font-size: 0.8em;
 }
 
+.card-footer p {
+    width: 100%;
+    background-color: #E14D2A;
+}

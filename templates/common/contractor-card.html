@@ -12,7 +12,7 @@
 
         <div class="contractor-card-specializations">
 
-            <h2>Специалист   <br> по:</h2>
+            <h2>Специалист <br> по:</h2>
 
             <ul>
                 {% for specialization in contractor.contractor.specializations.all|slice:3 %}
@@ -42,7 +42,16 @@
 
     <a href="{% url 'contractor-public-profile' contractor.slug %}">
         <div class="card-footer">
-            <button class="fancy special-class">Виж профил</button>
+            {% if user.is_authenticated %}
+
+                <button class="fancy special-class">Виж профил</button>
+
+            {% else %}
+
+                <p class="forbidden-info">За да видите пълният профил на майстора трябва да сте регистриран потребител</p>
+                <а>Регистрация</а>
+
+            {% endif %}
         </div>
     </a>
 </div>
