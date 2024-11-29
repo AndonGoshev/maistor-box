@@ -6,7 +6,11 @@
 }
 
 .user-not-authenticated-message {
+    padding: 0.3em 0.6em;
+    width: 35em;
     text-align: center;
-    color: #E14D2A;
-    font-size: 0.7em;
+    background-color: #E14D2A;
+    color: white;
+    font-size: 1em;
+    border-radius: 5px;
 }

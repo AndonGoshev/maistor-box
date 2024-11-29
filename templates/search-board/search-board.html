@@ -15,11 +15,10 @@
 
     {% include 'search-board/search-form-secondary.html' %}
 
-    {% if not user.is_authenticated %}
-        {% include 'common/not-authenticated-message.html' %}
-    {% endif %}
-
     <div class="contractor-results-section">
+        {% if not user.is_authenticated %}
+            {% include 'common/not-authenticated-message.html' %}
+        {% endif %}
 
         {% if contractors_list %}
 
@@ -50,14 +49,15 @@
                 <a href="?page={{ page_obj.previous_page_number }}"><img src="{% static 'images/previous-page.png' %}"></a>
             {% endif %}
 
-            <span class="current">
+                <span class="current">
                 Страница {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
             </span>
 
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}"><img src="{% static 'images/next-page.png' %}"></a>
-                <a href="?page={{ page_obj.paginator.num_pages }}"><img src="{% static 'images/last-page.png' %}"></a>
-            {% endif %}
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}"><img src="{% static 'images/next-page.png' %}"></a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}"><img
+                            src="{% static 'images/last-page.png' %}"></a>
+                {% endif %}
             </span>
         </div>
 
