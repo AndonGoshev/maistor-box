@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+    Изисква се логин
+{% endblock %}
+
+{% block content %}
+
+    <div class="login-required-container">
+
+        <div class="what-now-left">
+
+            <img src="{% static 'images/what-now.jpg' %}">
+
+        </div>
+
+        <div class="what-now-right">
+
+            <p>Влезте в профила си ,за да получите достъп до тази страница.</p>
+            <a class="user-not-authenticated-message" href="{% url 'login' %}">Влизане</a>
+
+        </div>
+    </div>
+
+{% endblock %}

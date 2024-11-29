@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView
 
 from maistorbox.common.models import ContractorPublicModel
+from maistorbox.mixins import PublicProfileDisplayLoginRequiredMixin
 from maistorbox.search_board.forms import ContractorSearchForm
 
 
@@ -15,8 +18,7 @@ class HomePageView(TemplateView):
         context['contractor'] = ContractorPublicModel.objects.all().order_by('-id')[:3]
         return context
 
-
-class ContractorPublicProfileView(TemplateView):
+class ContractorPublicProfileView(PublicProfileDisplayLoginRequiredMixin, TemplateView):
     template_name = 'common/contractor-public-profile.html'
 
     def get_success_url(self):
@@ -31,4 +33,7 @@ class ContractorPublicProfileView(TemplateView):
         context['contractor'] = contractor
 
         return context
+
+class LoginRequiredView(TemplateView):
+    template_name = 'common/login-required.html'
 

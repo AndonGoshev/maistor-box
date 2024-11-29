@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 from maistorbox.accounts.models import BaseUserModel
 
@@ -94,3 +96,13 @@ class ErrorMessagesTranslateMixin:
         for field in self.fields.values():
             for error_code, message in translated_messages.items():
                 field.error_messages.setdefault(error_code, message)
+
+
+class PublicProfileDisplayLoginRequiredMixin(LoginRequiredMixin):
+    def handle_no_permission(self):
+        return redirect('login-required')
+
+class PrivateProfileDataLoginRequiredMixin(LoginRequiredMixin):
+    def handle_no_permission(self):
+        return redirect('')
+    # TODO tuk shte trqbva da ima 404

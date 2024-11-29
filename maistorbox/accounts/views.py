@@ -218,6 +218,22 @@ class UserProfileDeleteView(DeleteView):
 class ContractorUserProfileDetailsView(TemplateView):
     template_name = 'accounts/contractors/contractor-profile-details.html'
 
+    # TODO functionality for not being able to see other profiles private profiles and editing them and deleting them and creating new passwords and not being able to see their projects and editing them and deleting them
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #
+    #     # Get the logged-in user's contractor profile (this assumes a one-to-one relationship)
+    #     user = self.request.user
+    #     try:
+    #         contractor_profile = get_object_or_404(ContractorPublicModel, user=user)
+    #     except ContractorPublicModel.DoesNotExist:
+    #         raise Http404("Profile not found.")
+    #
+    #     # Pass the contractor profile to the template
+    #     context['contractor_profile'] = contractor_profile
+    #     return context
+
 
 class ContractorUserProfileDeleteView(DeleteView):
     pass

@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from django.conf.global_settings import LOGIN_URL
 from django.urls import reverse_lazy
 
 
@@ -126,6 +127,7 @@ AUTH_USER_MODEL = 'accounts.BaseUserModel'
 
 LOGIN_REDIRECT_URL = reverse_lazy('home_page')
 LOGOUT_REDIRECT_URL = reverse_lazy('home_page')
+LOGIN_URL = '/accounts/login/'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
