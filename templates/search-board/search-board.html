@@ -15,6 +15,10 @@
 
     {% include 'search-board/search-form-secondary.html' %}
 
+    {% if not user.is_authenticated %}
+        {% include 'common/not-authenticated-message.html' %}
+    {% endif %}
+
     <div class="contractor-results-section">
 
         {% if contractors_list %}

@@ -4,54 +4,97 @@
     <div class="profile-img">
         <img src="{{ contractor.contractor.profile_image.url }}">
     </div>
-    <h1>
-        {{ contractor.contractor.user.get_full_name }}
-    </h1>
 
-    <div class="description">
-
-        <div class="contractor-card-specializations">
-
-            <h2>Специалист <br> по:</h2>
-
-            <ul>
-                {% for specialization in contractor.contractor.specializations.all|slice:3 %}
-
-                    <li>{{ specialization }}</li>
-
-                {% endfor %}
-            </ul>
-
-        </div>
-
-        <div class="contractor-card-regions">
-
-            <h2>Работи в <br>области:</h2>
-
-            <ul>
-                {% for region in contractor.contractor.regions.all|slice:3 %}
-
-                    <li>{{ region }}</li>
-
-                {% endfor %}
-            </ul>
-
-        </div>
+    <div class="card-content">
 
     </div>
 
-    <a href="{% url 'contractor-public-profile' contractor.slug %}">
-        <div class="card-footer">
-            {% if user.is_authenticated %}
+
+    <div class="button-section">
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'contractor-public-profile' contractor.slug %}">
 
                 <button class="fancy special-class">Виж профил</button>
 
-            {% else %}
+            </a>
 
-                <p class="forbidden-info">За да видите пълният профил на майстора трябва да сте регистриран потребител</p>
-                <а>Регистрация</а>
+        {% else %}
 
-            {% endif %}
-        </div>
-    </a>
+            {% include 'common/not-authenticated-button.html' %}
+
+        {% endif %}
+
+    </div>
+
+
 </div>
+
+
+{#<div class="description">#}
+{##}
+{#        <div class="full-name">#}
+{##}
+{#            <h1>#}
+{#                {{ contractor.contractor.user.get_full_name }}#}
+{#            </h1>#}
+{##}
+{#        </div>#}
+{##}
+{#        <div class="specializations-and-regions">#}
+{##}
+{#            <div class="my-specializations">#}
+{##}
+{#                <h2>Специалист <br> по:</h2>#}
+{##}
+{#                <ul>#}
+{#                    {% for specialization in contractor.contractor.specializations.all|slice:3 %}#}
+{##}
+{#                        <li>{{ specialization }}</li>#}
+{##}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{##}
+{#            </div>#}
+{##}
+{#            <div class="my-regions">#}
+{##}
+{#                <h2>Работи в:</h2>#}
+{##}
+{#                <ul>#}
+{#                    {% for region in contractor.contractor.regions.all|slice:3 %}#}
+{##}
+{#                        <li>{{ region }}</li>#}
+{##}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{##}
+{#            </div>#}
+{##}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="card-footer">#}
+{##}
+{#        {% if user.is_authenticated %}#}
+{##}
+{#            <div class="card-footer">#}
+{##}
+{#            <a href="{% url 'contractor-public-profile' contractor.slug %}">#}
+{##}
+{#                <button class="fancy special-class">Виж профил </button>#}
+{##}
+{#            </a>#}
+{##}
+{#            </div>#}
+{##}
+{#        {% else %}#}
+{##}
+{#            <button class="fancy special-class not-authenticated">Виж профил <span class="locked-icon"><img#}
+{#                    src="{% static 'images/locked.png' %}"></span></button>#}
+{#            <div class="hide">Трябва да сте регистриран потребител за да видите пълният профил на майстора.</div>#}
+{#        {% endif %}#}
+{##}
+{#    </div>#}

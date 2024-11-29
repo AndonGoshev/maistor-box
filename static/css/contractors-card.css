@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Sriracha&display=swap');
+
+
+.contractor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    height: 300px;
+    width: 250px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.profile-img, .contractor-card {
+    /*border: 2px solid #b8b8b8;*/
+    border: 2px solid rgb(0, 18, 83, 70%);
+}
+
+.contractor-card .profile-img {
+    position: absolute;
+    top: -13%;
+    height: 75px;
+    width: 75px;
+    min-height: 75px;
+    min-width: 75px;
+    border-radius: 25%;
+    overflow: hidden;
+}
+
+.contractor-card .profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-content {
+    margin: auto 0;
+    border: 2px solid red;
+    width: 100%;
+    height: 70%;
+}
+
+
+
+
+
+
+
+
+.button-section {
+    width: 80%;
+    height: 10%;
+    position: absolute;
+    bottom: 0.4em;
+    border: 2px solid red;
+}
+
+.button-section a {
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    height: 100%;
+}
+
+.button-section a button {
+    width: 100%;
+    height: 2.5em!important;
+}

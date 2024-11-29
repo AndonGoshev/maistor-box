@@ -3,7 +3,7 @@
 
 {% block scripts %}
     <script src="{% static 'js/select-box-regions-specializations.js' %}"
-    data-select-mode="single">
+            data-select-mode="single">
     </script>
 {% endblock %}
 
@@ -55,21 +55,25 @@
 
         <h3>Последно регистрирани майстори:</h3>
 
+        {% if not user.is_authenticated %}
+            {% include 'common/not-authenticated-message.html' %}
+        {% endif %}
+
         <div class="contractors-cards">
 
             {% if contractor %}
 
-            {% for contractor in contractor.all %}
+                {% for contractor in contractor.all %}
 
-                {% include 'common/contractor-card.html' %}
+                    {% include 'common/contractor-card.html' %}
 
-            {% endfor %}
+                {% endfor %}
 
-        {% else %}
+            {% else %}
 
-            <p>nqma rezultati</p>
+                <p>nqma rezultati</p>
 
-        {% endif %}
+            {% endif %}
 
         </div>
 
@@ -81,20 +85,20 @@
 
             <div class="question-and-icon">
                 <h1>Ти си майстор?<span><img src="{% static 'images/contractor.png' %}"></span></h1>
-                
+
             </div>
-            
+
             <p>Ако си майстор и искаш да представиш уменията си - нашата платформа е мястото за теб!</p>
             <p>Регистрирай се ,за да може нашите потребители да разберат за теб и никога да не оставаш без работа!</p>
 
         </div>
 
         <a href="{% url 'contractor-registration' %}">
-            
+
             <button class="fancy special-class">Майстор - регистрация</button>
-            
+
         </a>
-    
+
     </section>
 
 
