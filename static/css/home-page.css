@@ -7,8 +7,11 @@
     box-sizing: border-box;
 }
 
-html {
+html, body {
+    margin: 0 auto;
     font: 18px/1.5 'Roboto', sans-serif;
+    min-height: 100%;
+    width: 98vw;
 }
 
 h3 {
@@ -18,11 +21,12 @@ h3 {
 
 .site {
     margin: 0 auto;
-    /*width: 100vw;*/
-    max-width: 1400px;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 0 20px;
+    flex: 1;
 }
 
 main {
@@ -30,6 +34,7 @@ main {
     flex-direction: column;
     justify-content: space-around;
     gap: 2em;
+    flex: 1;
 }
 
 main .welcoming-section {

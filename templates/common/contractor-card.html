@@ -7,6 +7,38 @@
 
     <div class="card-content">
 
+        <div class="contractor-name">
+            <h3>{{ contractor.contractor.user.get_full_name }}</h3>
+        </div>
+
+        <div class="specializations-and-regions-wrapper">
+
+            <div class="card-specializations">
+
+                <h6>Специалист по:</h6>
+
+                <ul>
+                    {% for specialization in contractor.contractor.specializations.all|slice:3 %}
+                        <li>{{ specialization|truncatechars:15 }}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+            <div class="card-regions">
+
+                <h6>Градове и области:</h6>
+
+                <ul>
+                    {% for region in contractor.contractor.regions.all|slice:3 %}
+                        <li>     {{ region }}</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+        </div>
+
     </div>
 
 

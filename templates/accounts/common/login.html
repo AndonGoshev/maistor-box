@@ -13,6 +13,10 @@
             <button class="fancy special-class credentials">Влизане</button>
         </form>
 
-    <a class="forgotten-password" href="{% url 'password-reset' %}">Забравена парола?</a>
+        <ul class="authenticate-options-list">
+            <li><a class="forgotten-password" href="{% url 'password-reset' %}">Забравена парола?</a></li>
+            <li><a class="forgotten-password" href="{% url 'regular-user-registration' %}">Регистрация като потребител</a></li>
+            <li><a class="forgotten-password" href="{% url 'contractor-registration' %}">Регистрация като майстор</a></li>
+        </ul>
     </div>
 {% endblock %}
