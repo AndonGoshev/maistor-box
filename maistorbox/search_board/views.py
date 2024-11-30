@@ -1,3 +1,4 @@
+from django.db.models.functions import Random
 from django.shortcuts import render
 from django.views.generic import ListView
 
@@ -13,7 +14,8 @@ class SearchBoardView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        contractors_for_displaying = super().get_queryset()
+
 
         search_form = self.get_form()
 
@@ -22,13 +24,15 @@ class SearchBoardView(ListView):
             selected_specialization = search_form.cleaned_data['specializations']
 
         if selected_region:
-            queryset = queryset.filter(contractor__regions=selected_region)
+            contractors_for_displaying = contractors_for_displaying.filter(contractor__regions=selected_region)
         if selected_specialization:
-            queryset = queryset.filter(contractor__specializations=selected_specialization)
+            contractors_for_displaying = contractors_for_displaying.filter(contractor__specializations=selected_specialization)
 
-        queryset = queryset.distinct()
+        contractors_for_displaying = contractors_for_displaying.distinct()
 
-        return queryset
+        contractors_for_displaying = contractors_for_displaying.order_by(Random())
+
+        return contractors_for_displaying
 
     def get_form(self):
         return self.form_class(self.request.GET or None)

@@ -1,5 +1,3 @@
-from urllib import request
-
 from django import forms
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, \
@@ -7,8 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.forms import modelformset_factory
-from django.shortcuts import redirect, get_object_or_404
-from django.template.base import kwarg_re
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.utils.encoding import force_bytes
@@ -18,7 +15,6 @@ from django.contrib import messages
 
 from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRegistrationForm, CustomLoginForm, \
     CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectCreateForm, \
-    EditImageFormSet, \
     ImageForm, CreateImageFormSet, ContractorUserProfileEditForm
 from maistorbox.accounts.models import BaseUserModel, ContractorProject, ImageModel, ContractorUserModel
 
@@ -35,6 +31,30 @@ class ContractorUserRegistrationView(CreateView):
     template_name = 'accounts/contractors/contractor-registration.html'
     success_url = reverse_lazy('login')
     redirect_url = reverse_lazy('contractor-registration')
+
+
+class ContractorUserProfileDetailsView(TemplateView):
+    template_name = 'accounts/contractors/contractor-profile-details.html'
+
+
+
+
+
+    # TODO functionality for not being able to see other profiles private profiles and editing them and deleting them and creating new passwords and not being able to see their projects and editing them and deleting them
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #
+    #     # Get the logged-in user's contractor profile (this assumes a one-to-one relationship)
+    #     user = self.request.user
+    #     try:
+    #         contractor_profile = get_object_or_404(ContractorPublicModel, user=user)
+    #     except ContractorPublicModel.DoesNotExist:
+    #         raise Http404("Profile not found.")
+    #
+    #     # Pass the contractor profile to the template
+    #     context['contractor_profile'] = contractor_profile
+    #     return context
 
 
 class ContractorUserProfileEditView(UpdateView):
@@ -214,25 +234,6 @@ class UserProfileDeleteView(DeleteView):
     template_name = 'accounts/common/profile-delete.html'
     pk_url_kwarg = 'id'
 
-
-class ContractorUserProfileDetailsView(TemplateView):
-    template_name = 'accounts/contractors/contractor-profile-details.html'
-
-    # TODO functionality for not being able to see other profiles private profiles and editing them and deleting them and creating new passwords and not being able to see their projects and editing them and deleting them
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #
-    #     # Get the logged-in user's contractor profile (this assumes a one-to-one relationship)
-    #     user = self.request.user
-    #     try:
-    #         contractor_profile = get_object_or_404(ContractorPublicModel, user=user)
-    #     except ContractorPublicModel.DoesNotExist:
-    #         raise Http404("Profile not found.")
-    #
-    #     # Pass the contractor profile to the template
-    #     context['contractor_profile'] = contractor_profile
-    #     return context
 
 
 class ContractorUserProfileDeleteView(DeleteView):
