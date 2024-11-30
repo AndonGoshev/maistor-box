@@ -19,7 +19,7 @@
 
                 <ul>
                     {% for specialization in contractor.contractor.specializations.all|slice:3 %}
-                        <li>{{ specialization|truncatechars:15 }}</li>
+                        <li>{{ specialization|truncatechars:14 }}</li>
                     {% endfor %}
                 </ul>
 

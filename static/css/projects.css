@@ -16,6 +16,7 @@
     gap: 5em;
 }
 
+
 .project-card {
     position: relative;
     align-items: center;
@@ -25,7 +26,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     gap: 2em;
-    width: 40%;
+    width: 25em;
     min-width: 20em;
     min-height: 20em;
     background-color: #f4f4f4;
@@ -52,11 +53,19 @@
 }
 
 .project-card-images {
+    margin-left: 2.3em;
     width: 95%;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 1em 0.5em;
     flex-wrap: wrap;
+}
+
+.project-card-images::before, .project-card-images::after {
+    display: block;
+    content: '';
+    flex: 0 0 4em;
+    order: 999;
 }
 
 .project-card-image {

@@ -13,6 +13,13 @@
     position: relative;
 }
 
+.contractor-results::before, .contractor-results::after {
+    display: block;
+    content: '';
+    flex: 0 0 250px;
+    order: 999;
+}
+
 .profile-img, .contractor-card {
     border: 3px solid #b8b8b8;
     /*border: 2px solid rgb(0, 18, 83, 70%);*/
