@@ -29,6 +29,7 @@ class BaseUserModel(AbstractUser):
     email = models.EmailField(unique=True)
 
 
+
 class ContractorUserModel(models.Model):
     user = models.OneToOneField(
         BaseUserModel,

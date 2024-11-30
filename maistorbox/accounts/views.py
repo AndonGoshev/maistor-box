@@ -17,6 +17,7 @@ from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRe
     CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectCreateForm, \
     ImageForm, CreateImageFormSet, ContractorUserProfileEditForm
 from maistorbox.accounts.models import BaseUserModel, ContractorProject, ImageModel, ContractorUserModel
+from maistorbox.mixins import PrivateViewsPermissionRequiredMixin
 
 
 class BaseUserRegistrationView(CreateView):
@@ -26,6 +27,17 @@ class BaseUserRegistrationView(CreateView):
     redirect_url = reverse_lazy('regular-user-registration')
 
 
+class RegularUserProfileView(PrivateViewsPermissionRequiredMixin, TemplateView):
+    template_name = 'accounts/regular-users/regular-user-profile-details.html'
+
+
+class UserProfileDeleteView(PrivateViewsPermissionRequiredMixin, DeleteView):
+    model = BaseUserModel
+    success_url = reverse_lazy('home_page')
+    template_name = 'accounts/common/profile-delete.html'
+    pk_url_kwarg = 'id'
+
+
 class ContractorUserRegistrationView(CreateView):
     form_class = ContractorUserRegistrationForm
     template_name = 'accounts/contractors/contractor-registration.html'
@@ -33,31 +45,11 @@ class ContractorUserRegistrationView(CreateView):
     redirect_url = reverse_lazy('contractor-registration')
 
 
-class ContractorUserProfileDetailsView(TemplateView):
+class ContractorUserProfileDetailsView(PrivateViewsPermissionRequiredMixin, TemplateView):
     template_name = 'accounts/contractors/contractor-profile-details.html'
 
 
-
-
-
-    # TODO functionality for not being able to see other profiles private profiles and editing them and deleting them and creating new passwords and not being able to see their projects and editing them and deleting them
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #
-    #     # Get the logged-in user's contractor profile (this assumes a one-to-one relationship)
-    #     user = self.request.user
-    #     try:
-    #         contractor_profile = get_object_or_404(ContractorPublicModel, user=user)
-    #     except ContractorPublicModel.DoesNotExist:
-    #         raise Http404("Profile not found.")
-    #
-    #     # Pass the contractor profile to the template
-    #     context['contractor_profile'] = contractor_profile
-    #     return context
-
-
-class ContractorUserProfileEditView(UpdateView):
+class ContractorUserProfileEditView(PrivateViewsPermissionRequiredMixin, UpdateView):
     model = ContractorUserModel
     form_class = ContractorUserProfileEditForm  # Use the custom form for editing
     template_name = 'accounts/contractors/contractor-profile-edit.html'
@@ -74,7 +66,8 @@ class ContractorUserProfileEditView(UpdateView):
 
 
 
-class ContractorProjectCreateView(CreateView):
+
+class ContractorProjectCreateView(PrivateViewsPermissionRequiredMixin, CreateView):
     model = ContractorProject
     form_class = ContractorProjectCreateForm
     template_name = 'accounts/contractors/project-create.html'
@@ -114,7 +107,7 @@ class ContractorProjectCreateView(CreateView):
         return self.form_invalid(form)
 
 
-class ContractorProjectEditView(UpdateView):
+class ContractorProjectEditView(PrivateViewsPermissionRequiredMixin, UpdateView):
     model = ContractorProject
     form_class = ContractorProjectCreateForm
     template_name = 'accounts/contractors/project-edit.html'
@@ -204,7 +197,7 @@ class ContractorProjectEditView(UpdateView):
         return self.form_invalid(form)
 
 
-class ContractorProjectDeleteView(DeleteView):
+class ContractorProjectDeleteView(PrivateViewsPermissionRequiredMixin, DeleteView):
     model = ContractorProject
     template_name = 'accounts/contractors/project-delete.html'
     pk_url_kwarg = 'id'
@@ -224,19 +217,7 @@ class CustomLogoutView(LogoutView):
     http_method_names = ['get', 'post', 'options']
 
 
-class RegularUserProfileView(TemplateView):
-    template_name = 'accounts/regular-users/regular-user-profile-details.html'
-
-
-class UserProfileDeleteView(DeleteView):
-    model = BaseUserModel
-    success_url = reverse_lazy('home_page')
-    template_name = 'accounts/common/profile-delete.html'
-    pk_url_kwarg = 'id'
-
-
-
-class ContractorUserProfileDeleteView(DeleteView):
+class ContractorUserProfileDeleteView(PrivateViewsPermissionRequiredMixin, DeleteView):
     pass
 
 
