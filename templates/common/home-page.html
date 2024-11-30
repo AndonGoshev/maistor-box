@@ -79,27 +79,21 @@
 
     </section>
 
-    <section class="are-you-contractor">
+    {% if user.is_authenticated %}
+        {% if user.user_type == 'contractor_user' %}
 
-        <div class="are-you-contractor-text-section">
+        {% else %}
 
-            <div class="question-and-icon">
-                <h1>Ти си майстор?<span><img src="{% static 'images/contractor.png' %}"></span></h1>
+            {% include 'common/are-you-contractor.html' %}
 
-            </div>
+        {% endif %}
 
-            <p>Ако си майстор и искаш да представиш уменията си - нашата платформа е мястото за теб!</p>
-            <p>Регистрирай се ,за да може нашите потребители да разберат за теб и никога да не оставаш без работа!</p>
+    {% else %}
 
-        </div>
+        {% include 'common/are-you-contractor.html' %}
 
-        <a href="{% url 'contractor-registration' %}">
+    {% endif %}
 
-            <button class="fancy special-class">Майстор - регистрация</button>
-
-        </a>
-
-    </section>
 
 
 

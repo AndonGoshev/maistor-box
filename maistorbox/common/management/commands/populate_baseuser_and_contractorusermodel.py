@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password
 from django.core.management import BaseCommand
 
 from maistorbox import settings
+from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import Regions, Specializations, BaseUserModel, ContractorUserModel
 
 names = [
@@ -61,7 +62,7 @@ class Command(BaseCommand):
                 password=make_password('password123'),  # You can use a default password
                 first_name=first_name,
                 last_name=last_name,
-                user_type="CONTRACTOR_USER",  # Assuming user_type for contractor
+                user_type=UserTypeChoice.CONTRACTOR_USER,  # Assuming user_type for contractor
             )
 
             # Create a Contractor User

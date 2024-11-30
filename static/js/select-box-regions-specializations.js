@@ -28,7 +28,7 @@ $(document).ready(function () {
     var isMultiple = selectMode === 'multiple';
 
     // Set placeholders dynamically
-    var regionPlaceholder = isMultiple ? 'Изберете области или градове:' : 'Изберете област или град:';
+    var regionPlaceholder = isMultiple ? 'Къде работите?' : 'Изберете област или град:';
     var specializationPlaceholder = isMultiple ? 'Изберете специалности:' : 'Изберете специалност:';
 
     // Initialize Select2 with dynamic placeholders
