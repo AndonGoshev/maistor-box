@@ -110,7 +110,7 @@ class ContractorProjectCreateView(PrivateProfilesViewsPermissionRequiredMixin, C
         return self.form_invalid(form)
 
 
-class ContractorProjectEditView(LoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, UpdateView):
+class ContractorProjectEditView(CustomLoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, UpdateView):
     model = ContractorProject
     form_class = ContractorProjectCreateForm
     template_name = 'accounts/contractors/project-edit.html'
@@ -200,7 +200,7 @@ class ContractorProjectEditView(LoginRequiredMixin, PrivateContractorProjectsVie
         return self.form_invalid(form)
 
 
-class ContractorProjectDeleteView(LoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, DeleteView):
+class ContractorProjectDeleteView(CustomLoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, DeleteView):
     model = ContractorProject
     template_name = 'accounts/contractors/project-delete.html'
     pk_url_kwarg = 'id'
