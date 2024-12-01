@@ -3,9 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView
+from urllib3 import request
 
-from maistorbox.common.models import ContractorPublicModel
-from maistorbox.mixins import PublicProfileDisplayLoginRequiredMixin
+from maistorbox.common.forms import ClientFeedbackForm
+from maistorbox.common.models import ContractorPublicModel, ClientFeedbackModel
+from maistorbox.mixins import CustomLoginRequiredMixin
 from maistorbox.search_board.forms import ContractorSearchForm
 
 
@@ -16,9 +18,10 @@ class HomePageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['contractor_search_form'] = ContractorSearchForm
         context['contractor'] = ContractorPublicModel.objects.all().order_by('-id')[:3]
+
         return context
 
-class ContractorPublicProfileView(PublicProfileDisplayLoginRequiredMixin, TemplateView):
+class ContractorPublicProfileView(CustomLoginRequiredMixin, TemplateView):
     template_name = 'common/contractor-public-profile.html'
 
     def get_success_url(self):
@@ -27,10 +30,14 @@ class ContractorPublicProfileView(PublicProfileDisplayLoginRequiredMixin, Templa
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        data = super().get_context_data(**kwargs)
+
         slug = self.kwargs['slug']
         contractor = get_object_or_404(ContractorPublicModel, slug=slug)
         context['contractor'] = contractor
+
+        # client_user = request.user
+        context['feedback_form'] = ClientFeedbackForm
+        context['feedback'] = ClientFeedbackModel.objects.filter(contractor=contractor)
 
         return context
 

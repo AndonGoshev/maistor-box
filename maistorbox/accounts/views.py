@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView, \
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
@@ -17,7 +19,8 @@ from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRe
     CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectCreateForm, \
     ImageForm, CreateImageFormSet, ContractorUserProfileEditForm
 from maistorbox.accounts.models import BaseUserModel, ContractorProject, ImageModel, ContractorUserModel
-from maistorbox.mixins import PrivateViewsPermissionRequiredMixin
+from maistorbox.mixins import PrivateProfilesViewsPermissionRequiredMixin, CustomLoginRequiredMixin, \
+    PrivateContractorProjectsViewsPermissionRequiredMixin
 
 
 class BaseUserRegistrationView(CreateView):
@@ -27,11 +30,11 @@ class BaseUserRegistrationView(CreateView):
     redirect_url = reverse_lazy('regular-user-registration')
 
 
-class RegularUserProfileView(PrivateViewsPermissionRequiredMixin, TemplateView):
+class RegularUserProfileView(PrivateProfilesViewsPermissionRequiredMixin, TemplateView):
     template_name = 'accounts/regular-users/regular-user-profile-details.html'
 
 
-class UserProfileDeleteView(PrivateViewsPermissionRequiredMixin, DeleteView):
+class RegularUserProfileDeleteView(PrivateProfilesViewsPermissionRequiredMixin, DeleteView):
     model = BaseUserModel
     success_url = reverse_lazy('home_page')
     template_name = 'accounts/common/profile-delete.html'
@@ -45,11 +48,11 @@ class ContractorUserRegistrationView(CreateView):
     redirect_url = reverse_lazy('contractor-registration')
 
 
-class ContractorUserProfileDetailsView(PrivateViewsPermissionRequiredMixin, TemplateView):
+class ContractorUserProfileDetailsView(CustomLoginRequiredMixin, PrivateProfilesViewsPermissionRequiredMixin, TemplateView):
     template_name = 'accounts/contractors/contractor-profile-details.html'
 
 
-class ContractorUserProfileEditView(PrivateViewsPermissionRequiredMixin, UpdateView):
+class ContractorUserProfileEditView(CustomLoginRequiredMixin, PrivateProfilesViewsPermissionRequiredMixin, UpdateView):
     model = ContractorUserModel
     form_class = ContractorUserProfileEditForm  # Use the custom form for editing
     template_name = 'accounts/contractors/contractor-profile-edit.html'
@@ -67,7 +70,7 @@ class ContractorUserProfileEditView(PrivateViewsPermissionRequiredMixin, UpdateV
 
 
 
-class ContractorProjectCreateView(PrivateViewsPermissionRequiredMixin, CreateView):
+class ContractorProjectCreateView(PrivateProfilesViewsPermissionRequiredMixin, CreateView):
     model = ContractorProject
     form_class = ContractorProjectCreateForm
     template_name = 'accounts/contractors/project-create.html'
@@ -107,7 +110,7 @@ class ContractorProjectCreateView(PrivateViewsPermissionRequiredMixin, CreateVie
         return self.form_invalid(form)
 
 
-class ContractorProjectEditView(PrivateViewsPermissionRequiredMixin, UpdateView):
+class ContractorProjectEditView(LoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, UpdateView):
     model = ContractorProject
     form_class = ContractorProjectCreateForm
     template_name = 'accounts/contractors/project-edit.html'
@@ -197,7 +200,7 @@ class ContractorProjectEditView(PrivateViewsPermissionRequiredMixin, UpdateView)
         return self.form_invalid(form)
 
 
-class ContractorProjectDeleteView(PrivateViewsPermissionRequiredMixin, DeleteView):
+class ContractorProjectDeleteView(LoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, DeleteView):
     model = ContractorProject
     template_name = 'accounts/contractors/project-delete.html'
     pk_url_kwarg = 'id'
@@ -217,7 +220,7 @@ class CustomLogoutView(LogoutView):
     http_method_names = ['get', 'post', 'options']
 
 
-class ContractorUserProfileDeleteView(PrivateViewsPermissionRequiredMixin, DeleteView):
+class ContractorUserProfileDeleteView(PrivateProfilesViewsPermissionRequiredMixin, DeleteView):
     pass
 
 
