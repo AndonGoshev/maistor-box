@@ -18,6 +18,20 @@ class BaseUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, Fo
         model = BaseUserModel
         fields = ('username', 'email', 'password1', 'password2')
 
+    # We are overriding the save method because when the user is added through the admin panel
+    # the password is not hashed and this leads to the created user not being able
+    # to log in.
+    def save(self, commit=True):
+        regular_user = super().save(commit=False)
+        regular_user.set_password(self.cleaned_data['password1'])
+
+        if commit:
+            regular_user.save()
+
+        return regular_user
+
+
+
 
 class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
     # Base user fields
@@ -56,6 +70,7 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
 
         # Here we are saving the base part of the contractor user
         base_user = super().save(commit=False)
+        base_user.set_password(self.cleaned_data['password1'])
         base_user.first_name = self.cleaned_data['first_name']
         base_user.last_name = self.cleaned_data['last_name']
         base_user.email = self.cleaned_data['email']

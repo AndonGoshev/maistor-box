@@ -2,6 +2,7 @@
 
     <form method="post" enctype="multipart/form-data">
 
+        {% csrf_token %}
         {{ feedback_form.as_p }}
 
         <button class="fancy special-class">Изпрати отзив</button>
