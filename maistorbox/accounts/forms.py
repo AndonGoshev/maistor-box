@@ -33,6 +33,8 @@ class BaseUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, Fo
 
 
 
+
+
 class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
     # Base user fields
     email = forms.EmailField(required=True)

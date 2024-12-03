@@ -1,0 +1,27 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+	Забранен достъп
+{% endblock %}
+
+{% block content %}
+
+    <div class="forbidden-section">
+
+        <div class="forbidden-image">
+
+            <img src="{% static 'images/forbidden.png' %}">
+
+        </div>
+
+        <div class="forbidden-section-text">
+
+            <h1>403</h1>
+            <p>Съжaляваме ,но тази страница е с конфиденцилен статус и нямате достъп до нея! Моля обърнете се към администрацията - <a href="">контакти</a></p>
+
+        </div>
+
+    </div>
+
+{% endblock %}
