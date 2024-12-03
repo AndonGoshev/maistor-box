@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 from django.core.exceptions import ValidationError
@@ -44,11 +45,15 @@ class BaseUserModelAdmin(ModelAdmin):
         ('user types', {'fields': ('user_type',)}),
     )
 
-    def save_model(self, request, obj, form, change):
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
 
-        if obj.password:
-            obj.set_password(obj.password)
-        super().save_model(request, obj, form, change)
+        if obj:  # If editing an existing user, hide the password field
+            form.base_fields['password'].widget = forms.HiddenInput()
+        else:
+            pass  # Show the password field for new users
+
+        return form
 
 
 @admin.register(ContractorUserModel)
