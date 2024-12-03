@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from maistorbox.common.models import ContractorPublicModel
+
+
+@admin.register(ContractorPublicModel)
+class ContractorPublicModelAdmin(admin.ModelAdmin):
+    model = ContractorPublicModel
+    fields = ('contractor', 'slug')
+
+    search_fields = ('contractor__id', 'slug')

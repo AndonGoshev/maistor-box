@@ -4,7 +4,7 @@ import random
 from django.core.management import BaseCommand
 
 from maistorbox import settings
-from maistorbox.accounts.models import ContractorUserModel, ContractorProject, ImageModel
+from maistorbox.accounts.models import ContractorUserModel, ContractorProjectModel, ImageModel
 
 
 class Command(BaseCommand):
@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
             for _ in range(num_of_projects_per_contractor):
 
-                curr_project = ContractorProject.objects.create(
+                curr_project = ContractorProjectModel.objects.create(
                     project_name=project_name,
                     project_description=project_description,
                     average_price_for_similar_project=average_price_for_similar_project,

@@ -1,6 +1,6 @@
 from django.core.management import BaseCommand
 
-from maistorbox.accounts.models import Regions, Specializations
+from maistorbox.accounts.models import Region, Specialization
 
 
 class Command(BaseCommand):
@@ -85,9 +85,9 @@ class Command(BaseCommand):
             'Интелигентни сградни системи (smart home)']
 
         for region_name in regions_list:
-            Regions.objects.get_or_create(name=region_name)
+            Region.objects.get_or_create(name=region_name)
 
         for specialization_name in specializations_list:
-            Specializations.objects.get_or_create(name=specialization_name)
+            Specialization.objects.get_or_create(name=specialization_name)
 
         self.stdout.write(self.style.SUCCESS('Regions and Specializations populated successfully'))

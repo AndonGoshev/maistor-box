@@ -5,14 +5,14 @@ from django.db import models
 from maistorbox.accounts.choices import UserTypeChoice
 
 
-class Regions(models.Model):
+class Region(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
-class Specializations(models.Model):
+class Specialization(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -60,18 +60,18 @@ class ContractorUserModel(models.Model):
     )
 
     regions = models.ManyToManyField(
-        Regions,
+        Region,
         related_name='regions',
     )
 
     specializations = models.ManyToManyField(
-        Specializations,
+        Specialization,
         related_name='specializations',
     )
 
 
 
-class ContractorProject(models.Model):
+class ContractorProjectModel(models.Model):
     project_name = models.CharField(
         max_length=100,
         blank=True,
@@ -108,7 +108,7 @@ class ImageModel(models.Model):
     )
 
     contractor_project = models.ForeignKey(
-        to=ContractorProject,
+        to=ContractorProjectModel,
         on_delete=models.CASCADE,
         related_name='project_images',
     )

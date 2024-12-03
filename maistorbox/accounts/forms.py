@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.forms import BaseModelForm, BaseModelFormSet, ClearableFileInput
 
 from maistorbox.accounts.choices import UserTypeChoice
-from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Regions, Specializations, ContractorProject, \
+from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Region, Specialization, ContractorProjectModel, \
     ImageModel
 from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin
 
@@ -54,11 +54,11 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
         required=True,
     )
     regions = forms.ModelMultipleChoiceField(
-        queryset=Regions.objects.all(),
+        queryset=Region.objects.all(),
         required=True
     )
     specializations = forms.ModelMultipleChoiceField(
-        queryset=Specializations.objects.all(),
+        queryset=Specialization.objects.all(),
         required=True
     )
 
@@ -136,13 +136,13 @@ class ContractorUserProfileEditForm(forms.ModelForm,  FormsStylingMixin, ErrorMe
 
 class ContractorProjectCreateForm(forms.ModelForm, FormsStylingMixin, ):
     class Meta:
-        model = ContractorProject
+        model = ContractorProjectModel
         exclude = ['contractor_user', ]
 
 
 class ContractorProjectEditForm(forms.ModelForm, FormsStylingMixin, ):
     class Meta:
-        model = ContractorProject
+        model = ContractorProjectModel
         exclude = ['contractor_user', ]
 
 

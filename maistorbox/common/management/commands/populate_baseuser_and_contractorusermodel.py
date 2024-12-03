@@ -6,7 +6,7 @@ from django.core.management import BaseCommand
 
 from maistorbox import settings
 from maistorbox.accounts.choices import UserTypeChoice
-from maistorbox.accounts.models import Regions, Specializations, BaseUserModel, ContractorUserModel
+from maistorbox.accounts.models import Region, Specialization, BaseUserModel, ContractorUserModel
 
 names = [
     ("Александър", "Александров"), ("Ангел", "Ангелов"), ("Асен", "Асенов"),
@@ -45,8 +45,8 @@ class Command(BaseCommand):
                                  os.listdir(profile_images_media_folder)]
 
         # Fetch all regions and specializations for random assignment
-        all_regions = Regions.objects.all()
-        all_specializations = Specializations.objects.all()
+        all_regions = Region.objects.all()
+        all_specializations = Specialization.objects.all()
 
         # Number of users to create
         num_users = 1000

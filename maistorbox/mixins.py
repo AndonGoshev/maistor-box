@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError, PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 
-from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, ContractorProject
+from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, ContractorProjectModel
 
 
 class FormsStylingMixin(forms.Form):
@@ -144,7 +144,7 @@ class PrivateContractorProjectsViewsPermissionRequiredMixin:
         if request.user.user_type != 'contractor_user':
             raise PermissionDenied(f'{request.user.username} user tried to land on private contractor project edit / delete page. The page is {self.request.path}.')
 
-        project = get_object_or_404(ContractorProject, pk=kwargs['id'])
+        project = get_object_or_404(ContractorProjectModel, pk=kwargs['id'])
         contractor_user = get_object_or_404(ContractorUserModel, user=request.user)
 
         if project.contractor_user != contractor_user:

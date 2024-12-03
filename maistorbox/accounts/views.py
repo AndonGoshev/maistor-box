@@ -18,7 +18,7 @@ from django.contrib import messages
 from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRegistrationForm, CustomLoginForm, \
     CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectCreateForm, \
     ImageForm, CreateImageFormSet, ContractorUserProfileEditForm
-from maistorbox.accounts.models import BaseUserModel, ContractorProject, ImageModel, ContractorUserModel
+from maistorbox.accounts.models import BaseUserModel, ContractorProjectModel, ImageModel, ContractorUserModel
 from maistorbox.mixins import PrivateProfilesViewsPermissionRequiredMixin, CustomLoginRequiredMixin, \
     PrivateContractorProjectsViewsPermissionRequiredMixin
 
@@ -71,7 +71,7 @@ class ContractorUserProfileEditView(CustomLoginRequiredMixin, PrivateProfilesVie
 
 
 class ContractorProjectCreateView(PrivateProfilesViewsPermissionRequiredMixin, CreateView):
-    model = ContractorProject
+    model = ContractorProjectModel
     form_class = ContractorProjectCreateForm
     template_name = 'accounts/contractors/project-create.html'
     success_url = reverse_lazy('contractor-user-project-create')
@@ -111,7 +111,7 @@ class ContractorProjectCreateView(PrivateProfilesViewsPermissionRequiredMixin, C
 
 
 class ContractorProjectEditView(CustomLoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, UpdateView):
-    model = ContractorProject
+    model = ContractorProjectModel
     form_class = ContractorProjectCreateForm
     template_name = 'accounts/contractors/project-edit.html'
     pk_url_kwarg = 'id'
@@ -201,7 +201,7 @@ class ContractorProjectEditView(CustomLoginRequiredMixin, PrivateContractorProje
 
 
 class ContractorProjectDeleteView(CustomLoginRequiredMixin, PrivateContractorProjectsViewsPermissionRequiredMixin, DeleteView):
-    model = ContractorProject
+    model = ContractorProjectModel
     template_name = 'accounts/contractors/project-delete.html'
     pk_url_kwarg = 'id'
 

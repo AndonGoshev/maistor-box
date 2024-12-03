@@ -3,7 +3,8 @@ from django.contrib.admin import ModelAdmin
 from django.core.exceptions import ValidationError
 
 from maistorbox.accounts.forms import ContractorUserRegistrationForm
-from maistorbox.accounts.models import BaseUserModel, ContractorUserModel
+from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, ContractorProjectModel, ImageModel, \
+    Specialization, Region
 
 
 @admin.register(BaseUserModel)
@@ -55,3 +56,38 @@ class ContractorUserModelAdmin(ModelAdmin):
     model = ContractorUserModel
     list_display = ('user', 'phone_number', 'profile_image', 'created_at')
 
+@admin.register(ContractorProjectModel)
+class ContractorProjectModelAdmin(admin.ModelAdmin):
+    model = ContractorProjectModel
+    list_display = ('project_name', 'average_price_for_similar_project', 'contractor_user')
+    list_filter = ('project_name', 'contractor_user')
+    search_fields = ('project_name', 'contractor_user')
+
+    fieldsets = (
+        ('Project data', {'fields': ('project_name', 'project_description', 'average_price_for_similar_project')}),
+        ('Contractor Relationship', {'fields': ('contractor_user',)}),
+    )
+
+
+@admin.register(ImageModel)
+class ImageModelAdmin(ModelAdmin):
+    model = ImageModel
+    list_display = ('image', 'image_caption', 'contractor_project_id')
+    list_filter = ('image', 'contractor_project', 'contractor_project_id')
+    search_fields = ('image', 'contractor_project__contractor_user')
+
+    fieldsets = (
+        ('Image data', {'fields': ('image', 'image_caption', )}),
+        ('Project Relationship', {'fields': ('contractor_project',)}),
+    )
+
+
+@admin.register(Specialization)
+class SpecializationsAdmin(ModelAdmin):
+    model = Specialization
+    fields = ('name', )
+
+@admin.register(Region)
+class RegionsAdmin(ModelAdmin):
+    model = Specialization
+    fields = ('name', )
