@@ -49,7 +49,7 @@ class Command(BaseCommand):
         all_specializations = Specializations.objects.all()
 
         # Number of users to create
-        num_users = 50
+        num_users = 1000
 
         for _ in range(num_users):
             # Randomly select first name and last name

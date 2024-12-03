@@ -1,0 +1,22 @@
+# Ignore .env file
+.env
+
+# Virtual Environment
+venv/
+.env/
+*.env
+
+# Ignore compiled files
+*.pyc
+__pycache__/
+
+# Ignore logs
+*.log
+
+# Ignore database files
+*.sqlite3
+
+
+# Ignore system files
+.DS_Store
+Thumbs.db

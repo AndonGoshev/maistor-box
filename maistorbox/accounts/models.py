@@ -30,6 +30,7 @@ class BaseUserModel(AbstractUser):
 
 
 
+
 class ContractorUserModel(models.Model):
     user = models.OneToOneField(
         BaseUserModel,
@@ -67,6 +68,7 @@ class ContractorUserModel(models.Model):
         Specializations,
         related_name='specializations',
     )
+
 
 
 class ContractorProject(models.Model):

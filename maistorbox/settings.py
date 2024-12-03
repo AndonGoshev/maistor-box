@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from decouple import config
 from django.conf.global_settings import LOGIN_URL
 from django.urls import reverse_lazy
 
@@ -12,10 +13,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=*(_s6p8k4r27#lgjmwhv_gf5jp53=9yg(pyp#@*uytcrx#!kj'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -70,14 +71,15 @@ WSGI_APPLICATION = 'maistorbox.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "maistor-box",
-        "USER": "admin",
-        "PASSWORD": "admin",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),
+        "PORT": config('DB_PORT'),
     }
 }
 
@@ -132,17 +134,17 @@ LOGIN_URL = '/accounts/login/'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # We are going to use this for developing purposes
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = config('EMAIL_BACKEND')
 
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = config('EMAIL_HOST')
 
 # We are going to use this protocol and port because it's encrypted
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-EMAIL_HOST_USER = 'andon.go6ev1@gmail.com'
-EMAIL_HOST_PASSWORD = '9604024360a'
-DEFAULT_FROM_EMAIL = 'andon.go6ev1@gmail.com'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 
 # CLOUDINARY_STORAGE = {
