@@ -21,6 +21,11 @@ class HomePageView(TemplateView):
 
         return context
 
+
+class AboutUsView(TemplateView):
+    template_name = 'common/about-us.html'
+
+
 class ContractorPublicProfileView(CustomLoginRequiredMixin, TemplateView):
     template_name = 'common/contractor-public-profile.html'
 

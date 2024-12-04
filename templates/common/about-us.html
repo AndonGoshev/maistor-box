@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+    За нас
+{% endblock %}
+
+{% block content %}
+
+    <div class="about-us-section">
+
+        <div class="about-us-media-question">
+
+            <div class="about-us-media">
+
+                <div class="do-you-know-1">
+
+                    <img src="{% static 'images/do-you-know-someone1.png' %}">
+
+                </div>
+
+                <div class="do-you-know-1">
+
+                    <img src="{% static 'images/do-you-know-someone2.png' %}">
+
+                </div>
+
+            </div>
+
+            <h2>Познаваш ли някой майстор за...?</h2>
+
+        </div>
+
+        <div class="about-us-p">
+
+            <p><span class="question-answer">Познаваш ли някой майстор за...? - Да, познаваме! Но добре ли се справя?
+                -Да! Можеш да видиш отзивите оставени за него.</span> Това са въпросите ,които всеки от нас, на който му е предстоял някакъв вид ремонт задава към притяел.
+           Нека ние бъдем твоя прител и ти помогнем да намериш правилният майстор за твоя ремонт.  Нашия екип се старае да отсява само реални отзиви , за да можете
+            да сте сигурни в избора си на специалист!</p>
+
+        </div>
+
+    </div>
+
+{% endblock %}
