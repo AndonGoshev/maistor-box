@@ -45,13 +45,13 @@ class BaseUserModelAdmin(ModelAdmin):
         ('user types', {'fields': ('user_type',)}),
     )
 
+
+    # We are overriding this method to ensure that if a superuser
+    # tries to change_user will not see the password at all
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-
-        if obj:  # If editing an existing user, hide the password field
+        if 'password' in form.base_fields:
             form.base_fields['password'].widget = forms.HiddenInput()
-        else:
-            pass  # Show the password field for new users
 
         return form
 
