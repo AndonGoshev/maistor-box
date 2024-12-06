@@ -29,7 +29,9 @@ class FormsStylingMixin(forms.Form):
         'regions': 'Изберете в кои области или градове работите:',
         'specializations': 'Изберете специалисти:',
         'about_me': 'За мен...',
-        'average_price_for_similar_project': 'Средна цена за подобен проект в лева:'
+        'average_price_for_similar_project': 'Средна цена за подобен проект в лева:',
+        'sender': 'Вашият имейл...',
+        'content': 'Съобщение...',
     }
 
     def __init__(self, *args, **kwargs):

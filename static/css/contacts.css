@@ -1,0 +1,84 @@
+.contacts-section {
+    padding: 3em 0;
+    position: relative;
+    width: 100%;
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 5em;
+    background-color: #f4f4f4;
+}
+
+.contacts {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.contacts-sources {
+    padding-bottom: 3.7em;
+}
+
+.contacts-sources, .social-media-sources {
+    align-items: center;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+
+.contact-source-image {
+    margin-right: 0.5em;
+    vertical-align: middle;
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+}
+
+.contact-source-image img {
+    vertical-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.social-media-sources {
+    display: flex;
+    flex-direction: row;
+}
+
+.contacts-section {
+    color: #FD841F;
+}
+
+.contacts-section li {
+    color: #2b2b2b;
+}
+
+.send-message-section h2 {
+    color: #FD841F;
+    padding-bottom: 0.5em;
+}
+
+.send-message-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.send-message-image {
+    width: 10em;
+    height: 10em;
+}
+
+.send-message-section .form-section {
+    margin: 0 auto;
+}
+
+.send-message-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

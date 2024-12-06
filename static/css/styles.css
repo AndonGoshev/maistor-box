@@ -1,4 +1,5 @@
-@import "home-page.css";
+@import "base.css";
+@import "main.css";
 @import "header.css";
 @import "home-search.css";
 @import "buttons.css";
@@ -23,3 +24,5 @@
 @import "login-required.css";
 @import "403.css";
 @import "about-us.css";
+@import "contacts.css";
+@import "sent-successfully.css";

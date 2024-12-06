@@ -1,0 +1,64 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+    Контакти
+{% endblock %}
+
+{% block content %}
+
+    <div class="contacts-section">
+
+        <div class="contacts">
+
+            {% if company %}
+
+                <h2>Контакти</h2>
+
+                <ul class="contacts-sources">
+
+                    <li><span class="contact-source-image"><img
+                            src="{% static 'images/phone.png' %}"></span>{{ company.phone_number }}</li>
+                    <li><span class="contact-source-image"><img
+                            src="{% static 'images/email.png' %}"></span>{{ company.email }}</li>
+                    <li><span class="contact-source-image"><img
+                            src="{% static 'images/location.png' %}"></span>{{ company.address }}</li>
+
+                </ul>
+
+                <h2>Социални мрежи</h2>
+
+                <ul class="social-media-sources">
+
+                    <li><a href="{{ company.instagram_page_url }}"><span class="contact-source-image"><img
+                            src="{% static 'images/instagram-logo.png' %}"></span></a></li>
+                    <li><a href="{{ company.instagram_page_url }}"><span class="contact-source-image"><img
+                            src="{% static 'images/facebook-icon.png' %}"></span></a></li>
+                    <li><a href="{{ company.instagram_page_url }}"><span class="contact-source-image"><img
+                            src="{% static 'images/linkedin-icon.png' %}"></span></a></li>
+
+                </ul>
+
+            {% else %}
+
+                <p>В момента контактите не са достъпни.</p>
+
+            {% endif %}
+
+        </div>
+
+        <div class="send-message-section">
+
+            <div class="send-message-form">
+
+                <h2>Изпратете ни съобщение</h2>
+
+                {% include 'company/message-form.html' %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

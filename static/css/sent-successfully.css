@@ -1,0 +1,24 @@
+.sent-successfully-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
+}
+
+.sent-successfully-image {
+    vertical-align: middle;
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+}
+
+.sent-successfully-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sent-successfully-section h1 {
+    color: #FD841F;
+}
