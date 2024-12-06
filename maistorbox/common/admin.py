@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from maistorbox.common.models import ContractorPublicModel
+from maistorbox.common.models import ContractorPublicModel, ClientFeedbackModel
 
 
 @admin.register(ContractorPublicModel)
@@ -9,3 +9,12 @@ class ContractorPublicModelAdmin(admin.ModelAdmin):
     fields = ('contractor', 'slug')
 
     search_fields = ('contractor__id', 'slug')
+
+
+@admin.register(ClientFeedbackModel)
+class ClientFeedbackModelAdmin(admin.ModelAdmin):
+    model = ClientFeedbackModel
+    fields = ('rating', 'comment', 'approved', 'public_contractor', 'client_user')
+    list_display = ('comment', 'rating','public_contractor', 'approved')
+
+    readonly_fields = ('public_contractor', 'client_user')

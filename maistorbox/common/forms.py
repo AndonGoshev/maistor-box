@@ -6,7 +6,4 @@ from maistorbox.common.models import ClientFeedbackModel, ContractorPublicModel
 class ClientFeedbackForm(forms.ModelForm):
     class Meta:
         model = ClientFeedbackModel
-        exclude = ['contractor', 'client_user', 'approved']
-
-    def save(self, commit=True):
-        contractor = ContractorPublicModel.objects.filter()
+        exclude = ['public_contractor', 'client_user', 'approved', 'created_at']

@@ -69,6 +69,9 @@ class ContractorUserModel(models.Model):
         related_name='specializations',
     )
 
+    def __str__(self):
+        return f'Contractor with id: {self.id} '
+
 
 
 class ContractorProjectModel(models.Model):

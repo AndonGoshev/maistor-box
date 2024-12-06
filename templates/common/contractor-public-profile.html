@@ -20,26 +20,26 @@
                 <div class="profile-image-and-name">
 
                     <div class="profile-image">
-                        <img src="{{ contractor.contractor.profile_image.url }}">
+                        <img src="{{ public_contractor.contractor.profile_image.url }}">
                     </div>
 
-                    <h2>{{ contractor.contractor.user.get_full_name }}</h2>
+                    <h2>{{ public_contractor.contractor.user.get_full_name }}</h2>
 
                 </div>
 
                 <div class="about-me-and-contacts">
 
                     <h3>Персонална информация</h3>
-                    {% if contractor.contractor.about_me %}
-                        <p class="about-me">За мен: <span>{{ contractor.contractor.about_me }}</span></p>
+                    {% if public_contractor.contractor.about_me %}
+                        <p class="about-me">За мен: <span>{{ public_contractor.contractor.about_me }}</span></p>
                     {% endif %}
 
-                    {% if contractor.contractor.phone_number %}
-                        <p class="phone-number">Телефонен номер: <span>{{ contractor.contractor.phone_number }}</span>
+                    {% if public_contractor.contractor.phone_number %}
+                        <p class="phone-number">Телефонен номер: <span>{{ public_contractor.contractor.phone_number }}</span>
                         </p>
                     {% endif %}
 
-                    {% if contractor.contractor.social_networks %}
+                    {% if public_contractor.contractor.social_networks %}
 
                     {% else %}
 
@@ -66,7 +66,7 @@
 
                     <ul>
 
-                        {% for specialization in contractor.contractor.specializations.all %}
+                        {% for specialization in public_contractor.contractor.specializations.all %}
 
                             <li>{{ specialization }}</li>
 
@@ -83,7 +83,7 @@
 
                     <ul>
 
-                        {% for region in contractor.contractor.regions.all %}
+                        {% for region in public_contractor.contractor.regions.all %}
 
                             <li>{{ region }}</li>
 
@@ -101,11 +101,11 @@
 
             <h3>Моите проекти:</h3>
 
-            {% if contractor.contractor.projects.exists %}
+            {% if public_contractor.contractor.projects.exists %}
 
                 <div class="projects-cards">
 
-                    {% for project in contractor.contractor.projects.all %}
+                    {% for project in public_contractor.contractor.projects.all %}
 
                         <div class="project-card">
 

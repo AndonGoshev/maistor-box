@@ -27,7 +27,7 @@ class ContractorPublicModel(models.Model):
 
 class ClientFeedbackModel(models.Model):
     # This is the contractor who receives the feedback
-    contractor = models.ForeignKey(
+    public_contractor = models.ForeignKey(
         to=ContractorPublicModel,
         on_delete=models.CASCADE,
         related_name='client_feedback',
@@ -60,7 +60,4 @@ class ClientFeedbackModel(models.Model):
         auto_now_add=True,
     )
 
-    updated_at = models.DateTimeField(
-        auto_now=True,
-    )
 

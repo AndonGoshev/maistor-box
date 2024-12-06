@@ -1,13 +1,13 @@
-{% if feedback.exists %}
+{% for feedback in feedbacks %}
 
-    {% for feedback in feedback.all %}
+    <div class="client-feedback">
 
-        <div class="client-feedback">
+        <p>{{ feedback.comment }}</p>
 
+    </div>
 
+{% empty %}
 
-        </div>
+    <p>nqma rezultati</p>
 
-    {% endfor %}
-
-{% endif %}
+{% endfor %}
