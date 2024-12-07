@@ -32,12 +32,15 @@ class FormsStylingMixin(forms.Form):
         'average_price_for_similar_project': 'Средна цена за подобен проект в лева:',
         'sender': 'Вашият имейл...',
         'content': 'Съобщение...',
+        'rating': 'Изберete оценка...',
+        'comment': 'Оставeтe коментар...',
     }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         for field in self.fields:
+
             self.fields[field].label = ''
             self.fields[field].widget.attrs['placeholder'] = self.PLACEHOLDER_TRANSLATION[field]
             self.fields[field].help_text = ''
@@ -50,6 +53,9 @@ class ErrorMessagesTranslateMixin:
 
         # Field-specific custom error messages (applied first)
         field_messages = {
+            'rating': {
+                'required': 'Моля изберете нивото на майстора!',
+            },
             'username': {
                 'unique': "Потребител с това потребителско име вече съществува.",
                 'invalid': "Невалидно потребителско име.",

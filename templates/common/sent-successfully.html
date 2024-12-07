@@ -13,6 +13,13 @@
 
         <h1>Изпратено успешно!</h1>
 
+        {% if contractor_profile_url %}
+            <p>Благодарим ви за отзива! Очаква се одобрение от админстратор.</p>
+            <p>
+                <a href="{{ contractor_profile_url }}">Назад към профила</a>
+            </p>
+        {% endif %}
+
     </div>
 
 {% endblock %}

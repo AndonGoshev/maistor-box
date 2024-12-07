@@ -1,12 +1,45 @@
+<div id="form-section-anchor"></div>
+
 <div class="form-section">
 
     <form method="post" enctype="multipart/form-data">
-
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="rating-section">
+            <!-- Custom rating HTML -->
+            <div class="rating">
+                <input type="radio" name="rating" id="r5" value="5">
+                <label for="r5">
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
 
-        <button class="fancy special-class">Изпрати отзив</button>
+                <input type="radio" name="rating" id="r4" value="4">
+                <label for="r4">
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
 
+                <input type="radio" name="rating" id="r3" value="3">
+                <label for="r3">
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
+
+                <input type="radio" name="rating" id="r2" value="2">
+                <label for="r2">
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
+
+                <input type="radio" name="rating" id="r1" value="1">
+                <label for="r1">
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
+
+            </div>
+            <h6>Изберете нивото на майстора</h6>
+
+        </div>
+
+        {{ form.rating.errors }}
+        {{ form.comment }}
+
+        <button class="fancy special-class credentials">Изпрати</button>
     </form>
-
 </div>

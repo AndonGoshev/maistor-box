@@ -1,11 +1,12 @@
 from django import forms
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.timezone import now
 from django.views import View
 from django.views.generic import TemplateView, DetailView, FormView
 
-from maistorbox.common.forms import ClientFeedbackForm
+from maistorbox.common.forms import ClientFeedbackForm, StyledClientFeedbackForm
 from maistorbox.common.models import ContractorPublicModel, ClientFeedbackModel
 from maistorbox.company.forms import MessageForm
 from maistorbox.company.models import Company
@@ -66,9 +67,17 @@ class ContactsView(View):
 class SentSuccessfullyView(TemplateView):
     template_name = 'common/sent-successfully.html'
 
-class ContractorPublicProfileView(CustomLoginRequiredMixin, FormsStylingMixin, FormView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        contractor_slug = self.request.GET.get('contractor_slug')  # Retrieve the slug from the query parameters
+        if contractor_slug:
+            contractor_profile_url = reverse('contractor-public-profile', kwargs={'slug': contractor_slug})
+            context['contractor_profile_url'] = contractor_profile_url
+        return context
+
+class ContractorPublicProfileView(FormsStylingMixin, CustomLoginRequiredMixin, FormView):
     template_name = 'common/contractor-public-profile.html'
-    form_class = ClientFeedbackForm
+    form_class = StyledClientFeedbackForm
 
     def dispatch(self, request, *args, **kwargs):
         self.client_user = request.user
@@ -86,7 +95,10 @@ class ContractorPublicProfileView(CustomLoginRequiredMixin, FormsStylingMixin, F
 
         feedback_form.save()
 
-        return super().form_valid(form)
+        success_url = reverse('sent_successfully') + f'?contractor_slug={self.public_contractor.slug}'
+        return redirect(success_url)
+
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -95,58 +107,6 @@ class ContractorPublicProfileView(CustomLoginRequiredMixin, FormsStylingMixin, F
 
         return context
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # def get_object(self):
-    #     slug = self.kwargs['slug']
-    #     return get_object_or_404(ContractorPublicModel, slug=slug)
-    #
-    # def get_success_url(self):
-    #     return reverse('contractor-public-profile', kwargs={'slug': self.kwargs['slug']})
-    #
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #
-    #     slug = self.kwargs['slug']
-    #     contractor = get_object_or_404(ContractorPublicModel, slug=slug)
-    #     context['contractor'] = contractor
-    #
-    #     # client_user = request.user
-    #     context['feedback_form'] = ClientFeedbackForm
-    #     context['feedback'] = ClientFeedbackModel.objects.filter(contractor=contractor)
-    #
-    #     return context
-    #
-    # def post(self, request, *args, **kwargs):
-    #     self.object = self.get_object()  # Fetch contractor instance
-    #     form = ClientFeedbackForm(request.POST)
-    #     if form.is_valid():
-    #         feedback = form.save(commit=False)
-    #         feedback.contractor = self.object
-    #         feedback.client_user = request.user
-    #         feedback.save()
-    #         return redirect(self.get_success_url())
-    #     # Re-render page with form errors
-    #     context = self.get_context_data()
-    #     context['feedback_form'] = form
-    #     return self.render_to_response(context)
 
 class LoginRequiredView(TemplateView):
     template_name = 'common/login-required.html'

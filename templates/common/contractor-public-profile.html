@@ -7,6 +7,7 @@
 
 {% block scripts %}
     <script src="{% static 'js/project-images-displaying.js' %}"></script>
+    <script src="{% static 'js/contractor-reviews-anchor.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -156,15 +157,15 @@
 
         <div class="feedback-section">
 
-            <div class="feedback-form-section">
-
-                {% include 'common/feedback-form.html' %}
-
-            </div>
-
             <div class="clients-feedback-section">
 
                 {% include 'common/clients-feedbacks.html' %}
+
+            </div>
+
+            <div class="feedback-form-section">
+
+                {% include 'common/feedback-form.html' %}
 
             </div>
 

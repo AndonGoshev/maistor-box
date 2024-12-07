@@ -45,9 +45,8 @@ class ClientFeedbackModel(models.Model):
         default=False,
     )
 
-    rating = models.CharField(
-        max_length=1,
-        choices=RatingNumberChoices,
+    rating = models.PositiveSmallIntegerField(
+        choices=[(i, str(i)) for i in range(1, 6)],
     )
 
     comment = models.TextField(
@@ -59,5 +58,3 @@ class ClientFeedbackModel(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
     )
-
-
