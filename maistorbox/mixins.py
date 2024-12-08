@@ -33,7 +33,7 @@ class FormsStylingMixin(forms.Form):
         'sender': 'Вашият имейл...',
         'content': 'Съобщение...',
         'rating': 'Изберete оценка...',
-        'comment': 'Оставeтe коментар...',
+        'comment': '''Оставeтe коментар...(макс. 400 знака)''',
     }
 
     def __init__(self, *args, **kwargs):

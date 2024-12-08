@@ -61,7 +61,7 @@ class ClientFeedbackModel(models.Model):
     comment = models.TextField(
         blank=True,
         null=True,
-        max_length=200,
+        max_length=400,
     )
 
     created_at = models.DateTimeField(

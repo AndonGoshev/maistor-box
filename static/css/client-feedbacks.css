@@ -9,7 +9,7 @@
 .client-feedback {
     overflow: hidden;
     position: relative;
-    width: 60%;
+    width: 80%;
     height: 7em;
     border: 1px solid gray;
     border-radius: 5px;
@@ -61,7 +61,6 @@
     width: 80%;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
     align-items: center;
     padding: 0.6em 1.5em 0.4em 1.5em;
 }
