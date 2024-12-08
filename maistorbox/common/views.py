@@ -1,6 +1,7 @@
 from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.templatetags import static
 from django.urls import reverse
 from django.utils.timezone import now
 from django.views import View
@@ -8,6 +9,7 @@ from django.views.generic import TemplateView, DetailView, FormView
 
 from maistorbox.common.forms import ClientFeedbackForm, StyledClientFeedbackForm
 from maistorbox.common.models import ContractorPublicModel, ClientFeedbackModel
+from maistorbox.common.templatetags.custom_tags import rating_stars
 from maistorbox.company.forms import MessageForm
 from maistorbox.company.models import Company
 from maistorbox.mixins import CustomLoginRequiredMixin, FormsStylingMixin

@@ -3,10 +3,10 @@ from random import choices
 from django.db import models
 
 from django.db import models
+from django.db.models import Avg
 from django.utils.text import slugify
 
 from maistorbox.accounts.models import ContractorUserModel, BaseUserModel
-from maistorbox.common.choices import RatingNumberChoices
 
 
 class ContractorPublicModel(models.Model):
@@ -23,6 +23,15 @@ class ContractorPublicModel(models.Model):
 
     def __str__(self):
         return f"Public Profile for {self.contractor.user.first_name} {self.contractor.user.last_name}"
+
+    def average_rating(self):
+
+        avg_rating = self.client_feedback.filter(approved=True).aggregate(Avg('rating'))['rating__avg']
+
+        if avg_rating is None:
+            return None
+
+        return avg_rating
 
 
 class ClientFeedbackModel(models.Model):

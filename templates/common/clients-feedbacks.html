@@ -1,13 +1,65 @@
+{% load static %}
+{% load custom_tags %}
+{% load custom_filters %}
+
 {% for feedback in feedbacks %}
 
     <div class="client-feedback">
 
-        <p>{{ feedback.comment }}</p>
+        <p class="feedback-posted-date">{{ feedback.created_at|date:'d M Y H:i' }}</p>
+
+        <div class="client-info-section">
+
+            {% if feedback.client_user.user_type == 'contractor_user' %}
+
+                <div class="client-profile-image">
+
+                    <img src="{{ feedback.client_user.contractor_user.profile_image.url }}">
+
+                </div>
+
+                <h6>{{ feedback.client_user.get_full_name }}</h6>
+
+            {% else %}
+
+                <div class="client-profile-image">
+
+                    <img src="{% static 'images/profile-icon.png' %}">
+
+                </div>
+
+                <h6>{{ feedback.client_user.username }}</h6>
+
+            {% endif %}
+
+        </div>
+
+        <div class="client-feedback-section">
+
+            <div class="given-client-rating">
+
+                {% rating_stars feedback.rating as stars %}
+
+                {% include 'common/given-stars.html' %}
+
+            </div>
+
+            <div class="client-given-comment">
+
+                <p>{{ feedback.comment }}</p>
+
+            </div>
+
+        </div>
 
     </div>
 
 {% empty %}
 
-    <p>nqma rezultati</p>
+    <div>
+
+        <p>Все още няма оставени отзиви за майстора</p>
+
+    </div>
 
 {% endfor %}

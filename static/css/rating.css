@@ -1,15 +1,4 @@
-.form-section .rating-section {
-    display: flex;
-    flex-direction: column;
-}
 
-/* Rating container */
-.form-section .rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    gap: 1em;
-}
 
 .rating input {
     display: none; /* Hide the radio buttons */
@@ -17,7 +6,7 @@
 
 /* Default color of the icons (gray) */
 .rating label {
-    font-size: 2rem; /* Icon size */
+    font-size: 5em; /* Icon size */
     color: gray; /* Default gray */
     cursor: pointer;
     position: relative; /* Needed for positioning the text */
@@ -35,21 +24,21 @@
     color: #FD841F; /* Gold for selected icons */
 }
 
-/* Add text that follows the cursor */
+ /*Add text that follows the cursor */
 .rating label::after {
     content: ""; /* Default no text */
     position: absolute;
-    top: -40px; /* Position the text a bit above the icon */
+    top: -5px; /* Position the text a bit above the icon */
     left: 50%;
     transform: translateX(-50%); /* Center the text */
-    font-size: 1rem; /* Smaller text size than the icon */
+    font-size: 1em; /* Smaller text size than the icon */
     color: #FD841F; /* Text color */
     opacity: 0; /* Start invisible */
-    transition: opacity 0.3s ease, top 0.5s ease; /* Smooth transition */
+    transition: opacity 0.3s ease, top 0.3s ease; /* Smooth transition */
     white-space: nowrap; /* Prevent text from wrapping */
 }
 
-/* Show text on hover */
+ /*Show text on hover*/
 .rating label:hover::after {
     opacity: 1;
     top: -15px; /* Slightly move it up to make it visible */

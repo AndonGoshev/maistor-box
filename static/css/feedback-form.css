@@ -1,0 +1,41 @@
+.feedback-form-section {
+    width: 60%;
+    /*border: 1px solid black;*/
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.feedback-form-section .form-section {
+    width: 100%;
+    margin: 0;
+}
+
+.feedback-form-section .form-section h3{
+    padding-bottom: 1em;
+}
+
+.feedback-form-section .form-section form {
+    width: 100%;
+}
+
+.form-section .rating-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Rating container */
+.form-section .rating {
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 1em;
+}
+
+#id_comment {
+    min-width: 100%;
+    min-height: 9em;
+    max-height: 9em;
+}

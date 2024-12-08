@@ -1,0 +1,21 @@
+<ul class="given-stars">
+
+    {% for star in stars %}
+
+        {% if star == True %}
+
+            <li class="orange-star">
+                <ion-icon name="star-outline"></ion-icon>
+            </li>
+
+        {% else %}
+
+            <li class="gray-star">
+                <ion-icon name="star-outline"></ion-icon>
+            </li>
+
+        {% endif %}
+
+    {% endfor %}
+
+</ul>

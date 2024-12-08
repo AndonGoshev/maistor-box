@@ -13,12 +13,12 @@
 }
 
 .contractor-info-section {
+    position: relative;
     width: 100%;
     display: flex;
-    /*background-color: #4A628A;*/
     background-color: rgb(0, 18, 83, 70%);
     border-radius: 25px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .info-left-side, .my-specializations, .my-regions {
@@ -37,12 +37,40 @@
 }
 
 .profile-image-and-name {
+    position: relative;
     color: #E0E0E0;
     align-items: center;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
+
+.contractor-rating-section {
+    width: 80%;
+    vertical-align: middle;
+    padding: 0.1em 0;
+    position: absolute;
+    top: 8.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    /*border: 2px solid white;*/
+    background-color: #f4f4f4;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    border: 2px solid #b8b8b8;
+}
+
+.contractor-rating-section a {
+    font-size: 0.7em;
+}
+
+body > div.site > main > div > div.contractor-info-section > div.info-left-side > div.profile-image-and-name > div.contractor-rating-section > div > ul {
+    font-size: 1em;
+}
+
 
 .profile-image-and-name .profile-image {
     width: 10em;

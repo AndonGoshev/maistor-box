@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load custom_tags %}
 {% load static %}
 
 {% block title %}
@@ -26,6 +27,25 @@
 
                     <h2>{{ public_contractor.contractor.user.get_full_name }}</h2>
 
+                    {% if public_contractor.average_rating %}
+
+                    <div class="contractor-rating-section">
+
+                        <div class="contractor-rating">
+
+                            {% rating_stars public_contractor.average_rating as stars %}
+
+                            {% include 'common/given-stars.html' %}
+
+                        </div>
+
+                        <a href="">{{ public_contractor.average_rating|floatformat:1 }}
+                            ({{ public_contractor.client_feedback.all|length }} отзива)</a>
+
+                    </div>
+
+                {% endif %}
+
                 </div>
 
                 <div class="about-me-and-contacts">
@@ -36,7 +56,8 @@
                     {% endif %}
 
                     {% if public_contractor.contractor.phone_number %}
-                        <p class="phone-number">Телефонен номер: <span>{{ public_contractor.contractor.phone_number }}</span>
+                        <p class="phone-number">Телефонен номер:
+                            <span>{{ public_contractor.contractor.phone_number }}</span>
                         </p>
                     {% endif %}
 
