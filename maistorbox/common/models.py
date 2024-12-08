@@ -31,7 +31,7 @@ class ContractorPublicModel(models.Model):
         if avg_rating is None:
             return None
 
-        return avg_rating
+        return round(avg_rating)
 
 
 class ClientFeedbackModel(models.Model):
