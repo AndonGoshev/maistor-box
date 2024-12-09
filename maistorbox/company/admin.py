@@ -14,8 +14,8 @@ class CompanyAdmin(admin.ModelAdmin):
 class MessagesAdmin(admin.ModelAdmin):
     model = Message
 
-    list_display = ('sender', 'created_at')
-    list_filter = ('sender', 'created_at', )
-    search_fields = ('sender', 'created_at')
+    list_display = ('content' , 'sender_email', 'created_at')
+    list_filter = ('created_at', )
+    search_fields = ('sender_email', 'created_at')
 
     ordering = ('-created_at', )

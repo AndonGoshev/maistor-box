@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.forms import ModelForm
 from django.utils.timezone import now
 
+from maistorbox import settings
 from maistorbox.company.models import Message, Company
 from maistorbox.mixins import FormsStylingMixin
 
@@ -10,7 +11,7 @@ from maistorbox.mixins import FormsStylingMixin
 class MessageForm(FormsStylingMixin ,ModelForm):
     class Meta:
         model = Message
-        fields = ['sender', 'content', ]
+        fields = ['sender_email', 'content', ]
 
     def save(self, commit=True, user=None):
         # Retrieve the single company instance
@@ -23,20 +24,18 @@ class MessageForm(FormsStylingMixin ,ModelForm):
         message.company = company
         message.created_at = now()
 
+        sender_email = self.cleaned_data['sender_email']
+
         if commit:
             message.save()
 
-        # Determine sender username
-        sender_username = None
-        if user and user.is_authenticated and getattr(user, 'user_type', None) == 'contractor_user':
-            sender_username = getattr(user.contractor_user, 'email', None)
-
         # Send an email
         send_mail(
-            subject=f'Ново съобщение от {message.sender}',
+            subject=f'Изпратено запитване от {sender_email}',
             message=message.content,
-            from_email=sender_username,
-            recipient_list=[company.email],
+            from_email=sender_email,
+            recipient_list=[settings.COMPANY_EMAIL ],
+            fail_silently=False,
         )
 
         return message

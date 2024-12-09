@@ -1,3 +1,5 @@
+from lib2to3.fixes.fix_input import context
+
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,6 +17,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.views.generic import CreateView, TemplateView, DeleteView, UpdateView
 from django.contrib import messages
 
+from maistorbox import settings
 from maistorbox.accounts.forms import BaseUserRegistrationForm, ContractorUserRegistrationForm, CustomLoginForm, \
     CustomPasswordChangeForm, CustomPasswordSetForm, CustomPasswordResetForm, ContractorProjectCreateForm, \
     ImageForm, CreateImageFormSet, ContractorUserProfileEditForm
@@ -250,32 +253,29 @@ class CustomPasswordResetView(PasswordResetView):
         protocol = 'http' if not self.request.is_secure() else 'https'
         user = BaseUserModel.objects.get(email=email)
 
-        print(f"doamin - {domain}")
-        print(f"protocol - {protocol}")
-        print(f'user pk = {user.pk}')
-
         # Generate UID and Token
         uid = urlsafe_base64_encode(force_bytes(user.pk)).encode().decode()
-        print(f"Generated UID: {uid}")  # Print UID to confirm it's correctly created
         token = default_token_generator.make_token(user)
 
-        reset_link = f"{protocol}://{domain}{reverse_lazy('password-reset-confirm', kwargs={'uidb64': uid, 'token': token})}"
-        print(f"Generated reset link: {reset_link}")
-        print(f"Token valid for user {user}: {default_token_generator.check_token(user, token)}")
-
-        print(f"Email context: {{'uidb64': {uid}, 'token': {token}, 'protocol': {protocol}, 'domain': {domain}}}")
 
         email_subject = 'Създаване на нова парола'
-        email_message = render_to_string(self.email_template_name, {
-            'uidb64': uid,
-            'token': token,
-            'protocol': protocol,
-            'domain': domain,
+        email_message = render_to_string(
+            self.email_template_name,
+            context={
+                'uidb64': uid,
+                'token': token,
+                'protocol': protocol,
+                'domain': domain,
         })
 
-        print(
-            f"Context being passed to template: {{'uidb64': {uid}, 'token': {token}, 'protocol': {protocol}, 'domain': {domain}}}")
-        send_mail(email_subject, email_message, 'from@example.com', [email])
+
+        send_mail(
+            subject=email_subject,
+            message=email_message,
+            from_email='maistorbox@abv.com',
+            recipient_list=['andon.go6ev@gmail.com', ],
+            fail_silently=False,
+        )
 
         return redirect('password-reset-email-sent')
 

@@ -48,14 +48,14 @@ class Message(models.Model):
         related_name='messages',
     )
 
-    sender = models.EmailField(
+    sender_email = models.EmailField(
         max_length=200,
     )
 
     content = models.TextField(
         max_length=500,
         validators=[
-            MinLengthValidator(20)
+            MinLengthValidator(10)
         ]
     )
 

@@ -1,10 +1,28 @@
+import logging
+
+from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 from unidecode import unidecode
 
-from maistorbox.accounts.models import ContractorUserModel
+from maistorbox.accounts.models import ContractorUserModel, BaseUserModel
 from maistorbox.common.models import ContractorPublicModel
+from maistorbox.settings import COMPANY_EMAIL
+
+
+@receiver(post_save, sender=BaseUserModel)
+def send_welcoming_email(sender, instance, created, **kwargs):
+    if created:
+        print(f'message send from {COMPANY_EMAIL}')
+        print(f"Sending welcome email to: {instance.email}")
+        send_mail(
+            subject=f'Успешна регистрация!',
+            message='Поздравления! Вие успешно се регистрирахте в най-разпознаваемия сайт за майстори!',
+            from_email=COMPANY_EMAIL,
+            recipient_list=[instance.email],
+            fail_silently=False,
+        )
 
 
 @receiver(post_save, sender=ContractorUserModel)

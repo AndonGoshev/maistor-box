@@ -23,16 +23,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Built-in apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Custom apps
     'maistorbox.common.apps.CommonConfig',
     'maistorbox.accounts.apps.AccountsConfig',
-    'cloudinary',
-    'cloudinary_storage',
     'maistorbox.search_board.apps.SearchBoardConfig',
     'maistorbox.company.apps.CompanyConfig'
 ]
@@ -132,7 +133,6 @@ LOGIN_REDIRECT_URL = reverse_lazy('home_page')
 LOGOUT_REDIRECT_URL = reverse_lazy('home_page')
 LOGIN_URL = '/accounts/login/'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # We are going to use this for developing purposes
 EMAIL_BACKEND = config('EMAIL_BACKEND')
@@ -147,56 +147,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'doibl1txo',
-#     'API_KEY': '741272541124276',
-#     'API_SECRET': 'OMwJujSIwEWGw6tNEvX_qNQY-Qc',
-# }
-
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-# MEDIA_URL = 'https://res.cloudinary.com/doibl1txo/image/upload/'
+COMPANY_EMAIL = config('COMPANY_EMAIL')
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media/'
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters': {
-#         'verbose': {
-#             'format': '{levelname} {asctime} {module} {message}',
-#             'style': '{',
-#         },
-#         'simple': {
-#             'format': '{levelname} {message}',
-#             'style': '{',
-#         },
-#     },
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'verbose',
-#         },
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': 'debug.log',  # Logs will be saved here
-#             'formatter': 'verbose',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['console', 'file'],
-#             'level': 'DEBUG',
-#             'propagate': True,
-#         },
-#         'my_logger': {
-#             'handlers': ['console', 'file'],
-#             'level': 'DEBUG',
-#             'propagate': False,
-#         },
-#     },
-# }

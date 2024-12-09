@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load custom_filters %}
 {% load custom_tags %}
 {% load static %}
 
@@ -29,22 +30,22 @@
 
                     {% if public_contractor.average_rating %}
 
-                    <div class="contractor-rating-section">
+                        <div class="contractor-rating-section">
 
-                        <div class="contractor-rating">
+                            <div class="contractor-rating">
 
-                            {% rating_stars public_contractor.average_rating as stars %}
+                                {% rating_stars public_contractor.average_rating as stars %}
 
-                            {% include 'common/given-stars.html' %}
+                                {% include 'common/given-stars.html' %}
+
+                            </div>
+
+                            <a href="#feedbacks-section-anchor">{{ public_contractor.average_rating|floatformat:1 }}
+                                ({{ public_contractor.client_feedback.all|approved_feedback|length }} отзива)</a>
 
                         </div>
 
-                        <a href="">{{ public_contractor.average_rating|floatformat:1 }}
-                            ({{ public_contractor.client_feedback.all|length }} отзива)</a>
-
-                    </div>
-
-                {% endif %}
+                    {% endif %}
 
                 </div>
 
@@ -180,12 +181,14 @@
 
             <div class="clients-feedback-section">
 
+                <div id="feedbacks-section-anchor"></div>
                 {% include 'common/clients-feedbacks.html' %}
 
             </div>
 
             <div class="feedback-form-section">
 
+                <div id="form-section-anchor"></div>
                 {% include 'common/feedback-form.html' %}
 
             </div>

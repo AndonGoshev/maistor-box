@@ -21,9 +21,6 @@ class BaseUserModelAdmin(ModelAdmin):
     )
 
     list_filter = (
-        'username',
-        'last_name',
-        'email',
         'date_joined',
         'user_type',
         'is_active',

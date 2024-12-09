@@ -11,6 +11,7 @@ html, body {
     margin: 0 auto;
     font: 18px/1.5 'Roboto', sans-serif;
     min-height: 100%;
+    scroll-behavior: smooth;
 }
 
 h3 {

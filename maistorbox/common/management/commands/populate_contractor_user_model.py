@@ -33,6 +33,10 @@ class Command(BaseCommand):
     help = 'Populate the database with contractor users'
 
     def handle(self, *args, **kwargs):
+
+        # Number of contractors to be created
+        NUM_OF_CONTRACTORS = 50
+
         media_dir = settings.MEDIA_ROOT
         profile_images_media_folder = os.path.join(media_dir, 'test_profile_images')
 
@@ -48,29 +52,26 @@ class Command(BaseCommand):
         all_regions = Region.objects.all()
         all_specializations = Specialization.objects.all()
 
-        # Number of users to create
-        num_users = 1000
-
-        for _ in range(num_users):
+        for _ in range(NUM_OF_CONTRACTORS):
             # Randomly select first name and last name
             first_name, last_name = random.choice(names)
 
             # Create a Base User
-            base_user = BaseUserModel.objects.create(
+            base_user = BaseUserModel.objects.create_user(
                 username=f'contractor{_ + 1}',
                 email=f'user{_ + 1}@example.com',
-                password=make_password('password123'),  # You can use a default password
+                password='password123',
                 first_name=first_name,
                 last_name=last_name,
-                user_type=UserTypeChoice.CONTRACTOR_USER,  # Assuming user_type for contractor
+                user_type=UserTypeChoice.CONTRACTOR_USER,
             )
 
             # Create a Contractor User
             contractor_user = ContractorUserModel.objects.create(
                 user=base_user,
                 about_me='Имам опит в майсторенето повече от 25 години, като през последните 10 съм и учител в техникум по дървообработване.',
-                phone_number=f'+35912345678{_ + 1}',  # Example phone number
-                profile_image=random.choice(profile_pictures_urls),  # Placeholder for image
+                phone_number=f'+35912345678{_ + 1}',
+                profile_image=random.choice(profile_pictures_urls),
             )
 
             # Assign 3 random regions and 3 random specializations to the contractor user
@@ -80,4 +81,4 @@ class Command(BaseCommand):
             contractor_user.save()
 
             # Output information about the created user
-            self.stdout.write(self.style.SUCCESS(f"Created BaseUser(type=contractor) with username: {base_user.username}"))
+            self.stdout.write(self.style.SUCCESS(f"Created BaseUser(type=contractor) and ContractorUser with username: {base_user.username}"))

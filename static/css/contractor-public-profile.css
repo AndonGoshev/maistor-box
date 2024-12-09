@@ -47,27 +47,26 @@
 
 .contractor-rating-section {
     width: 80%;
-    vertical-align: middle;
     padding: 0.1em 0;
     position: absolute;
-    top: 8.5em;
+    top: 8.4em;
     left: 50%;
     transform: translateX(-50%);
     align-items: center;
-    /*border: 2px solid white;*/
     background-color: #f4f4f4;
+    border: 2px solid #b8b8b8;
     border-radius: 15px;
     display: flex;
     justify-content: center;
     gap: 0.5em;
-    border: 2px solid #b8b8b8;
 }
 
 .contractor-rating-section a {
     font-size: 0.7em;
+    color: #595959;
 }
 
-body > div.site > main > div > div.contractor-info-section > div.info-left-side > div.profile-image-and-name > div.contractor-rating-section > div > ul {
+body > div.site > main > div > div.contractor-info-section > div.info-left-side > div.profile-image-and-name > div.contractor-card-rating-section > div > ul {
     font-size: 1em;
 }
 

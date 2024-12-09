@@ -30,7 +30,7 @@ class FormsStylingMixin(forms.Form):
         'specializations': 'Изберете специалисти:',
         'about_me': 'За мен...',
         'average_price_for_similar_project': 'Средна цена за подобен проект в лева:',
-        'sender': 'Вашият имейл...',
+        'sender_email': 'Вашият имейл...',
         'content': 'Съобщение...',
         'rating': 'Изберete оценка...',
         'comment': '''Оставeтe коментар...(макс. 400 знака)''',

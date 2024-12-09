@@ -1,3 +1,5 @@
+{% load custom_filters %}
+{% load custom_tags %}
 {% load static %}
 
 <div class="contractor-card">
@@ -8,7 +10,28 @@
     <div class="card-content">
 
         <div class="contractor-name">
+
             <h3>{{ contractor.contractor.user.get_full_name }}</h3>
+
+            {% if contractor.average_rating %}
+
+                <div class="contractor-card-rating-section">
+
+                    <div class="contractor-rating">
+
+                        {% rating_stars contractor.average_rating as stars %}
+
+                        {% include 'common/given-stars.html' %}
+
+                    </div>
+
+                    <p>{{ contractor.average_rating|floatformat:1 }}
+                        ({{ contractor.client_feedback.all|approved_feedback|length }} отзива)</p>
+
+                </div>
+
+            {% endif %}
+
         </div>
 
         <div class="specializations-and-regions-wrapper">
