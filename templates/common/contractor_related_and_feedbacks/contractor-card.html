@@ -21,7 +21,7 @@
 
                         {% rating_stars contractor.average_rating as stars %}
 
-                        {% include 'common/given-stars.html' %}
+                        {% include 'common/contractor_related_and_feedbacks/given-stars.html' %}
 
                     </div>
 
@@ -77,7 +77,7 @@
 
         {% else %}
 
-            {% include 'common/not-authenticated-button.html' %}
+            {% include 'common/components/not-authenticated-button.html' %}
 
         {% endif %}
 

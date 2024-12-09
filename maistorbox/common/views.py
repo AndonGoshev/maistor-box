@@ -1,15 +1,12 @@
 from django import forms
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from django.templatetags import static
 from django.urls import reverse
 from django.utils.timezone import now
 from django.views import View
-from django.views.generic import TemplateView, DetailView, FormView
+from django.views.generic import TemplateView, FormView
 
 from maistorbox.common.forms import ClientFeedbackForm, StyledClientFeedbackForm
 from maistorbox.common.models import ContractorPublicModel, ClientFeedbackModel
-from maistorbox.common.templatetags.custom_tags import rating_stars
 from maistorbox.company.forms import MessageForm
 from maistorbox.company.models import Company
 from maistorbox.mixins import CustomLoginRequiredMixin, FormsStylingMixin
@@ -28,7 +25,7 @@ class HomePageView(TemplateView):
 
 
 class AboutUsView(TemplateView):
-    template_name = 'common/about-us.html'
+    template_name = 'common/static_pages/about-us.html'
 
 
 class ContactsView(View):
@@ -78,7 +75,7 @@ class SentSuccessfullyView(TemplateView):
         return context
 
 class ContractorPublicProfileView(FormsStylingMixin, CustomLoginRequiredMixin, FormView):
-    template_name = 'common/contractor-public-profile.html'
+    template_name = 'common/contractor_related_and_feedbacks/contractor-public-profile.html'
     form_class = StyledClientFeedbackForm
 
     def dispatch(self, request, *args, **kwargs):

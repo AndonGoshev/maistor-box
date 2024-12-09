@@ -5,13 +5,13 @@ from maistorbox.accounts.models import BaseUserModel
 
 
 class Command(BaseCommand):
-    help = ('Populate base user model. The need for base users in the project comes for the '
+    help = ('Populate base_footer_header user model. The need for base_footer_header users in the project comes for the '
             'randomness of the given feedbacks. Some feedbacks will be from contractors and '
             'some of them will be from regular users.')
 
     def handle(self, *args, **options):
 
-        # Number of base users to be created
+        # Number of base_footer_header users to be created
         NUM_OF_BASE_USERS = 20
 
         for _ in range(NUM_OF_BASE_USERS):

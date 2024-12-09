@@ -70,7 +70,7 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
 
     def save(self, commit=True):
 
-        # Here we are saving the base part of the contractor user
+        # Here we are saving the base_footer_header part of the contractor user
         base_user = super().save(commit=False)
         base_user.set_password(self.cleaned_data['password1'])
         base_user.first_name = self.cleaned_data['first_name']

@@ -1,4 +1,4 @@
-{% extends 'common/base.html' %}
+{% extends 'common/base_footer_header/base.html' %}
 {% load custom_filters %}
 {% load custom_tags %}
 {% load static %}
@@ -36,7 +36,7 @@
 
                                 {% rating_stars public_contractor.average_rating as stars %}
 
-                                {% include 'common/given-stars.html' %}
+                                {% include 'common/contractor_related_and_feedbacks/given-stars.html' %}
 
                             </div>
 
@@ -182,14 +182,14 @@
             <div class="clients-feedback-section">
 
                 <div id="feedbacks-section-anchor"></div>
-                {% include 'common/clients-feedbacks.html' %}
+                {% include 'common/contractor_related_and_feedbacks/clients-feedbacks.html' %}
 
             </div>
 
             <div class="feedback-form-section">
 
                 <div id="form-section-anchor"></div>
-                {% include 'common/feedback-form.html' %}
+                {% include 'common/contractor_related_and_feedbacks/feedback-form.html' %}
 
             </div>
 

@@ -62,7 +62,7 @@ class ContractorUserProfileEditView(CustomLoginRequiredMixin, PrivateProfilesVie
     success_url = reverse_lazy('contractor-user-profile-details')  # Change to the desired success URL
 
     def get_success_url(self):
-        contractor_id = self.request.user.contractor_user.id
+        contractor_id = self.request.user.id
         return reverse('contractor-user-profile-details', kwargs={'id': contractor_id})
 
     # This method ensures that we get the current contractor user based on the logged-in user
@@ -80,7 +80,7 @@ class ContractorProjectCreateView(PrivateProfilesViewsPermissionRequiredMixin, C
     success_url = reverse_lazy('contractor-user-project-create')
 
     def get_success_url(self):
-        contractor_id = self.request.user.contractor_user.id
+        contractor_id = self.request.user.id
         return reverse('contractor-user-profile-details', kwargs={'id': contractor_id})
 
     def get_context_data(self, **kwargs):
@@ -120,7 +120,7 @@ class ContractorProjectEditView(CustomLoginRequiredMixin, PrivateContractorProje
     pk_url_kwarg = 'id'
 
     def get_success_url(self):
-        contractor_id = self.object.contractor_user.id
+        contractor_id = self.object.contractor_user.user.id
         return reverse_lazy('contractor-user-profile-details', kwargs={'id': contractor_id})
 
     def get_context_data(self, **kwargs):
@@ -209,7 +209,7 @@ class ContractorProjectDeleteView(CustomLoginRequiredMixin, PrivateContractorPro
     pk_url_kwarg = 'id'
 
     def get_success_url(self):
-        contractor_id = self.object.contractor_user.id
+        contractor_id = self.object.contractor_user.user.id
         return reverse_lazy('contractor-user-profile-details', kwargs={'id': contractor_id})
 
 

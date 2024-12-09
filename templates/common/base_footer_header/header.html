@@ -3,7 +3,7 @@
 
     <div class="navigation-and-logo">
         
-        {% include 'common/nav-dropdown.html' %}    
+        {% include 'common/components/nav-dropdown.html' %}
         <div class="header-logo">
             <a href="{% url 'home_page' %}"><img alt="maistor box" src="{% static 'images/logo.png' %}"></a>
         </div>
@@ -19,7 +19,7 @@
             {% else %}
                 <p>Здравейте майстор {{ request.user.last_name }}!</p>
             {% endif %}
-            {% include 'common/profile-dropdown-menu.html' %}
+            {% include 'common/components/profile-dropdown-menu.html' %}
         {% else %}
             <nav>
             

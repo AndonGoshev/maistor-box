@@ -1,4 +1,4 @@
-{% extends 'common/base.html' %}
+{% extends 'common/base_footer_header/base.html' %}
 {% load static %}
 
 {% block title %}
@@ -17,7 +17,7 @@
 
     <div class="contractor-results-section">
         {% if not user.is_authenticated %}
-            {% include 'common/not-authenticated-message.html' %}
+            {% include 'common/components/not-authenticated-message.html' %}
         {% endif %}
 
         {% if contractors_list %}
@@ -26,7 +26,7 @@
 
                 {% for contractor in contractors_list %}
 
-                    {% include 'common/contractor-card.html' %}
+                    {% include 'common/contractor_related_and_feedbacks/contractor-card.html' %}
 
                 {% endfor %}
 

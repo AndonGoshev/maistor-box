@@ -1,4 +1,4 @@
-{% extends "common/base.html" %}
+{% extends "common/base_footer_header/base.html" %}
 {% load static %}
 
 {% block scripts %}
@@ -56,7 +56,7 @@
         <h3>Последно регистрирани майстори:</h3>
 
         {% if not user.is_authenticated %}
-            {% include 'common/not-authenticated-message.html' %}
+            {% include 'common/components/not-authenticated-message.html' %}
         {% endif %}
 
         <div class="contractors-cards">
@@ -65,7 +65,7 @@
 
                 {% for contractor in contractor.all %}
 
-                    {% include 'common/contractor-card.html' %}
+                    {% include 'common/contractor_related_and_feedbacks/contractor-card.html' %}
 
                 {% endfor %}
 
@@ -84,13 +84,13 @@
 
         {% else %}
 
-            {% include 'common/are-you-contractor.html' %}
+            {% include 'common/components/are-you-contractor.html' %}
 
         {% endif %}
 
     {% else %}
 
-        {% include 'common/are-you-contractor.html' %}
+        {% include 'common/components/are-you-contractor.html' %}
 
     {% endif %}
 
