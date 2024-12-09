@@ -186,10 +186,13 @@ body > div.site > main > div > div.contractor-info-section > div.info-left-side 
     color: #E0E0E0;
     list-style: none;
     display: flex;
-    gap: 1em;
+    row-gap: 0.5em;
+    column-gap: 1.5em;
     flex-wrap: wrap;
-    max-width: 80%;
+    max-width: 90%;
+    justify-content: center;
 }
+
 
 .no-projects {
     padding: 0.5em 1em;
