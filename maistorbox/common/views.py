@@ -8,7 +8,7 @@ from django.views.generic import TemplateView, FormView
 from maistorbox.common.forms import ClientFeedbackForm, StyledClientFeedbackForm
 from maistorbox.common.models import ContractorPublicModel, ClientFeedbackModel
 from maistorbox.company.forms import MessageForm
-from maistorbox.company.models import Company
+from maistorbox.company.models import CompanyModel
 from maistorbox.mixins import CustomLoginRequiredMixin, FormsStylingMixin
 from maistorbox.search_board.forms import ContractorSearchForm
 
@@ -29,7 +29,7 @@ class AboutUsView(TemplateView):
 
 
 class ContactsView(View):
-    template_name = 'common/contacts.html'
+    template_name = 'common/static_pages/contacts.html'
 
     def get_context(self, form=None):
         """
@@ -37,7 +37,7 @@ class ContactsView(View):
         - Company details for a specific section.
         - Message form for another section.
         """
-        company = Company.objects.first()  # Fetch the single company instance
+        company = CompanyModel.objects.first()  # Fetch the single company instance
         context = {
             'company': company,  # Pass company info for the relevant section
             'form': form or MessageForm(),  # Use the given form or create a new one

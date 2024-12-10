@@ -8,6 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         regions_list = [
+            'Изберете всички',
             'София', 'София-област',
             'Пловдив', 'Пловдив-област',
             'Варна', 'Варна-област',
@@ -39,6 +40,7 @@ class Command(BaseCommand):
             'Димитровград', ]
 
         specializations_list = [
+            'Изберете всички',
             'Изкопни работи',
             'Основи и фундаменти',
             'Груб строеж',

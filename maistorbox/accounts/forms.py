@@ -6,6 +6,7 @@ from django.forms import BaseModelForm, BaseModelFormSet, ClearableFileInput
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Region, Specialization, ContractorProjectModel, \
     ImageModel
+from maistorbox.helpers import select_all_option_instance_id
 from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin
 
 
@@ -56,11 +57,11 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
         required=True,
     )
     regions = forms.ModelMultipleChoiceField(
-        queryset=Region.objects.all(),
+        queryset=Region.objects.exclude(id=select_all_option_instance_id(Region).id),
         required=True
     )
     specializations = forms.ModelMultipleChoiceField(
-        queryset=Specialization.objects.all(),
+        queryset=Specialization.objects.exclude(id=select_all_option_instance_id(Specialization).id),
         required=True
     )
 
@@ -96,6 +97,8 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
         return base_user
 
 
+
+
 class ContractorUserProfileEditForm(forms.ModelForm,  FormsStylingMixin, ErrorMessagesTranslateMixin):
     # Include fields from the related BaseUserModel (first_name, last_name)
     first_name = forms.CharField(
@@ -118,6 +121,10 @@ class ContractorUserProfileEditForm(forms.ModelForm,  FormsStylingMixin, ErrorMe
     # Add additional logic to ensure first_name, last_name are properly populated
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['regions'].queryset = Region.objects.exclude(id=select_all_option_instance_id(Region).id)
+        self.fields['specializations'].queryset = Specialization.objects.exclude(id=select_all_option_instance_id(Specialization).id)
+
         # Initialize the first_name and last_name from the related BaseUserModel instance
         if self.instance and self.instance.user:
             self.fields['first_name'].initial = self.instance.user.first_name

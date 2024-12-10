@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from maistorbox.company.models import Company, Message
+from maistorbox.company.models import CompanyModel, Message
 
 
-@admin.register(Company)
+@admin.register(CompanyModel)
 class CompanyAdmin(admin.ModelAdmin):
-    model = Company
+    model = CompanyModel
 
     list_display = ('name', 'phone_number', 'email', 'address', 'instagram_page_url', 'facebook_page_url', 'linkedin_page_url')
 

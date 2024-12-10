@@ -14,10 +14,8 @@ from maistorbox.settings import COMPANY_EMAIL
 @receiver(post_save, sender=BaseUserModel)
 def send_welcoming_email(sender, instance, created, **kwargs):
     if created:
-        print(f'message send from {COMPANY_EMAIL}')
-        print(f"Sending welcome email to: {instance.email}")
         send_mail(
-            subject=f'Успешна регистрация!',
+            subject='Успешна регистрация!',
             message='Поздравления! Вие успешно се регистрирахте в най-разпознаваемия сайт за майстори!',
             from_email=COMPANY_EMAIL,
             recipient_list=[instance.email],
@@ -52,3 +50,5 @@ def create_contractor_public_profile(sender, instance, created, **kwargs):
             contractor=instance,
             slug=final_slug
         )
+
+        print(f'Created public profile for contractor with username: {instance.user.username}')

@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from django.utils.timezone import now
 
 from maistorbox import settings
-from maistorbox.company.models import Message, Company
+from maistorbox.company.models import Message, CompanyModel
 from maistorbox.mixins import FormsStylingMixin
 
 
@@ -15,7 +15,7 @@ class MessageForm(FormsStylingMixin ,ModelForm):
 
     def save(self, commit=True, user=None):
         # Retrieve the single company instance
-        company = Company.objects.first()
+        company = CompanyModel.objects.first()
         if not company:
             raise forms.ValidationError('В момента не може да изпращате съобщения.')
 

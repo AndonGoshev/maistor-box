@@ -1,11 +1,11 @@
 from django.core.management import BaseCommand
 
-from maistorbox.company.models import Company
+from maistorbox.company.models import CompanyModel
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        company = Company.objects.create(
+        company = CompanyModel.objects.create(
             name='MaistorBox',
             phone_number='089 89 89 889',
             email='maistorbox@gmail.com',

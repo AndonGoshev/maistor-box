@@ -1,12 +1,12 @@
 import os
 import random
 
-from django.contrib.auth.hashers import make_password
 from django.core.management import BaseCommand
 
 from maistorbox import settings
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import Region, Specialization, BaseUserModel, ContractorUserModel
+from maistorbox.helpers import last_model_instance_created
 
 names = [
     ("Александър", "Александров"), ("Ангел", "Ангелов"), ("Асен", "Асенов"),
@@ -52,14 +52,14 @@ class Command(BaseCommand):
         all_regions = Region.objects.all()
         all_specializations = Specialization.objects.all()
 
-        for _ in range(NUM_OF_CONTRACTORS):
+        for user_num in range(last_model_instance_created(BaseUserModel), last_model_instance_created(BaseUserModel) + NUM_OF_CONTRACTORS):
             # Randomly select first name and last name
             first_name, last_name = random.choice(names)
 
             # Create a Base User
             base_user = BaseUserModel.objects.create_user(
-                username=f'contractor{_ + 1}',
-                email=f'user{_ + 1}@example.com',
+                username=f'contractor{user_num + 1}',
+                email=f'user{user_num + 1}@example.com',
                 password='password123',
                 first_name=first_name,
                 last_name=last_name,
@@ -70,7 +70,7 @@ class Command(BaseCommand):
             contractor_user = ContractorUserModel.objects.create(
                 user=base_user,
                 about_me='Имам опит в майсторенето повече от 25 години, като през последните 10 съм и учител в техникум по дървообработване.',
-                phone_number=f'+35912345678{_ + 1}',
+                phone_number=f'+35912345678{user_num + 1}',
                 profile_image=random.choice(profile_pictures_urls),
             )
 

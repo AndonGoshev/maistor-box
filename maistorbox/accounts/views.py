@@ -51,6 +51,7 @@ class ContractorUserRegistrationView(CreateView):
     redirect_url = reverse_lazy('contractor-registration')
 
 
+
 class ContractorUserProfileDetailsView(CustomLoginRequiredMixin, PrivateProfilesViewsPermissionRequiredMixin, TemplateView):
     template_name = 'accounts/contractors/contractor-profile-details.html'
 
@@ -239,7 +240,7 @@ class CustomPasswordChangeDoneView(PasswordChangeDoneView):
 
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'accounts/common/password-reset.html'
-    email_template_name = 'accounts/common/email-password-reset.html'
+    email_template_name = 'emails/email-password-reset.html'
     success_url = reverse_lazy('password-reset-email-sent')
     form_class = CustomPasswordResetForm
 

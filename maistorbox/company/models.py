@@ -3,7 +3,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 
-class Company(models.Model):
+class CompanyModel(models.Model):
     name = models.CharField(
         max_length=100,
     )
@@ -33,7 +33,7 @@ class Company(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.pk and Company.objects.exists():
+        if not self.pk and CompanyModel.objects.exists():
             raise ValidationError("The company is only one and you cannot add more!")
         return super().save(*args, **kwargs)
 
@@ -43,7 +43,7 @@ class Company(models.Model):
 
 class Message(models.Model):
     company = models.ForeignKey(
-        to=Company,
+        to=CompanyModel,
         on_delete=models.CASCADE,
         related_name='messages',
     )
