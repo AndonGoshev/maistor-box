@@ -21,7 +21,7 @@ renovation or construction needs.
 
 
 ## ✨ Proud Achievement
-Proud to share that all the stylizations in this project are custom-made without relying on external libraries. Only the main button design was sourced online for free.	
+Proud to share that all the stylizations in this project are custom-made without relying on external frontend frameworks. Only the main button design was sourced online for free.	
         
 ## 🙏 Acknowledgments
 Special thanks to the following websites for providing free resources and components that enhanced our project:
