@@ -4,10 +4,11 @@ from django.views.generic import ListView
 from maistorbox.accounts.models import Region, Specialization
 from maistorbox.helpers import select_all_option_instance_id
 from maistorbox.common.models import ContractorPublicModel
+from maistorbox.mixins import CustomLoginRequiredMixin
 from maistorbox.search_board.forms import ContractorSearchForm
 
 
-class SearchBoardView(ListView):
+class SearchBoardView(CustomLoginRequiredMixin, ListView):
     model = ContractorPublicModel
     template_name = 'search-board/search-board.html'
     context_object_name = 'contractors_list'
