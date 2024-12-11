@@ -64,12 +64,12 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
     )
 
     regions = forms.ModelMultipleChoiceField(
-        queryset=Region.objects.exclude(name='Избери всички'),
+        queryset=Region.objects.exclude(name='Изберете всички'),
         required=True
     )
 
     specializations = forms.ModelMultipleChoiceField(
-        queryset=Specialization.objects.exclude(name='Избери всички'),
+        queryset=Specialization.objects.exclude(name='Изберете всички'),
         required=True
     )
 

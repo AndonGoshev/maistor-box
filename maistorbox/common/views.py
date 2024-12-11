@@ -32,15 +32,11 @@ class ContactsView(View):
     template_name = 'common/static_pages/contacts.html'
 
     def get_context(self, form=None):
-        """
-        Prepares the context for the page, including:
-        - Company details for a specific section.
-        - Message form for another section.
-        """
-        company = CompanyModel.objects.first()  # Fetch the single company instance
+
+        company = CompanyModel.objects.first()
         context = {
-            'company': company,  # Pass company info for the relevant section
-            'form': form or MessageForm(),  # Use the given form or create a new one
+            'company': company,
+            'form': form or MessageForm(),
         }
         return context
 
@@ -52,13 +48,12 @@ class ContactsView(View):
         form = MessageForm(request.POST)
         if form.is_valid():
             try:
-                form.save(user=request.user)  # Save the form and send the email
-                return redirect('sent_successfully')  # Redirect to success page
+                form.save(user=request.user)
+                return redirect('sent_successfully')
 
             except forms.ValidationError as e:
-                form.add_error(None, e.message)  # Add an error to the form
+                form.add_error(None, e.message)
 
-        # If the form is invalid, re-render the page with the form and errors
         context = self.get_context(form)
         return render(request, self.template_name, context)
 
@@ -68,7 +63,7 @@ class SentSuccessfullyView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        contractor_slug = self.request.GET.get('contractor_slug')  # Retrieve the slug from the query parameters
+        contractor_slug = self.request.GET.get('contractor_slug')
         if contractor_slug:
             contractor_profile_url = reverse('contractor-public-profile', kwargs={'slug': contractor_slug})
             context['contractor_profile_url'] = contractor_profile_url
