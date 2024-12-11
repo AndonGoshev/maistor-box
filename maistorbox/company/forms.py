@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.forms import ModelForm
 from django.utils.timezone import now
@@ -14,6 +15,10 @@ class MessageForm(FormsStylingMixin ,ModelForm):
         fields = ['sender_email', 'content', ]
 
     def save(self, commit=True, user=None):
+
+        if not user or not user.is_authenticated:
+            raise ValidationError('Трябва да сте влезли в системата, за да изпратите съобщение.')
+
         # Retrieve the single company instance
         company = CompanyModel.objects.first()
         if not company:
