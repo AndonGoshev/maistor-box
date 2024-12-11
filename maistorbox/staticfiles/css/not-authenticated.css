@@ -1,0 +1,13 @@
+.forbidden-button {
+    text-align: center;
+    background-color: #b6b6b6;
+    color: white;
+    border-radius: 5px;
+}
+
+.user-not-authenticated-message {
+    width: 35em;
+    text-align: center;
+    color: #E14D2A;
+    font-size: 1em;
+}

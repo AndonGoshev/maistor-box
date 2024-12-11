@@ -1,0 +1,200 @@
+.projects {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.projects h3 {
+    color: #FD841F;
+}
+
+.projects-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 5em;
+}
+
+
+.project-card {
+    position: relative;
+    align-items: center;
+    text-align: center;
+    padding: 2em 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 2em;
+    width: 25em;
+    min-width: 20em;
+    min-height: 20em;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid gray;
+    /*box-shadow: 1px 1px 1px 1px gray;*/
+}
+
+.project-card p {
+    color: #d16f1d;
+    font-size: 0.7em;
+    font-weight: bolder;
+}
+
+.project-card-info span {
+    color: #4a4a4a;
+}
+
+.project-card-info {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+
+.project-card-images {
+    margin-left: 2.3em;
+    width: 95%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em 0.5em;
+    flex-wrap: wrap;
+}
+
+.project-card-images::before, .project-card-images::after {
+    display: block;
+    content: '';
+    flex: 0 0 4em;
+    order: 999;
+}
+
+.project-card-image {
+    flex-shrink: 0;
+    width: 4em;
+    height: 4em;
+    border-radius: 5px;
+    border: 1px solid #676767;
+    overflow: hidden;
+}
+
+.project-card-image:hover {
+    cursor: pointer;
+    border: 3px solid rgb(225, 77, 42);
+    transition: 0.1s;
+}
+
+.project-card-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.project-actions-section {
+    padding: 0.2em 0.5em 0 0.5em;
+    position: absolute;
+    right: 50%;
+    transform: translate(50%);
+    bottom: -20px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1em;
+    background-color: #ff963f;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.edit-button, .delete-object-button {
+    width: 15px;
+}
+
+.edit-button img, .delete-object-button img {
+    width: 100%;
+}
+
+.edit-button:hover, .delete-object-button:hover {
+    width: 16px;
+}
+
+.projects .upload-project {
+    padding-top: 2em;
+}
+
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+
+.lightbox-content {
+    position: relative;
+    max-width: 60vw;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: visible;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: fill;
+    display: block;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin: auto;
+}
+
+.image-caption {
+    background-color: rgb(253, 132, 31);
+    padding: 0 0.5em;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%);
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    display: none;
+    z-index: 1101;
+}
+
+.lightbox-arrow {
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 50px 10px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10004;
+}
+
+.lightbox-arrow-left {
+    left: 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.lightbox-arrow-right {
+    right: 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+}

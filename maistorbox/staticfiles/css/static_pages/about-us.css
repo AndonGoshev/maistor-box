@@ -1,0 +1,58 @@
+.about-us-section {
+    padding: 2em 2em 5em 2em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.about-us-section h2 {
+    color: #3E6D9C;
+}
+
+
+
+.about-us-media {
+    display: flex;
+}
+
+.about-us-media-question {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.do-you-know-1, .do-you-know-2 {
+    width: 12em;
+    height: 12em;
+}
+
+.do-you-know-1 img, .do-you-know-2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.about-us-p {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 15px;
+    background-color: #fff2ec;
+}
+
+.about-us-p p {
+    font-size: 0.9em;
+    padding: 2em 0;
+    width: 70%;
+    color: #454545;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.question-answer {
+    font-size: 1em;
+    font-weight: bolder;
+    color: #454545;
+}

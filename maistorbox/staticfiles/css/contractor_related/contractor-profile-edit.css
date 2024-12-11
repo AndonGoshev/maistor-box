@@ -1,0 +1,20 @@
+#id_profile_image::file-selector-button {
+    display: none;
+}
+
+
+.image-upload-container label {
+    background-color: #FD841F;
+    color: white !important;
+    padding: 0.7em 0.8em;
+    border-radius: 5px;
+}
+
+.image-upload-container label:hover {
+    background-color: #c16318;
+    cursor: pointer;
+}
+
+.about-me-input textarea {
+    width: 100%;
+}

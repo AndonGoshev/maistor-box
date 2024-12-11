@@ -1,8 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from maistorbox.accounts.choices import UserTypeChoice
+from maistorbox.accounts.validators import ImageSizeValidator, PhoneNumberValidator
 
 
 class Region(models.Model):
@@ -45,10 +47,16 @@ class ContractorUserModel(models.Model):
 
     phone_number = models.CharField(
         max_length=20,
+        validators=[
+            PhoneNumberValidator(5),
+        ]
     )
 
     profile_image = models.ImageField(
         upload_to='contractor-users-profile-pictures',
+        validators=[
+            ImageSizeValidator(5),
+        ]
     )
 
     created_at = models.DateTimeField(
@@ -90,6 +98,9 @@ class ContractorProjectModel(models.Model):
         decimal_places=2,
         blank=True,
         null=True,
+        validators=[
+            MinValueValidator(0),
+        ]
     )
 
     contractor_user = models.ForeignKey(

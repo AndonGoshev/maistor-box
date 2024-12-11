@@ -111,12 +111,7 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
         return redirect('login-required')
 
 
-# TODO fix the comments because now we dont rely on the user authentication
-# This mixin checks if a user is allowed to access a page.
-# If the user isn’t logged in they can’t access the page.
-# Even if they are logged in they won’t get access to someone else’s profile
-# or pages related to it. It checks if the user from the request is the same
-# as the one connected to the page.
+
 class PrivateProfilesViewsPermissionRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
 

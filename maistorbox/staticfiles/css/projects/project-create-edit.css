@@ -1,0 +1,87 @@
+.form-section textarea {
+    max-width: 100%;
+}
+
+.project-images-create-edit {
+    border: none;
+}
+
+.image-object-line div a {
+    display: none;
+}
+
+.project-images-create-edit-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+}
+
+.image-object-line {
+    background-color: #efefef;
+    min-width: 100%;
+    padding: 1em 2em;
+    margin: 0.5em 0;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.image-object-line .image-container {
+    width: 4em;
+    height: 4em;
+    padding-bottom: 0;
+    margin-right: 1em;
+    border-radius: 5px;
+    border: 1px solid #676767;
+    overflow: hidden;
+}
+
+.image-object-line .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-upload-container:nth-child(n) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+}
+
+.image-upload-container div:nth-child(n) {
+    align-items: center;
+    padding-bottom: 0;
+}
+
+.change-image::file-selector-button, .upload-image::file-selector-button{
+    display: none;
+}
+
+.change-image, .upload-image {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 10em;
+}
+
+.image-upload-container div:nth-child(1) label {
+    background-color: #FD841F;
+    color: white;
+    padding: 0.7em 0.8em;
+    border-radius: 5px;
+}
+
+.image-upload-container div:nth-child(1) label:hover {
+    background-color: #c16318;
+    cursor: pointer;
+}
+
+.image-upload-container div:nth-child(3) label{
+    margin-left: 2em;
+    background-color: #E14D2A;
+    color: white;
+    padding: 0.7em 0.8em;
+    border-radius: 5px;
+}

@@ -1,0 +1,87 @@
+.user-section .profile-menu-wrapper {
+    position: relative;
+    z-index: 1000;
+}
+
+.user-section #profile-menu-toggle {
+    display: none; /* Hide the checkbox */
+}
+
+.user-section .profile-menu-icon  {
+    cursor: pointer; /* Change cursor to pointer for better UX */
+}
+
+.user-section .profile-menu-icon img {
+    width: 35px; /* Set your desired icon size */
+    height: auto;
+}
+
+/* Dropdown menu styles */
+.user-section .profile-dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 50px; /* Position it below the icon */
+    right: 0px;
+    width: 150px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: none; /* Hide by default */
+}
+
+.user-section #profile-menu-toggle:checked + .profile-menu-icon + .profile-dropdown-menu {
+    display: block;
+}
+
+/* Dropdown menu items */
+.user-section .profile-dropdown-menu li {
+    padding: 10px;
+    text-align: center;
+}
+
+.user-section .profile-dropdown-menu li a {
+    font-size: 0.8em;
+    text-decoration: none;
+    color: #373737;
+    display: block;
+    width: 100%;
+}
+
+.user-section .profile-dropdown-menu li:hover {
+    background-color: #3E6D9C;
+}
+
+.user-section .profile-dropdown-menu li a:hover {
+    color: white;
+}
+
+
+.profile-menu-wrapper label {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.profile-image-small {
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.profile-menu-small {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.profile-image-small > img, .profile-menu-small > img {
+    width: 100%!important;
+    height: 100%!important;
+    object-fit: cover;
+}
+
+.profile-image-small {
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}

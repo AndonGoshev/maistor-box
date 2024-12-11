@@ -6,6 +6,7 @@ from django.forms import BaseModelForm, BaseModelFormSet, ClearableFileInput
 from maistorbox.accounts.choices import UserTypeChoice
 from maistorbox.accounts.models import BaseUserModel, ContractorUserModel, Region, Specialization, ContractorProjectModel, \
     ImageModel
+from maistorbox.accounts.validators import PhoneNumberValidator, ImageSizeValidator
 from maistorbox.helpers import select_all_option_instance_id
 from maistorbox.mixins import FormsStylingMixin, ErrorMessagesTranslateMixin
 
@@ -32,17 +33,15 @@ class BaseUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, Fo
         return regular_user
 
 
-
-
-
-
 class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationForm, FormsStylingMixin):
     # Base user fields
     email = forms.EmailField(required=True)
+
     first_name = forms.CharField(
         required=True,
         max_length=50,
     )
+
     last_name = forms.CharField(
         required=True,
         max_length=50,
@@ -52,16 +51,25 @@ class ContractorUserRegistrationForm(ErrorMessagesTranslateMixin, UserCreationFo
     phone_number = forms.CharField(
         required=True,
         max_length=20,
+        validators=[
+            PhoneNumberValidator(5),
+        ]
     )
+
     profile_image = forms.ImageField(
         required=True,
+        validators=[
+            ImageSizeValidator(5),
+        ]
     )
+
     regions = forms.ModelMultipleChoiceField(
-        queryset=Region.objects.exclude(id=select_all_option_instance_id(Region).id),
+        queryset=Region.objects.exclude(name='Избери всички'),
         required=True
     )
+
     specializations = forms.ModelMultipleChoiceField(
-        queryset=Specialization.objects.exclude(id=select_all_option_instance_id(Specialization).id),
+        queryset=Specialization.objects.exclude(name='Избери всички'),
         required=True
     )
 
