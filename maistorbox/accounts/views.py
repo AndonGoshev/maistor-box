@@ -33,11 +33,11 @@ class BaseUserRegistrationView(CreateView):
     redirect_url = reverse_lazy('regular-user-registration')
 
 
-class RegularUserProfileView(PrivateProfilesViewsPermissionRequiredMixin, TemplateView):
+class RegularUserProfileView(CustomLoginRequiredMixin, PrivateProfilesViewsPermissionRequiredMixin, TemplateView):
     template_name = 'accounts/regular-users/regular-user-profile-details.html'
 
 
-class RegularUserProfileDeleteView(PrivateProfilesViewsPermissionRequiredMixin, DeleteView):
+class RegularUserProfileDeleteView(CustomLoginRequiredMixin, PrivateProfilesViewsPermissionRequiredMixin, DeleteView):
     model = BaseUserModel
     success_url = reverse_lazy('home_page')
     template_name = 'accounts/common/profile-delete.html'
