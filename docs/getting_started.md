@@ -133,7 +133,7 @@ python manage.py runserver
 Open your browser and go to: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ### 10. Credentials that you can use
-For base users (username = regular_user1, password = password123) , for contractor users (username = contractor_user21, password = password123)
+For base users (username = regular_user1, password = password123) , for contractor users (username = contractor21, password = password123)
 
 ### 11. (optional) Assign users to groups 
-Go to http://localhost:8000/admin ,login as admin ,open the user model, choose a user, open their instance and you can place this user into group with specific permissions. 
+Go to http://localhost:8000/admin ,login as admin ,open the user model, choose a user, open their instance, and you can place this user into group with specific permissions. 

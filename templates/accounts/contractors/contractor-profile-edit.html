@@ -43,15 +43,26 @@
 
             </div>
 
-            <p>{{ form.first_name }}</p>
-            <p>{{ form.last_name }}</p>
+            <p>
+            {{ form.first_name }}
+            {{ form.first_name.errors }}
+            </p>
+
+            <p>
+            {{ form.last_name }}
+            {{ form.last_name.errors }}
+            </p>
 
             <!-- Render the rest of the form -->
-            <p>{{ form.phone_number }}</p>
+
+            <p>
+                {{ form.phone_number }}
+                {{ form.phone_number.errors }}
+            </p>
+
             <p class="about-me-input">{{ form.about_me }}</p>
             <p class="regions-input">{{ form.regions }}</p>
             <p class="specializations-input">{{ form.specializations }}</p>
-
 
             <button class="fancy special-class credentials">Запази</button>
         </form>

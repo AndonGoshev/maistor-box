@@ -61,3 +61,6 @@
 		- Model dedicated for receiving user messages in the contacts page.
 		- When user sends a message it's saved in the ✉️database as well it's received as 📧email in the maistorbox
 		  inbox.
+
+
+- ### ❗ All the emails sent or received will be shown in the terminal
