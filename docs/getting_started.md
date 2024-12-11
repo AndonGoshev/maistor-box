@@ -78,38 +78,38 @@ python manage.py migrate
 ```
 
 ### 6. Run the custom commands for populating the database
-This command runs a series of other commands that populate the database. Use it to simulate a functional and usable web application and explore its capabilities.
+This command runs a series of other commands that populate the database. Use it to simulate a functional and usable web application and explore its capabilities. Approx. running time 1min. 
 ```bash
 python manage.py run_all_start_up_commands
 ```
 
 ### 6.1 (optional alternative approach) Run the custom commands manually.
 
-#### `populate_region_and_specialization_models`
+#### `python manage.py populate_region_and_specialization_models`
 - This command creates instances of the **Region** and **Specialization** models. These are required for the creation of **ContractorUser** models because fields for region and specialization are mandatory during registration.
 - The relationship between **Region** and **Specialization** models and the **ContractorUserModel** is many-to-many (M2M).
 
-#### `populate_base_user_model`
-- This command creates regular **Base User** instances.
+#### `python manage.py populate_base_user_model`
+- This command creates **20** regular **Base User** instances.
 - It triggers a `post_save` signal that sends a welcome email to the user after they register on the platform.
 - The purpose of this command is to ensure the creation of **ClientFeedbackModel** random instances. If no regular users are created, all feedback will be submitted by contractors only.
 
-#### `populate_contractor_user_model`
-- This command creates **Base User** instances with additional required fields for first and last name, which are mandatory during contractor registration.
-- It also creates **ContractorUserModel** instances, which are linked one-to-one (O2O) with **BaseUserModel**.
+#### `python manage.py populate_contractor_user_model`
+- This command creates **50** **Base User** instances with additional required fields for first and last name, which are mandatory during contractor registration.
+- It also creates **50** **ContractorUserModel** instances, which are linked one-to-one (O2O) with **BaseUserModel**.
 - A welcome email is sent via `post_save` signal.
 - Additionally, a second signal is triggered to create instances of **ContractorPublicModel**, which separates the logic for the user account from the public profile.
 
-#### `populate_projects_for_all_of_the_contractor_model_instances`
+#### `python manage.py populate_projects_for_all_of_the_contractor_model_instances`
 - This command iterates over all existing **ContractorUserModel** instances and creates several **ProjectModel** instances associated with the corresponding **ContractorUserModel** via a one-to-many (O2M) relationship.
 
-#### `populate_feedbacks_for_all_of_the_contractor_public_instances`
+#### `python manage.py populate_feedbacks_for_all_of_the_contractor_public_instances`
 - This command iterates over all existing **ContractorPublicModel** instances and creates several **ClientFeedbackModel** instances associated with the corresponding **ContractorPublicModel** via a one-to-many (O2M) relationship.
 
-#### `create_company`
+#### `python manage.py create_company`
 - This command creates a single instance of the **CompanyModel**, providing a centralized place to store company data.
 
-#### `create_groups`
+#### `python manage.py create_groups`
 - This command creates three admin groups:
   - **Super Admin**: Has all permissions.
   - **Client Feedback Redactor**: Can view everything and perform CRUD operations on **ClientFeedbackModel**.
