@@ -121,9 +121,24 @@ class ContractorUserProfileEditForm(forms.ModelForm,  FormsStylingMixin, ErrorMe
     # Fields from ContractorUserModel
     class Meta:
         model = ContractorUserModel
-        fields = ['about_me', 'phone_number', 'profile_image', 'regions', 'specializations']
+        fields = [
+            'about_me',
+            'phone_number',
+            'profile_image',
+            'regions',
+            'specializations',
+            'available_for_new_projects',
+            'weekday_start_time',
+            'weekday_end_time',
+            'weekend_start_time',
+            'weekend_end_time',
+        ]
         widgets = {
-            'profile_image': CustomClearableFileInput()
+            'profile_image': CustomClearableFileInput(),
+            'weekday_start_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'weekday_end_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'weekend_start_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'weekend_end_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
         }
 
     # Add additional logic to ensure first_name, last_name are properly populated

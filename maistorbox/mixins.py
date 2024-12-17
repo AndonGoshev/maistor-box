@@ -34,12 +34,22 @@ class FormsStylingMixin(forms.Form):
         'content': 'Съобщение...',
         'rating': 'Изберete оценка...',
         'comment': '''Оставeтe коментар...(макс. 400 знака)''',
+        'available_for_new_projects': 'Приемам нови проекти:',
+        'weekday_start_time': 'през седмицата от:',
+        'weekday_end_time': 'до:',
+        'weekend_start_time': 'през уикенда от:',
+        'weekend_end_time': 'до:',
     }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         for field in self.fields:
+
+            if field == 'available_for_new_projects':
+                self.fields[field].label = 'В момента приемам нови проекти'
+                self.fields[field].help_text = 'Ако тази опция е изключена ,телефонния ви номер няма да бъде показван'
+                continue
 
             self.fields[field].label = ''
             self.fields[field].widget.attrs['placeholder'] = self.PLACEHOLDER_TRANSLATION[field]
@@ -105,11 +115,11 @@ class ErrorMessagesTranslateMixin:
             for error_code, message in translated_messages.items():
                 field.error_messages.setdefault(error_code, message)
 
+
 # This mixin is preventing not logged users to access contractors public profiles by entering their url
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     def handle_no_permission(self):
         return redirect('login-required')
-
 
 
 class PrivateProfilesViewsPermissionRequiredMixin:
@@ -138,19 +148,21 @@ class PrivateProfilesViewsPermissionRequiredMixin:
                                    f'connected to account with id {landed_account.id} '
                                    f'by force browsing attack. The url of the page is - " {get_page_url()} " ')
 
-
         return super().dispatch(request, *args, **kwargs)
+
 
 class PrivateContractorProjectsViewsPermissionRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
 
         if request.user.user_type != 'contractor_user':
-            raise PermissionDenied(f'{request.user.username} user tried to land on private contractor project edit / delete page. The page is {self.request.path}.')
+            raise PermissionDenied(
+                f'{request.user.username} user tried to land on private contractor project edit / delete page. The page is {self.request.path}.')
 
         project = get_object_or_404(ContractorProjectModel, pk=kwargs['id'])
         contractor_user = get_object_or_404(ContractorUserModel, user=request.user)
 
         if project.contractor_user != contractor_user:
-            raise PermissionDenied(f'Contractor with id {contractor_user.id} and username {contractor_user.user.username} tried to land on another contractors project related view. The page is {self.request.path}.')
+            raise PermissionDenied(
+                f'Contractor with id {contractor_user.id} and username {contractor_user.user.username} tried to land on another contractors project related view. The page is {self.request.path}.')
 
         return super().dispatch(request, *args, **kwargs)

@@ -16,9 +16,6 @@
     {% include 'search-board/search-form-secondary.html' %}
 
     <div class="contractor-results-section">
-        {% if not user.is_authenticated %}
-            {% include 'common/components/not-authenticated-message.html' %}
-        {% endif %}
 
         {% if contractors_list %}
 

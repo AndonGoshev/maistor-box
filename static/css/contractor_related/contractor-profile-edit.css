@@ -2,6 +2,9 @@
     display: none;
 }
 
+/*body > div.site > main > div > form > div.image-object-line {*/
+/*    max-width: 20em!important;*/
+/*}*/
 
 .image-upload-container label {
     background-color: #FD841F;
@@ -17,4 +20,41 @@
 
 .about-me-input textarea {
     width: 100%;
+}
+
+.taking-new-projects-tick-section {
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em!important;
+    border: 1px solid gray;
+}
+
+
+.calls-availability-section {
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em!important;
+    align-items: center;
+}
+
+.weekday-availability-section, .weekend-availability-section {
+    align-items: center;
+    width: 10em;
+    display: flex;
+    flex-direction: column;
+}
+
+.weekday-availability-section p:nth-child(1), .weekend-availability-section p:nth-child(1) {
+    padding-bottom: 0.5em;
+}
+
+input[type="time"] {
+    width: 6em;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }

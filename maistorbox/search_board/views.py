@@ -8,7 +8,7 @@ from maistorbox.mixins import CustomLoginRequiredMixin
 from maistorbox.search_board.forms import ContractorSearchForm
 
 
-class SearchBoardView(CustomLoginRequiredMixin, ListView):
+class SearchBoardView(ListView):
     model = ContractorPublicModel
     template_name = 'search-board/search-board.html'
     context_object_name = 'contractors_list'

@@ -7,7 +7,7 @@
 
 {% block scripts %}
     <script src="{% static 'js/select-box-regions-specializations.js' %}"
-    data-select-mode="multiple">
+            data-select-mode="multiple">
     </script>
 {% endblock %}
 
@@ -44,13 +44,13 @@
             </div>
 
             <p>
-            {{ form.first_name }}
-            {{ form.first_name.errors }}
+                {{ form.first_name }}
+                {{ form.first_name.errors }}
             </p>
 
             <p>
-            {{ form.last_name }}
-            {{ form.last_name.errors }}
+                {{ form.last_name }}
+                {{ form.last_name.errors }}
             </p>
 
             <!-- Render the rest of the form -->
@@ -63,6 +63,51 @@
             <p class="about-me-input">{{ form.about_me }}</p>
             <p class="regions-input">{{ form.regions }}</p>
             <p class="specializations-input">{{ form.specializations }}</p>
+
+            <div class="taking-new-projects-tick-section">
+
+                <h3>В момента приемам нови проекти:</h3>
+                <p>{{ form.available_for_new_projects }}</p>
+                <small>{{ form.available_for_new_projects.help_text }}</small>
+
+            </div>
+
+{#            <p class="taking-new-projects-tick-section">#}
+{#                <small>{{ form.available_for_new_projects.label_tag }}</small>#}
+{#                {{ form.available_for_new_projects }}#}
+{#            </p>#}
+
+{#            <small>{{ form.available_for_new_projects.help_text }}</small>#}
+
+            <div class="calls-availability-section">
+
+                <div class="section-title">
+
+                    <h3>Приемам обаждания в тези часове:</h3>
+
+                </div>
+
+                <div class="choosing-availability-section">
+
+                    <div class="weekday-availability-section">
+
+                        <p>През седмицата</p>
+                        <p>от {{ form.weekday_start_time }}</p>
+                        <p>до: {{ form.weekday_end_time }}</p>
+
+                    </div>
+
+                    <div class="weekend-availability-section">
+
+                        <p>През уикенда</p>
+                        <p>от {{ form.weekend_start_time }}</p>
+                        <p>до: {{ form.weekend_end_time }}</p>
+
+                    </div>
+
+                </div>
+
+            </div>
 
             <button class="fancy special-class credentials">Запази</button>
         </form>

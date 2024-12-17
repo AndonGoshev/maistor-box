@@ -77,6 +77,16 @@ class ContractorUserModel(models.Model):
         related_name='specializations',
     )
 
+    available_for_new_projects = models.BooleanField(
+        default=True,
+    )
+
+    weekday_start_time = models.TimeField(null=True, blank=True)
+    weekday_end_time = models.TimeField(null=True, blank=True)
+
+    weekend_start_time = models.TimeField(null=True, blank=True)
+    weekend_end_time = models.TimeField(null=True, blank=True)
+
     def __str__(self):
         return f'Contractor with id: {self.id} '
 
