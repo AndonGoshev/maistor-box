@@ -41,11 +41,6 @@ pip install -r requirements.txt
 
 ### 4. Configure the Environment Variables
 
-1. **Download the .env File**  
-   Download the `.env` file from the provided link and place it into the root directory of your project.<span style="color:red">**When downloaded if needed, add dot('.') before the name of the file so its .env not only env**</span>
-
-   https://drive.google.com/file/d/1z6w3HrivmdJuH2GMc2KYq3WZAHd2kasd/view?usp=drive_link - I know that this is really wrong to be here, but it had to :( 
-
 2. **Update the .env File with Your Credentials**  
    Open the `.env` file in a text editor and replace the placeholders with your actual PostgreSQL credentials.
 
